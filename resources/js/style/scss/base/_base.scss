@@ -1,0 +1,36 @@
+@use '../abstracts/variabel' as _;
+
+.flex{display: flex;}
+.flexC{
+    @extend .flex;
+    flex-direction: column;
+}
+.flexR{
+    @extend .flex;
+    flex-direction: row;
+}
+
+.grid-3c{
+    @include _.gridC(repeat(4,23%));
+    width: 100%;
+    grid-gap: 2%;
+}
+
+
+// justifyContent
+.jcE{ @include _.jc(end)}
+.jcSB{  @include _.jc(space-between)}
+.jcSE{ @include _.jc(space-evenly)}
+.jcSA{ @include _.jc(space-around) }
+.jcC{ @include _.jc() }
+
+
+.scroll{ @include _.scroll()}
+.scroll-200{ @include _.scroll(200px)}
+.scroll-400{ @include _.scroll(400px)}
+.scroll-600{ @include _.scroll(600px)}
+.scroll-800{ @include _.scroll(800px)}
+
+.boxSLeft{
+    @include _.shadow(-2px -5px 5px 0px,map-get(_.$c,'dark'));
+}

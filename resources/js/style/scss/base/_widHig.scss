@@ -1,0 +1,6 @@
+@use '../abstracts/variabel' as _;
+
+.mxw200{@include _.wmax(200px)};
+.mxw400{@include _.wmax(400px)};
+.mxw500{@include _.wmax(500px)};
+.mxw600{@include _.wmax(600px)};

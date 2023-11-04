@@ -1,0 +1,60 @@
+@use '../abstracts/variabel' as _;
+
+.bwhite{ @include _.cB('white')}
+.cwhite{@include _.c('white')}
+
+.blight{@include _.cB('light')}
+.clight{@include _.c('light')}
+
+.bblack{@include _.cB('black') }
+.cblack{@include _.c('black')}
+
+.bprimary{@include _.cB('primary'); @extend .cwhite; }
+.cprimary{@include _.c('primary')}
+
+.bwarning{@include _.cB('warning'); @extend .cwhite;}
+.cwarning{@include _.c('warning')}
+.borderBWarning-1{border-bottom: 1px solid map-get(_.$c,'warning1');}
+.borderBWarning-5{border-bottom: 5px solid map-get(_.$c,'warning1');}
+
+.binfo{@include _.cB('info'); @extend .cwhite;}
+.binfo1{@include _.cB('info1'); @extend .cwhite;}
+.borderBInfo-1{border-bottom: 1px solid map-get(_.$c,'info1');}
+.borderBInfo-5{border-bottom: 5px solid map-get(_.$c,'info1');}
+
+.cinfo{@include _.c('info')}
+
+.borderInfoT5px{border-top: 5px solid map-get(_.$c,'info1');}
+.borderInfoB5px{border-bottom: 5px solid map-get(_.$c,'info1');}
+
+.bsuccess{@include _.cB('success'); @extend .cwhite; }
+.csuccess{@include _.c('success')}
+.borderBSuccess-1{border-bottom: 1px solid map-get(_.$c,'success1');}
+.borderBSuccess-5{border-bottom: 5px solid map-get(_.$c,'success1');}
+
+.bdanger{@include _.cB('danger')}
+.cdanger{@include _.c('danger')}
+
+.bdark{@include _.cB('dark')}
+.cdark{@include _.c('dark')}
+
+.bsecondary{@include _.cB('secondary') }
+.csecondary{@include _.c('secondary')}
+
+.bmuted{@include _.cB('muted'); @extend .cwhite; }
+.cmuted{@include _.c('muted')}
+.borderBMuted-1{border-bottom: 1px solid map-get(_.$c,'muted1');}
+.borderBMuted-5{border-bottom: 5px solid map-get(_.$c,'muted1');}
+
+.bpurple{@include _.cB('purple') }
+.bpurple1{@include _.cB('purple1')}
+.cpurple{@include _.c('purple')}
+
+.borderpurpleT5px{border-top: 5px solid map-get(_.$c,'purple1');}
+.borderpurpleB5px{border-bottom: 5px solid map-get(_.$c,'purple1');}
+
+.borange{@include _.cB('orange')}
+.corange{@include _.c('orange')}
+// batas
+
+.bnone{background: none;}

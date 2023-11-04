@@ -1,0 +1,470 @@
+.p0 {
+  padding: 0px;
+}
+
+.pLink, .btnRadius50, .navM li {
+  padding: 8px 16px;
+}
+
+.pwrap-5 {
+  padding: 5px;
+}
+
+.pwrap-10 {
+  padding: 10px;
+}
+
+.pwrap-3p, .minHeader, .containerHome {
+  padding: 3%;
+}
+
+.pwrap_3p {
+  padding: 0% 3%;
+}
+
+.pwrap__3p {
+  padding: 3% 0%;
+}
+
+.pwrap-5p, .BiconText .box {
+  padding: 5%;
+}
+
+.pm0 {
+  padding: 0px !important;
+  margin: 0px !important;
+}
+
+.mauto {
+  margin: auto;
+}
+
+.m0 {
+  margin: 0px !important;
+}
+
+.mwrap-5, .btnRadius50 {
+  margin: 5px;
+}
+
+.mwrap-10 {
+  margin: 10px;
+}
+
+.mwrap_3p {
+  margin: 0% 3%;
+}
+
+.mwrap__3p {
+  margin: 3% 0%;
+}
+
+.radius-10, .BiconText, .BiconText .box {
+  border-radius: 10px;
+}
+
+.bwhite {
+  background-color: #fff !important;
+}
+
+.cwhite, .bmuted, .bsuccess, .binfo1, .binfo, .bwarning, .bprimary {
+  color: #fff !important;
+}
+
+.blight {
+  background-color: #e2e2e2 !important;
+}
+
+.clight {
+  color: #e2e2e2 !important;
+}
+
+.bblack {
+  background-color: #000 !important;
+}
+
+.cblack {
+  color: #000 !important;
+}
+
+.bprimary {
+  background-color: #007bff !important;
+}
+
+.cprimary {
+  color: #007bff !important;
+}
+
+.bwarning {
+  background-color: #f1b100 !important;
+}
+
+.cwarning {
+  color: #f1b100 !important;
+}
+
+.borderBWarning-1 {
+  border-bottom: 1px solid #F6BA6F;
+}
+
+.borderBWarning-5 {
+  border-bottom: 5px solid #F6BA6F;
+}
+
+.binfo {
+  background-color: #17a2b8 !important;
+}
+
+.binfo1 {
+  background-color: #347a96 !important;
+}
+
+.borderBInfo-1 {
+  border-bottom: 1px solid #347a96;
+}
+
+.borderBInfo-5 {
+  border-bottom: 5px solid #347a96;
+}
+
+.cinfo {
+  color: #17a2b8 !important;
+}
+
+.borderInfoT5px {
+  border-top: 5px solid #347a96;
+}
+
+.borderInfoB5px {
+  border-bottom: 5px solid #347a96;
+}
+
+.bsuccess {
+  background-color: #28a745 !important;
+}
+
+.csuccess {
+  color: #28a745 !important;
+}
+
+.borderBSuccess-1 {
+  border-bottom: 1px solid #076b20;
+}
+
+.borderBSuccess-5 {
+  border-bottom: 5px solid #076b20;
+}
+
+.bdanger {
+  background-color: #dc3545 !important;
+}
+
+.cdanger {
+  color: #dc3545 !important;
+}
+
+.bdark {
+  background-color: #343a40 !important;
+}
+
+.cdark {
+  color: #343a40 !important;
+}
+
+.bsecondary {
+  background-color: #6c757d !important;
+}
+
+.csecondary {
+  color: #6c757d !important;
+}
+
+.bmuted {
+  background-color: #6c757d !important;
+}
+
+.cmuted {
+  color: #6c757d !important;
+}
+
+.borderBMuted-1 {
+  border-bottom: 1px solid #3a3f44;
+}
+
+.borderBMuted-5 {
+  border-bottom: 5px solid #3a3f44;
+}
+
+.bpurple {
+  background-color: #A555EC !important;
+}
+
+.bpurple1 {
+  background-color: #7d43af !important;
+}
+
+.cpurple {
+  color: #A555EC !important;
+}
+
+.borderpurpleT5px {
+  border-top: 5px solid #7d43af;
+}
+
+.borderpurpleB5px {
+  border-bottom: 5px solid #7d43af;
+}
+
+.borange {
+  background-color: darkorange !important;
+}
+
+.corange {
+  color: darkorange !important;
+}
+
+.bnone {
+  background: none;
+}
+
+.flex, .navM, .flexR, .minHeader .headerM, .flexC, .BiconText, .minHeader, .containerHome {
+  display: flex;
+}
+
+.flexC, .BiconText, .minHeader, .containerHome {
+  flex-direction: column;
+}
+
+.flexR, .minHeader .headerM {
+  flex-direction: row;
+}
+
+.grid-3c {
+  display: grid;
+  grid-template-columns: repeat(4, 23%);
+  width: 100%;
+  grid-gap: 2%;
+}
+
+.jcE {
+  display: flex;
+  justify-content: end;
+}
+
+.jcSB, .minHeader .headerM {
+  display: flex;
+  justify-content: space-between;
+}
+
+.jcSE {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.jcSA {
+  display: flex;
+  justify-content: space-around;
+}
+
+.jcC, .BiconText .box {
+  display: flex;
+  justify-content: center;
+}
+
+.scroll {
+  overflow: auto;
+}
+
+.scroll-200 {
+  overflow: auto;
+  max-height: 200px;
+}
+
+.scroll-400 {
+  overflow: auto;
+  max-height: 400px;
+}
+
+.scroll-600 {
+  overflow: auto;
+  max-height: 600px;
+}
+
+.scroll-800 {
+  overflow: auto;
+  max-height: 800px;
+}
+
+.boxSLeft, .BiconText, .bodyM {
+  box-shadow: -2px -5px 5px 0px #343a40;
+}
+
+.fzS {
+  font-size: 10px;
+}
+
+.fzM {
+  font-size: 12px;
+}
+
+.fzL {
+  font-size: 14px;
+}
+
+.fzXl {
+  font-size: 16px;
+}
+
+.fzL1 {
+  font-size: 20px;
+}
+
+.fzL2, .navM li {
+  font-size: 25px;
+}
+
+.fzL3 {
+  font-size: 30px;
+}
+
+.fzL4 {
+  font-size: 40px;
+}
+
+.fzL5 {
+  font-size: 50px;
+}
+
+.fzL6 {
+  font-size: 60px;
+}
+
+.fnunito {
+  font-family: "Nunito", sans-serif;
+}
+
+.farial {
+  font-family: "Arial", Helvetica, sans-serif;
+}
+
+.fBebasNeue, .navM li {
+  font-family: "BebasNeue", BebasNeue-Regular;
+}
+@font-face {
+  font-family: "BebasNeue";
+  src: url("../font/Bebas_Neue/BebasNeue-Regular.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+
+.fPoppins {
+  font-family: "Poppins", Poppins-Regular;
+}
+@font-face {
+  font-family: "Poppins";
+  src: url("../font/Poppins/Poppins-Regular.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+
+.fpacifico {
+  font-family: "pacifico", Pacifico-Regular;
+}
+@font-face {
+  font-family: "pacifico";
+  src: url("../font/Pacifico/Pacifico-Regular.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+
+.fcookie {
+  font-family: "Cookie", Cookie-Regular;
+}
+@font-face {
+  font-family: "Cookie";
+  src: url("../font/Cookie/Cookie-Regular.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+
+.fdamion {
+  font-family: "Damion", Damion-Regular;
+}
+@font-face {
+  font-family: "Damion";
+  src: url("../font/Damion/Damion-Regular.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+
+.ftaprom {
+  font-family: "Taprom", Taprom-Regular;
+}
+@font-face {
+  font-family: "Taprom";
+  src: url("../font/Taprom/Taprom-Regular.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+
+.tupper, .navM li {
+  text-transform: uppercase;
+}
+
+.tbold, .navM li {
+  font-weight: bold;
+}
+
+.tjustify {
+  text-align: justify;
+}
+
+.tcenter {
+  text-align: center;
+}
+
+.mxw200 {
+  max-width: 200px;
+}
+
+.mxw400 {
+  max-width: 400px;
+}
+
+.mxw500 {
+  max-width: 500px;
+}
+
+.mxw600 {
+  max-width: 600px;
+}
+
+.bodyM {
+  margin: auto;
+  max-width: 1448px;
+}
+
+.minHeader {
+  background-image: url("/svg/bg-1.svg");
+  background-size: cover;
+  height: 721px;
+}
+.minHeader .headerM {
+  min-height: 200px;
+}
+
+.navM li {
+  display: inline;
+}
+
+.btnRadius50 {
+  border-radius: 50px;
+  border: 1px solid #000;
+  box-shadow: 0px 4px 18px 0px rgba(0, 0, 0, 0.25);
+}
+
+.BiconText {
+  margin-bottom: 5%;
+}
+
+/*# sourceMappingURL=output.css.map */

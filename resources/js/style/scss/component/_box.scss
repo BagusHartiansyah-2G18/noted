@@ -1,0 +1,14 @@
+@use '../abstracts/variabel' as _;
+@forward '../base/index';
+
+.BiconText{
+    @extend .flexC;
+    @extend .boxSLeft;
+    @extend .radius-10;
+    margin-bottom: 5%;
+    & .box{
+        @extend .pwrap-5p;
+        @extend .jcC;
+        @extend .radius-10;
+    }
+}

@@ -1,0 +1,43 @@
+@use '../abstracts/variabel' as _;
+@forward '../base/index';
+
+.bodyM{
+    margin: auto;
+    @include _.wmax(1448px);
+    @extend .boxSLeft;
+}
+
+.minHeader{
+    background-image: url('/svg/bg-1.svg');
+    background-size: cover;
+    height: 721px;
+    @extend .flexC;
+    @extend .pwrap-3p;
+    & .headerM{
+        @extend .flexR;
+        @include _.hmin(200px);
+        @extend .jcSB;
+    }
+
+
+}
+
+
+.navM{
+    @extend .flex;
+    & li{
+        display: inline;
+        @extend .pLink;
+        @extend .fzL2;
+        @extend .fBebasNeue;
+        @extend .tupper;
+        @extend .tbold;
+
+    }
+}
+
+
+.containerHome{
+    @extend .flexC;
+    @extend .pwrap-3p;
+}

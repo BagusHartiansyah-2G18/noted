@@ -1,0 +1,307 @@
+.p0 {
+  padding: 0px;
+}
+
+.pLink {
+  padding: 8px 16px;
+}
+
+.pwrap-5 {
+  padding: 5px;
+}
+
+.pwrap-10 {
+  padding: 10px;
+}
+
+.pm0 {
+  padding: 0px !important;
+  margin: 0px !important;
+}
+
+.m0 {
+  margin: 0px !important;
+}
+
+.mwrap-5 {
+  margin: 5px;
+}
+
+.mwrap-10 {
+  margin: 10px;
+}
+
+.bwhite {
+  background-color: #fff !important;
+}
+
+.cwhite {
+  color: #fff n !important;
+}
+
+.blight {
+  background-color: #e2e2e2 !important;
+}
+
+.clight {
+  color: #e2e2e2 n !important;
+}
+
+.bblack {
+  background-color: #000 !important;
+}
+
+.cblack {
+  color: #000 n !important;
+}
+
+.bprimary {
+  background-color: #007bff !important;
+}
+
+.cprimary {
+  color: #007bff n !important;
+}
+
+.bwarning {
+  background-color: #f1b100 !important;
+}
+
+.cwarning {
+  color: #f1b100 n !important;
+}
+
+.binfo {
+  background-color: #17a2b8 !important;
+}
+
+.binfo1 {
+  background-color: #347a96 !important;
+}
+
+.cinfo {
+  color: #17a2b8 n !important;
+}
+
+.borderInfoT5px {
+  border-top: 5px solid #347a96;
+}
+
+.borderInfoB5px {
+  border-bottom: 5px solid #347a96;
+}
+
+.bsuccess {
+  background-color: #28a745 !important;
+}
+
+.csuccess {
+  color: #28a745 n !important;
+}
+
+.bdanger {
+  background-color: #dc3545 !important;
+}
+
+.cdanger {
+  color: #dc3545 n !important;
+}
+
+.bdark {
+  background-color: #343a40 !important;
+}
+
+.cdark {
+  color: #343a40 n !important;
+}
+
+.bsecondary {
+  background-color: #6c757d !important;
+}
+
+.csecondary {
+  color: #6c757d n !important;
+}
+
+.bmuted {
+  background-color: #6c757d !important;
+}
+
+.cmuted {
+  color: #6c757d n !important;
+}
+
+.bpurple {
+  background-color: #A555EC !important;
+}
+
+.bpurple1 {
+  background-color: #7d43af !important;
+}
+
+.cpurple {
+  color: #A555EC n !important;
+}
+
+.borderpurpleT5px {
+  border-top: 5px solid #7d43af;
+}
+
+.borderpurpleB5px {
+  border-bottom: 5px solid #7d43af;
+}
+
+.borange {
+  background-color: darkorange !important;
+}
+
+.corange {
+  color: darkorange n !important;
+}
+
+.bnone {
+  background: none;
+}
+
+.flex, .flexR, .flexC {
+  display: flex;
+}
+
+.flexC {
+  flex-direction: column;
+}
+
+.flexR {
+  flex-direction: row;
+}
+
+.jcE {
+  display: flex;
+  justify-content: end;
+}
+
+.jcSB {
+  display: flex;
+  justify-content: space-between;
+}
+
+.jcSE {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.jcSA {
+  display: flex;
+  justify-content: space-around;
+}
+
+.jcC {
+  display: flex;
+  justify-content: center;
+}
+
+.scroll {
+  overflow: auto;
+}
+
+.scroll-200 {
+  overflow: auto;
+  max-height: 200px;
+}
+
+.scroll-400 {
+  overflow: auto;
+  max-height: 400px;
+}
+
+.scroll-600 {
+  overflow: auto;
+  max-height: 600px;
+}
+
+.scroll-800 {
+  overflow: auto;
+  max-height: 800px;
+}
+
+.boxShadow-1 {
+  box-shadow: 1px 1px 1px 1px #343a40;
+}
+
+.fzS {
+  font-size: 10px;
+}
+
+.fzM {
+  font-size: 12px;
+}
+
+.fzL {
+  font-size: 14px;
+}
+
+.fzXl {
+  font-size: 16px;
+}
+
+.fzL1 {
+  font-size: 20px;
+}
+
+.fzL2 {
+  font-size: 25px;
+}
+
+.fzL3 {
+  font-size: 30px;
+}
+
+.fnunito {
+  font-family: "Nunito", sans-serif;
+}
+
+.fpacifico {
+  font-family: "pacifico", Pacifico-Regular;
+}
+@font-face {
+  font-family: "pacifico";
+  src: url("../font/Pacifico/Pacifico-Regular.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+
+.fcookie {
+  font-family: "Cookie", Cookie-Regular;
+}
+@font-face {
+  font-family: "Cookie";
+  src: url("../font/Cookie/Cookie-Regular.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+
+.fdamion {
+  font-family: "Damion", Damion-Regular;
+}
+@font-face {
+  font-family: "Damion";
+  src: url("../font/Damion/Damion-Regular.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+
+.ftaprom {
+  font-family: "Taprom", Damion-Regular;
+}
+@font-face {
+  font-family: "Taprom";
+  src: url("../font/Taprom/Taprom-Regular.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+
+.minHeader {
+  min-height: 150px;
+}
+
+/*# sourceMappingURL=output.css.map */
