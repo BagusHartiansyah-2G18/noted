@@ -4,6 +4,10 @@
 .pwrap-5{padding:5px}
 .pwrap-10{padding:10px}
 
+.pwrap-2p{padding:2%}
+.pwrap_2p{padding:0px 2%}
+.pwrap__2p{padding:2% 0px}
+
 .pwrap-3p{padding:3%}
 .pwrap_3p{padding:0% 3%} //kiri kanan _
 .pwrap__3p{padding:3% 0%} //atas bawah __
@@ -23,3 +27,9 @@
 .mwrap__3p{margin:3% 0%} //atas bawah __
 
 .radius-10{border-radius: 10px;}
+.radius_10{
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.boval{border-radius: 50%}

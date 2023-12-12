@@ -10,13 +10,6 @@
     flex-direction: row;
 }
 
-.grid-3c{
-    @include _.gridC(repeat(4,23%));
-    width: 100%;
-    grid-gap: 2%;
-}
-
-
 // justifyContent
 .jcE{ @include _.jc(end)}
 .jcSB{  @include _.jc(space-between)}
@@ -24,6 +17,9 @@
 .jcSA{ @include _.jc(space-around) }
 .jcC{ @include _.jc() }
 
+
+.aiE{ @include _.ai(end)}
+.aiC{ @include _.ai()}
 
 .scroll{ @include _.scroll()}
 .scroll-200{ @include _.scroll(200px)}
@@ -33,4 +29,10 @@
 
 .boxSLeft{
     @include _.shadow(-2px -5px 5px 0px,map-get(_.$c,'dark'));
+}
+
+
+.positionR-b40{
+    position: relative;
+    @include _.arah(("b":40px));
 }

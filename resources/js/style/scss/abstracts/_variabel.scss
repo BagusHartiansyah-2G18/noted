@@ -15,7 +15,7 @@ $c: (
     'white': #fff,
     'black': #000,
     'warning': #f1b100,
-    'warning1': #F6BA6F,
+    'warning1': #7a4606,
 
     'purple': #A555EC,
     'purple1': #7d43af,
@@ -37,7 +37,7 @@ $px:(
 @mixin cB($v:'dark'){ background-color:map-get($c,$v) !important;}
 @mixin c($v:'dark'){color:map-get($c,$v) !important;}
 @mixin cOpacity($v:'dark', $opa: 0.2, $cb:true){
-    @if ($bg){
+    @if ($cb){
         background-color: rgba(map-get($c,$v), $opa);
     } @else{
         color: rgba(map-get($c,$v), $opa);
@@ -46,7 +46,7 @@ $px:(
 @mixin cGradient($v : top,$v1:rgba(map-get($c,'dark'),0.9) ,$v2: rgba(map-get($c,'light'),0.1), $cb:true){
     //to top bottom rr
     // background-image: linear-gradient(to $v, $v1, $v2);
-    @if ($bg){
+    @if ($cb){
         // background-color: rgba(map-get($c,$v), $opa);
         background-image: linear-gradient(to $v, $v1, $v2);
     } @else{
@@ -71,7 +71,7 @@ $px:(
     }
 }
 @mixin rotasi($v: 45deg){ transform: rotate($v);}
-@mixin border($v:2px,$c:'dark'){border: $v solid map-get(_.$c,$c);}
+@mixin border($v:2px,$c1:'dark'){border: $v solid map-get($c,$c1);}
 
 @mixin hmax($v:100%){max-height: $v;}
 @mixin hmin($v:100px){min-height: $v;}
@@ -101,6 +101,10 @@ $px:(
 @mixin jc($v:center){
     display: flex;
     justify-content: $v;
+}
+@mixin ai($v:center){
+    display: flex;
+    align-items: $v;
 }
 
 @mixin scroll($max:false){

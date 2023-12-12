@@ -1,0 +1,40 @@
+@use '../abstracts/variabel' as _;
+@forward '../base/index';
+
+.sliderM{
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    @extend .mauto;
+
+    & .cimg{ //container image
+        @extend .flex;
+        @extend .mwrap-10;
+        @extend .radius-10;
+        > img{
+            height: 250px;
+            @extend .radius-10;
+        }
+    }
+    & .form{
+        @extend .mwrap-10;
+        @extend .radius-10;
+        @include _.hmax(250px);
+        @include _.wmax(500px);
+        border-left: 3px solid map-get(_.$c,'dark');
+    }
+
+    & #kiri,#kanan{
+        position: absolute;
+        top: 50%;
+        box-shadow: inset 0px 0px 20px 4px #91b7c3;
+        border: none;
+        @extend .boval;
+    }
+    & #kiri{
+        left: -30px;
+    }
+    & #kanan{
+        right: -30px;
+    }
+}

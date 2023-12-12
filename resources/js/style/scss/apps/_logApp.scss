@@ -11,12 +11,10 @@
     background-image: url('/svg/bg-1.svg');
     background-size: cover;
     height: 721px;
-    @extend .flexC;
-    @extend .pwrap-3p;
+    @extend .flexC, .pwrap-3p;
     & .headerM{
-        @extend .flexR;
+        @extend .flexR, .jcSB;
         @include _.hmin(200px);
-        @extend .jcSB;
     }
 
 
@@ -25,19 +23,72 @@
 
 .navM{
     @extend .flex;
-    & li{
+    > li{
         display: inline;
-        @extend .pLink;
-        @extend .fzL2;
-        @extend .fBebasNeue;
-        @extend .tupper;
-        @extend .tbold;
-
+        @extend .pLink, .fzL2, .fBebasNeue, .tupper, .tbold;
+        cursor: pointer;
     }
 }
 
 
 .containerHome{
-    @extend .flexC;
-    @extend .pwrap-3p;
+    @extend .flexC, .pwrap-3p;
+    background-image: url('/svg/bg-2.svg');
+    // @extend .blight08;
+
+    background-position: center;
+
+    border-bottom: 1px solid rgb(190, 175, 175);
 }
+
+.wrapContact{
+    @extend .flexR, .pwrap-3p, .jcC;
+    @include _.hmin(250px);
+    & img{
+        @extend .boval, .pwrap-10;
+    }
+}
+
+
+// dashboard
+.headerM1{
+    @extend .flexR, .jcSB, .bhijauBlueG;
+    & .wrap{
+        width: 100%;
+    }
+    & ul{
+        & li{
+            display: inline-flex;
+            @extend .pwrap-3p;
+            > .textIcon{
+                @extend .flexC;
+
+            }
+            & span{
+                @extend .jcC, .fzXl;
+            }
+        }
+    }
+}
+
+.userInfo{
+    @extend .flexC;
+
+
+    & #ui_bg{
+        @extend .mh300, .bdark, .jcC, .clight, .aiC,.fpacifico, .fzL4, .radius_10;
+    }
+    & #ui_profil{
+        @extend .flexR, .jcSB;
+        & #profil{
+            @extend .flexR;
+            > img{
+                height: 100px;
+            }
+        }
+        & #menu{
+
+        }
+    }
+}
+

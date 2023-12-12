@@ -2,7 +2,7 @@ import react from "react";
 
 function FooterM(){
     return (
-        <b>ini Footer</b>
+        <div className="bhijauBlueG mh30"></div>
     );
 }
 export default FooterM;

@@ -4,3 +4,10 @@
 .mxw400{@include _.wmax(400px)};
 .mxw500{@include _.wmax(500px)};
 .mxw600{@include _.wmax(600px)};
+
+.mh30{@include _.hmin(30px)};
+.mh80{@include _.hmin(80px)};
+.mh200{@include _.hmin(200px)};
+.mh250{@include _.hmin(250px)};
+.mh300{@include _.hmin(300px)};
+.w90p{width: 90%;}

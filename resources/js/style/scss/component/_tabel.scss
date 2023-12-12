@@ -1,0 +1,53 @@
+@use '../abstracts/variabel' as _;
+@forward '../base/index';
+
+.grid-4c{
+    @include _.gridC(repeat(4,23%));
+    width: 100%;
+    grid-gap: 2%;
+}
+
+
+.grid-2c-timeline{
+    @include _.gridC(repeat(2,47%));
+    width: 100%;
+    grid-column-gap: 6%;
+}
+
+.view1{
+    position: relative;
+    ::after{
+        position: absolute;
+        content: "";
+        // border-left: 1px solid black;
+        width: 2px;
+        top: 0;
+        bottom: 0;
+        left: 50%;
+        margin-left: -1px;
+        background: #E47A2E;
+    }
+
+    & .cimg{ //container image
+        @extend .flex;
+        @extend .mwrap-10;
+        // @extend .jcE;
+        @extend .radius-10;
+        // @extend .bmutedG-opa2End;
+        > img{
+            // width: 200px;
+            height: 250px;
+            @extend .radius-10;
+            // @extend .boval;
+            // background-color: burlywood;
+            // @extend .bmutedG-opa2End;
+            // box-shadow: inset 0px 0px 20px 4px #2e2e2e;
+        }
+    }
+    & .form{
+        @extend .mwrap-10;
+        @extend .radius-10;
+        @include _.hmax(250px);
+        border-left: 3px solid map-get(_.$c,'dark');
+    }
+}

@@ -7,10 +7,10 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Provider } from 'react-redux';
 
-// import store from './states';
+import store from './states';
 
 // layout
-import HeaderM from './layout/header';
+// import HeaderM from './layout/header';
 // import NavigationM from './layout/navigation';
 import RouterM from './layout/router';
 import FooterM from './layout/footer';
@@ -20,15 +20,15 @@ function MyApp() {
         <>
             <div className='bodyM'>{/* 1. body*/}
                 {/* 2. loading*/}
-                <div className='minHeader'>
-                    <HeaderM></HeaderM> {/* 3. header*/}
+                {/* <div className='minHeader'>
+                    <HeaderM></HeaderM> 3. header
                     <div>
                         <h1>Make a list of your notes.</h1>
                         <h2><u><b className='fpacifico'>Derivative Notes</b> <i className='fBebasNeue'>"DN / CT"</i></u></h2>
                         <button className='btnRadius50 bprimary'>Sig In</button>
                         <button className='btnRadius50 bwarning'>Sig Up</button>
                     </div>
-                </div>
+                </div> */}
                 {/*<div> 4. container
                     <NavigationM></NavigationM> 4.1. navigation
                     <RouterM></RouterM> 4.2. isi
@@ -45,10 +45,10 @@ export default MyApp;
 
 if (document.getElementById('app')) {
     ReactDOM.render(
-        // <Provider store={store}>
+        <Provider store={store}>
             <BrowserRouter>
                 <MyApp />
             </BrowserRouter>
-        // </Provider>
+        </Provider>
         , document.getElementById('app'));
 }
