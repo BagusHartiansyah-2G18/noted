@@ -4,13 +4,24 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 // pages
 import Home from '../pages/home';
-import Dashboard from '../pages/dashboard';
+import Homes from '../pages/subDash/home';
+import Anggota from '../pages/subDash/anggota';
+import Noted from '../pages/subDash/noteForm';
+import NoteSub from '../pages/subDash/noteFormSub';
+import Publikasi from '../pages/subDash/publikasi';
 
-
-function RouterM(){
+//dashboard
+function RouterM({ userMenu }){
+    const sub = userMenu.sub;
     return (
         <Routes>
-            <Route path="/home" element={<Dashboard /> } />
+            <Route path="/home" element={<Homes sub={sub}/> } />
+            
+            <Route path="/home/anggota" element={<Anggota sub={sub} /> } />
+            <Route path="/home/publikasi" element={<Publikasi sub={sub}/> } />
+            <Route path="/home/noted" element={<Noted /> } /> 
+            <Route path="/home/notedSub/:value" element={<NoteSub /> } />  
+
             <Route path="*" element={<Home /> } />
         </Routes>
     );

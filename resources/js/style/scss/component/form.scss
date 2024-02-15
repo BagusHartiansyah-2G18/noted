@@ -1,0 +1,46 @@
+@use '../abstracts/variabel' as _;
+@forward '../base/index';
+
+.doubleInput{
+    @extend .flexC; 
+    & label{
+        @extend .fzXl, .pLink;
+        font-weight: bold;
+    }
+    & .double{
+        @extend .flexR, .jcSA, .aiC;
+         
+    }
+}
+.iconInput2{
+    @extend .flexR, .aiC;
+    position: relative;
+    & input{
+        @extend .p10_30, .fzXl, .radius-10;
+        width: 100%;
+        height: max-content;
+        
+    }
+    & span{
+        position: absolute;
+        left:10px;
+        z-index: 0;
+        
+    }
+}
+
+.formSimple{
+    @extend .flexC;
+}
+@media screen and (min-width: 800px) { 
+    .formSimple{
+       display: flex;
+       flex-direction: row;
+
+       & .kanan{
+            border-left: 5px solid darkgreen;
+            border-radius: 10px;
+            padding-left: 15px;
+       }
+    }
+}

@@ -6,6 +6,11 @@ function htmlReducer(dt = [], action = {}) {
           ...dt,
           ...action.payload
         }
+        case actType.um:
+            return {
+                ...dt,
+                userMenu: action.payload
+            }
       default:
         return dt;
     }

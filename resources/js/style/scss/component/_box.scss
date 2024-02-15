@@ -12,3 +12,18 @@
         @extend .radius-10;
     }
 }
+.boxShadow{
+    @extend .mh80;
+    @extend .boxS;
+}
+
+
+.Bicon3coll{
+    @extend .flexC, .jcC, .pwrap-5, .boxS, .mxw300, .radius-10; 
+    // text-align: center;
+    & .judul{
+        @extend .w70p, .pwrap-5, .fPoppins;
+        
+    }
+    & h2{@extend .pm0, .fzL1, .tcapital, .farial;  }
+}

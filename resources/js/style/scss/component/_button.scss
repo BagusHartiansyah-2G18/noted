@@ -11,6 +11,5 @@
 }
 
 .btn{
-    @extend .mwrap-5;
-    @extend .pLink;
+    @extend .mwrap-5, .pLink, .pointer;
 }

@@ -74,21 +74,43 @@
 .userInfo{
     @extend .flexC;
 
-
     & #ui_bg{
         @extend .mh300, .bdark, .jcC, .clight, .aiC,.fpacifico, .fzL4, .radius_10;
     }
+    & .boxProfil{
+        border-bottom: 3px solid darkgreen;
+        @extend .positionR-b40, .radius-10, .pwrap-2p, .bwhite, .w90p, .mauto;
+    }
     & #ui_profil{
-        @extend .flexR, .jcSB;
+        @extend .flexR, .jcSB;;
         & #profil{
             @extend .flexR;
+            min-width: 300px;
             > img{
                 height: 100px;
             }
         }
         & #menu{
-
+            // width: max-content;
+            @extend .jcC;
         }
     }
 }
 
+.listNode{
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 20px;
+    justify-content: center;
+}
+@media screen and (min-width: 800px) { 
+    .listNode{
+        grid-template-columns: repeat(2,44%);
+        justify-content: space-between;
+    }
+}
+@media screen and (min-width: 1000px) { 
+    .listNode{
+        grid-template-columns: repeat(4,22%);
+    }
+}

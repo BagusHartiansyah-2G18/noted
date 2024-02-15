@@ -1,12 +1,21 @@
 
 const actType = {
     html: "setHtml",
+    um: "userMenu",
 };
 
 function htmlS(v) {
     return async (dispatch) => {
       dispatch({
           type : actType.html,
+          payload : v,
+      })
+    }
+}
+function userMenuS(v) {
+    return async (dispatch) => {
+      dispatch({
+          type : actType.um,
           payload : v,
       })
     }
@@ -54,5 +63,6 @@ function session(){
 
 export {
     actType,
-    htmlS
+    htmlS,
+    userMenuS
 }

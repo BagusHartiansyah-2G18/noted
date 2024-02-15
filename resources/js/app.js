@@ -10,15 +10,36 @@ import { Provider } from 'react-redux';
 import store from './states';
 
 // layout
-// import HeaderM from './layout/header';
-// import NavigationM from './layout/navigation';
+import HeaderM1 from "./layout/dashboard/headerM1";
+import MenuUserM1 from "./layout/dashboard/menuUserM1";
+
+
 import RouterM from './layout/router';
 import FooterM from './layout/footer';
 
+import { htmlS, userMenuS } from "./states/sf/html/action"
+
+
 function MyApp() {
+    const { _html, dnote } = useSelector((state) => state);
+    const dispatch = useDispatch(); 
+    useEffect(() => { 
+        dispatch(htmlS({
+            userMenu : {
+                v:4, //value
+                sub:1 //sub menu
+            }
+        }))
+        
+    }, [dispatch]);
+    const path= window.location.pathname;
+    // console.log(path);
+    if(Object.keys(_html).length==0){
+        return "";
+    }  
     return (
         <>
-            <div className='bodyM'>{/* 1. body*/}
+            <div className='bodyM'>
                 {/* 2. loading*/}
                 {/* <div className='minHeader'>
                     <HeaderM></HeaderM> 3. header
@@ -33,7 +54,20 @@ function MyApp() {
                     <NavigationM></NavigationM> 4.1. navigation
                     <RouterM></RouterM> 4.2. isi
                 </div> */}
-                <RouterM></RouterM>
+                 {
+                    (
+                        (path == '/home' || (path.split('home/').length>1)) && 
+                        <>
+                            <HeaderM1></HeaderM1>
+                            <MenuUserM1
+                                userMenu={_html.userMenu}
+                            ></MenuUserM1>
+                        </>
+                    )
+                }
+                <RouterM 
+                    userMenu={_html.userMenu}
+                    ></RouterM>
                 {/* 5. toast*/}
                 <FooterM></FooterM>{/* 6. footer*/}
             </div>

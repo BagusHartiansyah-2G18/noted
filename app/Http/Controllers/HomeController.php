@@ -24,6 +24,11 @@ class HomeController extends Controller
      */
     public function index()
     {
+        // $user =Auth::user();
+        // $$request = new Request;
+        // $request->session()->put('duser',$users);
+        // $user =Auth::user()->id;
+        // return print_r($user);
         return view('react')->with([
             "kdDinas" => Auth::user()->kdDinas
         ]);

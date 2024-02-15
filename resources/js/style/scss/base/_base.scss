@@ -1,5 +1,6 @@
 @use '../abstracts/variabel' as _;
 
+
 .flex{display: flex;}
 .flexC{
     @extend .flex;
@@ -21,6 +22,8 @@
 .aiE{ @include _.ai(end)}
 .aiC{ @include _.ai()}
 
+.acC{ @include _.ac()}
+
 .scroll{ @include _.scroll()}
 .scroll-200{ @include _.scroll(200px)}
 .scroll-400{ @include _.scroll(400px)}
@@ -30,9 +33,14 @@
 .boxSLeft{
     @include _.shadow(-2px -5px 5px 0px,map-get(_.$c,'dark'));
 }
+.boxS{
+    @include _.shadow(0px 1px 10px 1px,map-get(_.$c,'dark'));
+}
 
 
 .positionR-b40{
     position: relative;
     @include _.arah(("b":40px));
 }
+
+.pointer{ cursor: pointer;}

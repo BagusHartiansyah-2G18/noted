@@ -3,7 +3,7 @@
 .bwhite{ @include _.cB('white')}
 .cwhite{@include _.c('white')}
 
-.blight{@include _.cB('light')}
+.blight{@include _.cB('light'); @include _.c('dark'); }
 .blight04{ background-color: rgba(map-get(_.$c,'light'), 0.4);}
 .blight08{ background-color: rgba(map-get(_.$c,'light'), 0.8);}
 .blightG-opa2{@include _.cGradient(left, rgba(map-get(_.$c,'light'),0), rgba(map-get(_.$c,'light'),0.8)); @extend .cwhite;}
@@ -30,11 +30,18 @@
 
 .binfo{@include _.cB('info'); @extend .cwhite;}
 .binfo1{@include _.cB('info1'); @extend .cwhite;}
+.binfo3{@include _.cB('info3'); @extend .cdark;}
+
 .binfoG{@include _.cGradient(left, map-get(_.$c,'info') ,map-get(_.$c,'info1')); @extend .cwhite;}
 .binfoG-opa2{@include _.cGradient(left, rgba(map-get(_.$c,'info1'),0.2), rgba(map-get(_.$c,'info'),0.8)); @extend .cwhite;}
 .binfoG-opa2End{@include _.cGradient(right, rgba(map-get(_.$c,'info1'),0.2), rgba(map-get(_.$c,'info'),0.8)); @extend .cwhite;}
 .borderBInfo-1{border-bottom: 1px solid map-get(_.$c,'info1');}
 .borderBInfo-5{border-bottom: 5px solid map-get(_.$c,'info1');}
+.borderTInfo-5{border-top: 5px solid map-get(_.$c,'info1');}
+.borderTBInfo-5{
+    border-bottom: 5px solid map-get(_.$c,'info1');
+    border-top: 5px solid map-get(_.$c,'info1');
+}
 
 .cinfo{@include _.c('info')}
 
@@ -48,14 +55,19 @@
 .bsuccessG-opa2End{@include _.cGradient(right, rgba(map-get(_.$c,'success1'),0.2), rgba(map-get(_.$c,'success'),0.8)); @extend .cwhite;}
 .borderBSuccess-1{border-bottom: 1px solid map-get(_.$c,'success1');}
 .borderBSuccess-5{border-bottom: 5px solid map-get(_.$c,'success1');}
+.borderTSuccess-5{border-top: 5px solid map-get(_.$c,'success1');}
+.borderTBSuccess-5{
+    border-bottom: 5px solid map-get(_.$c,'success');
+    border-top: 5px solid map-get(_.$c,'success');
+}
 
 .bdanger{@include _.cB('danger')}
 .cdanger{@include _.c('danger')}
 
-.bdark{@include _.cB('dark')}
+.bdark{@include _.cB('dark'); @extend .clight;}
 .cdark{@include _.c('dark')}
 
-.bsecondary{@include _.cB('secondary') }
+.bsecondary{@include _.cB('secondary');@extend .clight; }
 .csecondary{@include _.c('secondary')}
 
 .bmuted{@include _.cB('muted'); @extend .clight; }
@@ -78,10 +90,20 @@
 
 .borange{@include _.cB('orange')}
 .corange{@include _.c('orange')}
+
+.bcoklat{@include _.cB('orange')}
+.ccoklat{@include _.c('coklat')}
+
 // batas
+
 
 .bnone{background: none;}
 
 
 // gradient
 .bhijauBlueG{@include _.cGradient(right, map-get(_.$c,'success') ,map-get(_.$c,'info1')); @extend .clight;}
+
+.alfaDark{background-color: rgba(map-get(_.$c,'dark'), 0.5);}
+.alfaInfo2{background-color: rgba(map-get(_.$c,'info2'), 0.9);}
+.alfaCoklat{background-color: rgba(map-get(_.$c,'coklat'), 0.5);}
+

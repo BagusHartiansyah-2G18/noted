@@ -146,7 +146,7 @@ function Home(){
             <h2 className="fBebasNeue tcenter pwrap__3p">
                 <u>Contact Information</u>
                 <p className="tjustify fzL mauto tcenter farial mxw600">
-                    konsultasi perencanaan untuk sebuah gerakan
+                    konsultasi perencana, sebuah gerakan
                 </p>
             </h2>
             <div className="wrapContact">

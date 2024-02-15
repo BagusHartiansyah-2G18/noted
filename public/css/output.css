@@ -2,11 +2,15 @@
   padding: 0px;
 }
 
-.pLink, .btnRadius50, .btn, .navM > li {
+.pl0 {
+  padding-left: 0px !important;
+}
+
+.pLink, .doubleInput label, .btnRadius50, .btn, .navM > li {
   padding: 8px 16px;
 }
 
-.pwrap-5 {
+.pwrap-5, .Bicon3coll, .Bicon3coll .judul {
   padding: 5px;
 }
 
@@ -14,11 +18,43 @@
   padding: 10px;
 }
 
-.pwrap-2p {
+.pwrap_10 {
+  padding: 10px 0px;
+}
+
+.pwrap__10 {
+  padding: 0px 10px;
+}
+
+.p10_20 {
+  padding: 10px 20px;
+}
+
+.p20_10 {
+  padding: 20px 10px;
+}
+
+.p10_30, .iconInput2 input {
+  padding: 10px 30px;
+}
+
+.pwrap-20 {
+  padding: 20px;
+}
+
+.pwrap_20 {
+  padding: 20px 0px;
+}
+
+.pwrap__20 {
+  padding: 0px 20px;
+}
+
+.pwrap-2p, .userInfo .boxProfil {
   padding: 2%;
 }
 
-.pwrap_2p {
+.pwrap_2p, .ul1 li {
   padding: 0px 2%;
 }
 
@@ -26,7 +62,7 @@
   padding: 2% 0px;
 }
 
-.pwrap-3p, .minHeader, .containerHome, .wrapContact, .headerM1 ul li {
+.pwrap-3p, .ul1 li, .minHeader, .containerHome, .wrapContact, .headerM1 ul li {
   padding: 3%;
 }
 
@@ -42,12 +78,20 @@
   padding: 5%;
 }
 
-.pm0 {
+.pwrap_5p {
+  padding: 0% 5%;
+}
+
+.pwrap__5p {
+  padding: 5% 0%;
+}
+
+.pm0, .ul1, .Bicon3coll h2, body {
   padding: 0px !important;
   margin: 0px !important;
 }
 
-.mauto, .sliderM {
+.mauto, .sliderM, .userInfo .boxProfil {
   margin: auto;
 }
 
@@ -63,6 +107,14 @@
   margin: 10px;
 }
 
+.mwrap_2p {
+  margin: 0% 2%;
+}
+
+.mwrap__2p {
+  margin: 2% 0%;
+}
+
 .mwrap_3p {
   margin: 0% 3%;
 }
@@ -71,7 +123,7 @@
   margin: 3% 0%;
 }
 
-.radius-10, .sliderM .cimg, .sliderM .cimg > img, .sliderM .form, .view1 .cimg, .view1 .cimg > img, .view1 .form, .BiconText, .BiconText .box {
+.radius-10, .iconInput2 input, .sliderM .cimg, .sliderM .cimg > img, .sliderM .form, .view1 .cimg, .view1 .cimg > img, .view1 .form, .BiconText, .BiconText .box, .Bicon3coll, .userInfo .boxProfil {
   border-radius: 10px;
 }
 
@@ -80,11 +132,16 @@
   border-bottom-right-radius: 10px;
 }
 
+.radius__10 {
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
 .boval, .sliderM #kiri, .sliderM #kanan, .wrapContact img {
   border-radius: 50%;
 }
 
-.bwhite {
+.bwhite, .userInfo .boxProfil {
   background-color: #fff !important;
 }
 
@@ -94,6 +151,7 @@
 
 .blight {
   background-color: #e2e2e2 !important;
+  color: #343a40 !important;
 }
 
 .blight04 {
@@ -112,7 +170,7 @@
   background-image: linear-gradient(to right, rgba(226, 226, 226, 0), rgba(226, 226, 226, 0.8));
 }
 
-.clight, .userInfo #ui_bg, .bhijauBlueG, .headerM1, .bmutedG-opa2End, .bmutedG-opa2, .bmutedG, .bmuted08, .bmuted04, .bmuted {
+.clight, .userInfo #ui_bg, .bhijauBlueG, .headerM1, .bmutedG-opa2End, .bmutedG-opa2, .bmutedG, .bmuted08, .bmuted04, .bmuted, .bsecondary, .bdark {
   color: #e2e2e2 !important;
 }
 
@@ -176,6 +234,10 @@
   background-color: #347a96 !important;
 }
 
+.binfo3 {
+  background-color: #f1fafb !important;
+}
+
 .binfoG {
   background-image: linear-gradient(to left, #17a2b8, #347a96);
 }
@@ -194,6 +256,15 @@
 
 .borderBInfo-5 {
   border-bottom: 5px solid #347a96;
+}
+
+.borderTInfo-5 {
+  border-top: 5px solid #347a96;
+}
+
+.borderTBInfo-5 {
+  border-bottom: 5px solid #347a96;
+  border-top: 5px solid #347a96;
 }
 
 .cinfo {
@@ -236,6 +307,15 @@
   border-bottom: 5px solid #076b20;
 }
 
+.borderTSuccess-5 {
+  border-top: 5px solid #076b20;
+}
+
+.borderTBSuccess-5 {
+  border-bottom: 5px solid #28a745;
+  border-top: 5px solid #28a745;
+}
+
 .bdanger {
   background-color: #dc3545 !important;
 }
@@ -248,7 +328,7 @@
   background-color: #343a40 !important;
 }
 
-.cdark {
+.cdark, .binfo3 {
   color: #343a40 !important;
 }
 
@@ -324,6 +404,14 @@
   color: darkorange !important;
 }
 
+.bcoklat {
+  background-color: darkorange !important;
+}
+
+.ccoklat {
+  color: rgb(93, 47, 3) !important;
+}
+
 .bnone {
   background: none;
 }
@@ -332,15 +420,27 @@
   background-image: linear-gradient(to right, #28a745, #347a96);
 }
 
-.flex, .sliderM .cimg, .view1 .cimg, .navM, .flexR, .minHeader .headerM, .wrapContact, .headerM1, .userInfo #ui_profil, .userInfo #ui_profil #profil, .flexC, .BiconText, .minHeader, .containerHome, .headerM1 ul li > .textIcon, .userInfo {
+.alfaDark {
+  background-color: rgba(52, 58, 64, 0.5);
+}
+
+.alfaInfo2 {
+  background-color: rgba(44, 62, 80, 0.9);
+}
+
+.alfaCoklat {
+  background-color: rgba(93, 47, 3, 0.5);
+}
+
+.flex, .sliderM .cimg, .view1 .cimg, .navM, .flexR, .doubleInput .double, .iconInput2, .minHeader .headerM, .wrapContact, .headerM1, .userInfo #ui_profil, .userInfo #ui_profil #profil, .flexC, .doubleInput, .formSimple, .BiconText, .Bicon3coll, .minHeader, .containerHome, .headerM1 ul li > .textIcon, .userInfo {
   display: flex;
 }
 
-.flexC, .BiconText, .minHeader, .containerHome, .headerM1 ul li > .textIcon, .userInfo {
+.flexC, .doubleInput, .formSimple, .BiconText, .Bicon3coll, .minHeader, .containerHome, .headerM1 ul li > .textIcon, .userInfo {
   flex-direction: column;
 }
 
-.flexR, .minHeader .headerM, .wrapContact, .headerM1, .userInfo #ui_profil, .userInfo #ui_profil #profil {
+.flexR, .doubleInput .double, .iconInput2, .minHeader .headerM, .wrapContact, .headerM1, .userInfo #ui_profil, .userInfo #ui_profil #profil {
   flex-direction: row;
 }
 
@@ -359,12 +459,12 @@
   justify-content: space-evenly;
 }
 
-.jcSA {
+.jcSA, .doubleInput .double {
   display: flex;
   justify-content: space-around;
 }
 
-.jcC, .BiconText .box, .wrapContact, .headerM1 ul li span, .userInfo #ui_bg {
+.jcC, .ul1 li label, .BiconText .box, .Bicon3coll, .wrapContact, .headerM1 ul li span, .userInfo #ui_bg, .userInfo #ui_profil #menu {
   display: flex;
   justify-content: center;
 }
@@ -374,9 +474,14 @@
   align-items: end;
 }
 
-.aiC, .userInfo #ui_bg {
+.aiC, .doubleInput .double, .iconInput2, .userInfo #ui_bg {
   display: flex;
   align-items: center;
+}
+
+.acC {
+  display: flex;
+  align-content: center;
 }
 
 .scroll {
@@ -407,9 +512,17 @@
   box-shadow: -2px -5px 5px 0px #343a40;
 }
 
-.positionR-b40 {
+.boxS, .boxShadow, .Bicon3coll {
+  box-shadow: 0px 1px 10px 1px #343a40;
+}
+
+.positionR-b40, .userInfo .boxProfil {
   position: relative;
   bottom: 40px;
+}
+
+.pointer, .btn {
+  cursor: pointer;
 }
 
 .fzS {
@@ -424,11 +537,11 @@
   font-size: 14px;
 }
 
-.fzXl, .headerM1 ul li span {
+.fzXl, .doubleInput label, .iconInput2 input, .ul1 li label, .headerM1 ul li span {
   font-size: 16px;
 }
 
-.fzL1 {
+.fzL1, .Bicon3coll h2 {
   font-size: 20px;
 }
 
@@ -456,7 +569,7 @@
   font-family: "Nunito", sans-serif;
 }
 
-.farial {
+.farial, .Bicon3coll h2 {
   font-family: "Arial", Helvetica, sans-serif;
 }
 
@@ -470,7 +583,7 @@
   font-style: normal;
 }
 
-.fPoppins {
+.fPoppins, .Bicon3coll .judul {
   font-family: "Poppins", Poppins-Regular;
 }
 @font-face {
@@ -520,6 +633,10 @@
   font-style: normal;
 }
 
+.tcapital, .Bicon3coll h2 {
+  text-transform: capitalize;
+}
+
 .tupper, .navM > li {
   text-transform: uppercase;
 }
@@ -532,7 +649,7 @@
   text-align: justify;
 }
 
-.tcenter {
+.tcenter, .grid-col3 label {
   text-align: center;
 }
 
@@ -540,12 +657,68 @@
   max-width: 200px;
 }
 
+.mnw200 {
+  min-width: 200px;
+}
+
+.w200 {
+  width: 200px;
+}
+
+.w220 {
+  width: 220px;
+}
+
+.w230 {
+  width: 230px;
+}
+
+.mnw240 {
+  min-width: 240px;
+}
+
+.w240 {
+  width: 240px;
+}
+
+.w250 {
+  width: 250px;
+}
+
+.mnw250 {
+  min-width: 250px;
+}
+
+.mxw300, .Bicon3coll {
+  max-width: 300px;
+}
+
+.mnw300 {
+  min-width: 300px;
+}
+
+.w300 {
+  width: 300px;
+}
+
 .mxw400 {
   max-width: 400px;
 }
 
+.mnw400 {
+  min-width: 400px;
+}
+
+.w400 {
+  width: 400px;
+}
+
 .mxw500 {
   max-width: 500px;
+}
+
+.w500 {
+  width: 500px;
 }
 
 .mxw600 {
@@ -556,7 +729,7 @@
   min-height: 30px;
 }
 
-.mh80 {
+.mh80, .boxShadow {
   min-height: 80px;
 }
 
@@ -572,8 +745,44 @@
   min-height: 300px;
 }
 
-.w90p {
+.w100p {
+  width: 100%;
+}
+
+.w80p {
+  width: 80%;
+}
+
+.w60p {
+  width: 60%;
+}
+
+.w40p {
+  width: 40%;
+}
+
+.w20p {
+  width: 20%;
+}
+
+.w90p, .userInfo .boxProfil {
   width: 90%;
+}
+
+.w70p, .Bicon3coll .judul {
+  width: 70%;
+}
+
+.w50p {
+  width: 50%;
+}
+
+.w30p {
+  width: 30%;
+}
+
+.w10p {
+  width: 10%;
 }
 
 .bodyM {
@@ -610,8 +819,32 @@
 .headerM1 ul li {
   display: inline-flex;
 }
+.userInfo .boxProfil {
+  border-bottom: 3px solid darkgreen;
+}
+.userInfo #ui_profil #profil {
+  min-width: 300px;
+}
 .userInfo #ui_profil #profil > img {
   height: 100px;
+}
+.listNode {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 20px;
+  justify-content: center;
+}
+
+@media screen and (min-width: 800px) {
+  .listNode {
+    grid-template-columns: repeat(2, 44%);
+    justify-content: space-between;
+  }
+}
+@media screen and (min-width: 1000px) {
+  .listNode {
+    grid-template-columns: repeat(4, 22%);
+  }
 }
 .btnRadius50 {
   border-radius: 50px;
@@ -681,6 +914,43 @@
 }
 .sliderM #kanan {
   right: -30px;
+}
+
+.ul1 li {
+  margin: 0%;
+  display: inline;
+}
+.grid-col3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+.doubleInput label {
+  font-weight: bold;
+}
+.iconInput2 {
+  position: relative;
+}
+.iconInput2 input {
+  width: 100%;
+  height: max-content;
+}
+.iconInput2 span {
+  position: absolute;
+  left: 10px;
+  z-index: 0;
+}
+
+@media screen and (min-width: 800px) {
+  .formSimple {
+    display: flex;
+    flex-direction: row;
+  }
+  .formSimple .kanan {
+    border-left: 5px solid darkgreen;
+    border-radius: 10px;
+    padding-left: 15px;
+  }
 }
 
 /*# sourceMappingURL=output.css.map */
