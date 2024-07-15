@@ -5,10 +5,14 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Helper\Mfc;
 use App\Models\judul;
+use App\Models\judul_file;
+
+use Illuminate\Support\Facades\Storage;
 use App\Http\Resources\judulR;
 use Dotenv\Validator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use App\Models\data_form;
 
 class JudulController extends Controller
 {
@@ -16,8 +20,7 @@ class JudulController extends Controller
     {
         $this->middleware('auth');
     }
-    public function index(Request $request)
-    {
+    public function index(Request $request){
         $portal = Mfc::portal(Auth::user());
         if($portal['exc']){
             $validator = $request;
@@ -38,12 +41,17 @@ class JudulController extends Controller
         }
     }
     function getData($kdMember,$tingkat){
-        return DB::select(" 
-            select * from judul
-            where tingkat = '".$tingkat."' and
-            kdMember='".$kdMember."'
-            order by judul asc
-        ");
+        return judul::where('tingkat',$tingkat)
+            ->where('kdMember',$kdMember)
+             ->where('aktif',1)
+             ->orderby('judul')
+            ->get(); 
+        // return DB::select(" 
+        //     select * from judul
+        //     where tingkat = '".$tingkat."' and
+        //     kdMember='".$kdMember."'
+        //     order by judul asc
+        // ");
     }
     public function addx(Request $request){
         // $request->session()->put('duser',$users);
@@ -165,6 +173,7 @@ class JudulController extends Controller
                 $validator = $validator->validate([
                     'kdJudul' => 'required',
                     'kdMember' => 'required',
+                    'tingkat'=> 'required',
                 ]);
             } catch (\Throwable $th) {
                 return response()->json([
@@ -175,7 +184,10 @@ class JudulController extends Controller
             if(
                 judul::where('kdJudul',$validator['kdJudul'])
                 ->where('kdMember',$validator['kdMember'])
-                ->delete()
+                ->where('tingkat',$validator['tingkat'])
+                ->update([
+                    "aktif"=>0 
+                ])
             ){
                 return response()->json([
                     'exc' => true,
@@ -221,21 +233,22 @@ class JudulController extends Controller
                 $lengthKdJudul= strlen($validator['kdJudul'])+2;
             }
             $query =" substr(kdJudul,".$lengthKdJudul.") ";
+            $queryNotTingkat0 = "and kdJudul like '".($validator['tingkat']==1?$validator['kdJudul']."MFC":$validator['kdJudul'])."%'";
             if($validator['tingkat']==0){
                 $lengthKdJudul= 0;
                 $query =" (kdJudul) ";
-            }
+                $queryNotTingkat0 ='';
+            } 
 
             $kdJudul = 1;
             $dt = DB::select(" 
                 select ".$query."  as kdJudul from judul
                 where tingkat = '".$validator['tingkat']."' and
-                kdMember='".$portal['kdMember']."' and
-                kdJudul like '%".($validator['tingkat']==1?$validator['kdJudul']."MFC":$validator['kdJudul'])."%'
+                kdMember='".$portal['kdMember']."' 
+                ".$queryNotTingkat0."
                 order by cast(".$query." as int) desc
                 limit 1
-            ");
-            
+            "); 
             if(count($dt)>0){  
                 $kdJudul = $dt[0]->kdJudul+1;
             }
@@ -268,7 +281,8 @@ class JudulController extends Controller
                     // return print_r($data);
                     $sub=judul::where('tingkat',($validator['tingkat']))
                         ->where('kdMember',$validator['kdMember'])
-                        ->where('kdJudul','like','%'.($validator['tingkat']==1?$validator['kdJudul']."MFC":$validator['kdJudul'])."%")
+                        ->where('kdJudul','like',''.($validator['tingkat']==1?$validator['kdJudul']."MFC":$validator['kdJudul'])."%")
+                        ->where('aktif',1)
                         ->get(); 
                     $dt=[
                         'induk'=>$data,
@@ -313,20 +327,104 @@ class JudulController extends Controller
                 $validator['kdMember'],
                 $validator['tingkat']
             );
-            // return print_r($data);
+            // return print_r(($validator['tingkat']+1));
             $sub=judul::where('tingkat',($validator['tingkat']+1))
                 ->where('kdMember',$validator['kdMember'])
-                ->where('kdJudul','like','%'.($validator['tingkat']==0?$validator['kdJudul']."MFC":$validator['kdJudul'])."%")
-                ->get(); 
+                ->where('kdJudul','like',''.($validator['tingkat']==0?$validator['kdJudul']."MFC":$validator['kdJudul'])."%")
+                ->where('aktif',1)
+                ->get();
+            
+            
+            $note = $data[count($data)-1]; 
+            $file=judul_file::where('kdMember',$note['kdMember'])
+                ->where('kdJudul',$note['kdJudul'])
+                ->get();
+            $form= data_form::where([
+                "kdNote"=>$note['kdJudul'],
+                "kdMember"=>$note['kdMember'],
+                "tingkat"=>$note['tingkat']
+            ])->get();
+            foreach ($form as $keyx => $vx) { 
+                $vx['dvalue']= DB::select(" 
+                   select a.*, b.name
+                   from value_forms a
+                   join users b on 
+                       a.kdMember = TO_BASE64(b.id)
+                   where a.kdDF='".
+                   Mfc::getKeyValue(array_merge($validator,["kd"=>$vx['kd'], "kdNote"=>$validator['kdJudul']]))
+                   ."' and  
+                   a.aktif =1
+               ");
+           }; 
+            foreach ($sub as $key => $v) {
+                $v['file']=judul_file::where('kdMember',$v['kdMember'])
+                ->where('kdJudul',$v['kdJudul'])
+                ->get();
+                $v['form']=data_form::where([
+                    "kdNote"=>$v['kdJudul'],
+                    "kdMember"=>$v['kdMember'],
+                    "tingkat"=>$v['tingkat']
+                ])->get();
+                     
+                foreach ($v['form'] as $keyx => $vx) {  
+                    $vx['dvalue']= DB::select(" 
+                       select a.*, b.name
+                       from value_forms a
+                       join users b on 
+                           a.kdMember = TO_BASE64(b.id)
+                       where a.kdDF='".
+                       Mfc::getKeyValue(array_merge($validator,["kd"=>$vx['kd'], "kdNote"=>$vx['kdNote'],"tingkat"=>$vx['tingkat']]))
+                       ."' and  
+                       a.aktif =1
+                   ");
+               };
+            }; 
+            
             return response()->json([
                 'exc' => true,
                 'data' => [
                     'induk'=>$data,
-                    'sub'=>$sub
+                    'sub'=>$sub,
+                    'file'=>$file,
+                    'form'=>$form
                 ]
             ], 200);
         }
     }
+    public function subFileUpload(Request $request){
+        $portal = Mfc::portal(Auth::user());
+        if($portal['exc']){
+            $validator = $request;
+            try {
+                $validator = $validator->validate([ 
+                    'tingkat' => 'required', 
+                    'kdMember' => 'required', 
+                    'kdJudul' => 'required', 
+                ]);
+            } catch (\Throwable $th) {
+                return response()->json([
+                    'exc' => false,
+                    'data' => 'body not valid'
+                ], 422);
+            } 
+            $data = $this->getDataTurunanInduk(
+                $validator['kdJudul'],
+                $validator['kdMember'],
+                $validator['tingkat']
+            ); 
+            $file=judul_file::where('kdMember',$validator['kdMember'])
+                ->where('kdJudul',$validator['kdJudul'])
+                ->get();  
+            return response()->json([
+                'exc' => true,
+                'data' => [
+                    'induk'=>$data,
+                    'file'=>$file
+                ]
+            ], 200);
+        }
+    }
+    
     function readKdJudul($kdJudul) {
         $cekJudul = explode("MFC",$kdJudul);
         $sub=[]; 
@@ -377,5 +475,88 @@ class JudulController extends Controller
             $itingkat++;
         }
         return $fdata;
+    }
+    public function actUFSubNote(Request $request){
+        $portal = Mfc::portal(Auth::user());
+        if($portal['exc']){
+            $request = $request->all();  
+            $namaFile =''; 
+            if($request['files']!="-" && count($request['files'])>1){
+                $namaFile = $this->_uploadImage($request['files']['data'],"fileUploadSubNote/".$request['files']['nama']); 
+            } 
+
+            $dfile=judul_file::where('kdMember',$portal['kdMember'])
+                ->where('kdJudul',$request['kdJudul'])
+                ->orderByDesc('ind')
+                ->limit(1)
+                ->get();  
+            $ind = 1; 
+            if(count($dfile)>0){ 
+                $ind = $dfile[0]->ind+1; 
+            }
+            $newJudul = new judul_file;
+            $newJudul->keterangan =$request['judul']; 
+            $newJudul->kdMember =$portal['kdMember'];
+            $newJudul->kdJudul =$request['kdJudul'];
+            $newJudul->ind =$ind;
+            $newJudul->file=$namaFile;
+            $newJudul->kdMemberSub='';
+            $newJudul->url =($request['url']==''?'-':$request['url']);
+            if($newJudul->save()){
+                return response()->json([
+                    'exc' => true,
+                    'data' =>judul_file::where('kdMember',$portal['kdMember'])
+                    ->where('kdJudul',$request['kdJudul'])
+                    ->get() 
+                ], 200);
+            } 
+            return response()->json([
+                'exc' => false,
+                'msg' => 'query Error'
+            ], 200);
+        }
+        return response()->json([
+            'exc' => false,
+            'msg' => $cek['msg']
+        ], 200);
+    }
+    public function _uploadImage($file,$nama){
+        $split=explode("/",$nama);
+        $flokasi="sppd/";// default foldar jika ber ubah maka tambahakan dinamanya
+        if(count($split)>1){
+            $flokasi='';
+            foreach ($split as $key => $v) {
+                if($key==count($split)-1){
+                    $nama=$v;
+                }else{
+                    $flokasi.=$v."/";
+                }
+            }
+            // $flokasi.=$split[0]."/";
+            // $nama=$split[count($split)-1];
+        }
+        // return print_r($file);
+        // $nama=explode(".",$nama);
+        // switch($nama[count($nama)-1]){
+        //     case "png":$image=substr($file,22);break;
+        //     case "PNG":$image=substr($file,22);break;
+        //     case "pdf":$image=substr($file,22);break;
+        //     default:$image=substr($file,23);break;
+        // }
+        // $image=substr($file,23);
+        // return print_r($nama[1]);
+        date_default_timezone_set("America/New_York");
+        // $namaFile=$nama[count($nama)-2]."-".date("Y-m-d-h-i-sa").".".$nama[count($nama)-1];
+        $namaFile=date("Y-m-d-h-i-sa")."-".$nama;
+
+
+        $delspace=explode(" ",$namaFile);
+        $namaFile="";
+        foreach ($delspace as $key => $value) {
+            $namaFile.=$value;
+        }
+        $lokasiFile='public/pdf/'.$flokasi.$namaFile;
+        Storage::put($lokasiFile,base64_decode($file));
+        return $namaFile;
     }
 }

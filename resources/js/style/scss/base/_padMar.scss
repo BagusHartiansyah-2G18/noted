@@ -3,10 +3,12 @@ body{@extend .pm0;}
 .pl0{padding-left: 0px !important}
 .pLink{ padding: 8px 16px;}
 .pwrap-5{padding:5px}
+.pwrap_5{padding:0px 5px}
+.pwrap__5{padding:5px 0px}
 
 .pwrap-10{padding:10px}
-.pwrap_10{padding:10px 0px}
-.pwrap__10{padding:0px 10px}
+.pwrap_10{padding: 0px 10px}
+.pwrap__10{padding:10px 0px }
 
 .p10_20{padding: 10px 20px;}
 .p20_10{padding: 20px 10px;}
@@ -34,11 +36,15 @@ body{@extend .pm0;}
     margin: 0px !important;
 }
 .mauto{margin: auto;}
+.mauto_{margin-left: auto !important; margin-right: auto !important; }
+.mauto__{margin-top: auto !important; margin-bottom: auto !important;}
+
 .m0{margin: 0px !important}
 
 .mwrap-5{margin: 5px;}
 .mwrap-10{margin: 10px;}
 
+.mwrap-2p{margin:2%} //kiri kanan _
 .mwrap_2p{margin:0% 2%} //kiri kanan _
 .mwrap__2p{margin:2% 0%} //atas bawah __
 
@@ -56,3 +62,4 @@ body{@extend .pm0;}
 }
 
 .boval{border-radius: 50%}
+.mtop100{    margin-top: 100px !important;}

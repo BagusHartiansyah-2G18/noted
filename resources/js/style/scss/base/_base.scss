@@ -23,9 +23,13 @@
 .aiC{ @include _.ai()}
 
 .acC{ @include _.ac()}
+.acE{ @include _.ac(end)}
 
-.scroll{ @include _.scroll()}
+
+.scroll{ @include _.scroll()} 
+.scroll-10{ @include _.scroll(10px)}
 .scroll-200{ @include _.scroll(200px)}
+.scroll-300{ @include _.scroll(300px)}
 .scroll-400{ @include _.scroll(400px)}
 .scroll-600{ @include _.scroll(600px)}
 .scroll-800{ @include _.scroll(800px)}
@@ -36,6 +40,9 @@
 .boxS{
     @include _.shadow(0px 1px 10px 1px,map-get(_.$c,'dark'));
 }
+.boxS1px{
+    @include _.shadow( 1px 1px 1px 1px,map-get(_.$c,'dark'));
+} 
 
 
 .positionR-b40{
@@ -44,3 +51,10 @@
 }
 
 .pointer{ cursor: pointer;}
+
+.borderB1{
+    border-bottom: 1px;
+    border-bottom-style: dashed;
+}
+.hidden{visibility: hidden;}
+

@@ -1,5 +1,6 @@
-const api = (() => {
+const api = (() => { 
     const BASE_URL = 'http://localhost:8000/';
+    const File_URL = BASE_URL+'fileEntri/';
     // const BASE_URL = 'https://sipj.bappedaksb.com/';
     async function GET({method, api = 'api/' }) {
         const response = await fetch(`${BASE_URL+api+method}`, {
@@ -62,7 +63,9 @@ const api = (() => {
       GET,
       POST,
       POSTData,
-      act
+      act,
+      BASE_URL,
+      File_URL
     };
 })();
 export default api;

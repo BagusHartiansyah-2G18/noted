@@ -1,9 +1,10 @@
+import api from "../../../utils/api";
 
 const actType = {
     html: "setHtml",
     um: "userMenu",
 };
-
+import { baseUrl } from "../../noted/action";
 function htmlS(v) {
     return async (dispatch) => {
       dispatch({
@@ -24,6 +25,30 @@ function userMenuS(v) {
 function logout(){
     localStorage.removeItem('sess');
     window.location.replace('/logout');
+}
+function cko(url){ // cek open source / no keamanan
+   
+  // window.open.location=baseUrl+"cko/"+url;
+  window.location.href=baseUrl+"cko/"+url;
+}
+async function saveJSON(data, saveAs){
+  var stringified = JSON.stringify(data, null, 2); 
+  var blob = new Blob([stringified], {type: "application/json"});
+  var url = URL.createObjectURL(blob);
+  await tombolDonwloadCreateClick(url,saveAs);
+} 
+function tombolDonwloadCreateClick(url,saveAs){
+  var a = document.createElement('a');
+  a.download = saveAs + '.json';
+  a.href = url;
+  a.id = saveAs;
+  document.body.appendChild(a);
+  a.click();
+  try {
+      document.querySelector('#' + a.id).remove();
+  } catch (error) {
+      
+  }
 }
 function session(){
     return async (dispatch) => {
@@ -60,9 +85,35 @@ function session(){
 
     }
 }
-
+function modalClose(){ 
+  return async (dispatch) => {
+    dispatch({
+        type : actType.html,
+        payload : {
+          modal : false,
+        },
+    })
+  }
+}
+function fileUrl(nmFile){
+  return api.File_URL+nmFile;
+}
+async function uploadFile(body,callback){
+  try {  
+    const fileD = await api.POST({url:"sfmfc/uploadFile",body});
+    callback({nama:fileD, url:fileUrl(fileD)});
+  } catch (error) {
+    callback("File gagal diupload.");
+  } 
+} 
 export {
     actType,
     htmlS,
-    userMenuS
+    userMenuS,
+    logout,
+    modalClose,
+    cko,
+    saveJSON,
+    uploadFile,
+    fileUrl, 
 }

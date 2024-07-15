@@ -15,6 +15,7 @@
 .cblack{@include _.c('black')}
 
 .bprimary{@include _.cB('primary'); @extend .cwhite; }
+.bprimary1{@include _.cB('primary1'); @extend .cwhite; }
 .cprimary{@include _.c('primary')}
 .bprimaryG-opa2{@include _.cGradient(left, rgba(map-get(_.$c,'primary1'),0.2), rgba(map-get(_.$c,'primary'),0.8)); @extend .cwhite;}
 .bprimaryG-opa2End{@include _.cGradient(right, rgba(map-get(_.$c,'primary1'),0.2), rgba(map-get(_.$c,'primary'),0.8)); @extend .cwhite;}

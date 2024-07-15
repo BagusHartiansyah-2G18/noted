@@ -114,7 +114,7 @@ $px:(
 @mixin ac($v:center){
     display: flex;
     align-content: $v;
-}
+} 
 
 @mixin scroll($max:false){
     overflow: auto;

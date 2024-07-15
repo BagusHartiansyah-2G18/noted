@@ -11,7 +11,7 @@ function Tabel1({
         btnAction = undefined,
         ExpandedComponent = null,
         rowSelectCritera = false,
-        selectData =()=>{}}){
+        selectData =()=>{}}){ 
     return (
         <>
             {
@@ -21,13 +21,15 @@ function Tabel1({
             }
             {
                 (
-                    search!=undefined &&
-                    <div className="jcE">
-                        <div className={`iconInput2 ${cinput}`}>
-                            <input className="borderR10px" type="text" value={search} onChange={oncSearch}  placeholder="search..." />
-                            <span className="mdi mdi-cloud-search "></span>
+                    (search!=undefined || data.length!=0)   &&
+                    <> 
+                        <div className="jcE pwrap__2p">
+                            <div className={`iconInput2 ${cinput}`}>
+                                <input className="borderR10px" type="text" value={search} onChange={oncSearch}  placeholder="search..." />
+                                <span className="mdi mdi-cloud-search "></span>
+                            </div>
                         </div>
-                    </div>
+                    </>
                 )
             }
             <DataTable

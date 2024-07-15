@@ -18,10 +18,10 @@ class CreateJudulFileTable extends Migration
             $table->string('kdMember',25);
             $table->string('kdMemberSub',25)->comment('member ajakan yang add');
             $table->string('file',250);
-            $table->string('keterangan',25);
-            $table->integer('ind',5)->comment('index upload file');
+            $table->string('keterangan',125);
+            $table->string('ind',5)->comment('index upload file');
             $table->timestamps();
-            // $table->primary(['kdJudul','kdMember','ind']);
+            $table->primary(['kdJudul','kdMember','ind']);
         });
     }
 

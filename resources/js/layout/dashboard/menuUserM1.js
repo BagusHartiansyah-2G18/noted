@@ -36,43 +36,59 @@ function MenuUserM1({ userMenu }) {
     const menuNoted =()=>{
         return(
             <div className="acC">
-                <Link className="btn blight borderTInfo-5" to={`/home/noted`}><b>Form Noted</b></Link>
+                <Link className="btn blight borderTInfo-5" to={`/noted`}><b>Form Noted</b></Link>
                 <button className="btn blight borderTInfo-5" ><b>List Noted</b></button>
             </div>
         )
-    }
-    return (
+    }  
+    return ( 
         <div className="userInfo">
-            <div id="ui_bg">
-                <label>Background Profil</label>
-            </div>
-            <div className="boxProfil ">
-                <div id="ui_profil">
-                    <div id="profil">
-                        <img src="/svg/dev-mini.png"/>
-                        <div className="flexC jcC mwrap_3p">
-                            <label className="tbold fPoppins">Bagus Hartiansyah</label>
-                            <label className="">Manajer MFC</label>
-                        </div>
+            {
+                userMenu.v != 46 ?
+                <>
+                    <div id="ui_bg">
+                        <label>Background Profil</label>
+                    </div> 
+                    <div>
+                        {userMenu.v != 45 &&
+                            <div className="boxProfil ">
+                                <div id="ui_profil">
+                                    <div id="profil">
+                                        <img src="/svg/dev-mini.png"/>
+                                        <div className="flexC jcC mwrap_3p">
+                                            <label className="tbold fPoppins">{userMenu.name}</label>
+                                            <label className="">{userMenu.email}</label>
+                                        </div>
+                                    </div>
+                                    <div id="menu">
+                                        {
+                                            (userMenu.v === 1 ) && menuHome()
+                                        }
+                                        {
+                                            (userMenu.v === 2) && menuAnggota()
+                                        }
+                                        {
+                                            (userMenu.v === 3) && menuPublikasi()
+                                        }
+                                        {
+                                            (userMenu.v === 4) && menuNoted()
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        } 
                     </div>
-                    <div id="menu">
-                        {
-                            (userMenu.v === 1 ) && menuHome()
-                        }
-                        {
-                            (userMenu.v === 2) && menuAnggota()
-                        }
-                        {
-                            (userMenu.v === 3) && menuPublikasi()
-                        }
-                        {
-                            (userMenu.v === 4) && menuNoted()
-                        }
-                    </div>
-                </div>
-            </div>
+                </>:
+                (
+                    userMenu.sub == 1 ?
+                    <div id="ui_bg">
+                        <label>URL Error,</label>
+                    </div> :''
+                )
+            }
         </div>
-    )
+    ) 
 }
 MenuUserM1.prototype = {
     userMenu: PropTypes.object.isRequired,

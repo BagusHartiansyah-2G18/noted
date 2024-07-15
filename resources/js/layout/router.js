@@ -9,6 +9,13 @@ import Anggota from '../pages/subDash/anggota';
 import Noted from '../pages/subDash/noteForm';
 import NoteSub from '../pages/subDash/noteFormSub';
 import Publikasi from '../pages/subDash/publikasi';
+import ErrorP from '../pages/error';
+import Pnoted from "../pages/publikasi/Pnoted";
+
+
+import FormUpload from "../pages/nextSubNote/formUpload";
+import FormEntri from "../pages/nextSubNote/formEntriData";
+import FormPreview from "../pages/nextSubNote/formPreview";
 
 //dashboard
 function RouterM({ userMenu }){
@@ -17,12 +24,20 @@ function RouterM({ userMenu }){
         <Routes>
             <Route path="/home" element={<Homes sub={sub}/> } />
             
-            <Route path="/home/anggota" element={<Anggota sub={sub} /> } />
-            <Route path="/home/publikasi" element={<Publikasi sub={sub}/> } />
-            <Route path="/home/noted" element={<Noted /> } /> 
-            <Route path="/home/notedSub/:value" element={<NoteSub /> } />  
+            <Route path="/anggota" element={<Anggota sub={sub} /> } />
+            <Route path="/publikasi" element={<Publikasi sub={sub}/> } />
+            <Route path="/noted" element={<Noted /> } /> 
+            <Route path="/notedSub/:value" element={<NoteSub /> } />  
 
-            <Route path="*" element={<Home /> } />
+            <Route path="/fu-sub/:value" element={<FormUpload /> } /> 
+            <Route path="/fe-sub/:value" element={<FormEntri /> } /> 
+
+            <Route path="/formPreview/:value" element={<FormPreview /> } />  
+            <Route path="/Pnoted/:value" element={<Pnoted /> } /> 
+            
+
+            <Route path="/" element={<Home /> } />
+            <Route path="*" element={<ErrorP /> } />
         </Routes>
     );
 }

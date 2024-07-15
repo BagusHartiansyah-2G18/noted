@@ -12,6 +12,12 @@
          
     }
 }
+input:checked{
+    accent-color: rgb(23, 204, 66);
+}
+.iconInput{
+    @extend .flexC;
+}
 .iconInput2{
     @extend .flexR, .aiC;
     position: relative;
@@ -28,10 +34,85 @@
         
     }
 }
+.iconInputList{
+    @extend .flexC, .aiC ;
+    position: relative;
+    & input{
+        @extend .p10_30, .fzXl, .radius-10;
+        width: max-content;
+        height: max-content;
+        
+    }
+    & span{
+        position: absolute;
+        left:10px;
+        z-index: 0;
+        
+    }
+}
+.List3{
+    @include _.gridC(repeat(2,40%)); 
+    & input{
+        @extend .p10_30, .fzXl, .radius-10;
+        width: max-content;
+        height: max-content;
+        
+    }
+    & span{
+        position: absolute;
+        left:10px;
+        z-index: 0;
+        
+    }
+    // border-bottom: 3px solid black; 
+    // & #btnUpload{
+    //     border-top:4px solid black;
+    // }
+}
 
 .formSimple{
     @extend .flexC;
 }
+
+.form1{
+    @extend .flexC;
+    // @extend .pwrap_2p;
+    @extend .boxS;
+    border-radius: 5px;
+    & .header{
+        @extend .flexR;
+        @extend .jcSB; 
+        @extend .pwrap-2p;
+        & .icon{
+            @extend .flexR;
+            @extend .aiC;
+            & span{
+                margin-right: 10px;
+            }
+        }
+    }
+    & .body{
+        @extend .flexC;
+        min-height: 50px;
+        @extend .boxS;
+        @extend .pwrap-2p; 
+    }
+    & .footer{
+        @extend .flexR;
+        min-height: 50px;
+        @extend .pwrap-2p;
+        @extend .boxS1px;
+    }
+    & .posEnd{
+        @extend .jcE;
+    }
+    & .absB0{
+        position: absolute;
+        bottom: 0px;
+        width: 98%;
+    }
+}
+
 @media screen and (min-width: 800px) { 
     .formSimple{
        display: flex;
@@ -42,5 +123,20 @@
             border-radius: 10px;
             padding-left: 15px;
        }
+    }
+    .iconInputList{
+        display: grid;
+        grid-template-columns: repeat(3,32%);
+        row-gap: 10px;
+    }
+
+    .iconInput{
+        display: flex;
+        flex-direction: row;
+    }
+
+    .List3{
+        display: flex;
+        flex-direction: row;
     }
 }

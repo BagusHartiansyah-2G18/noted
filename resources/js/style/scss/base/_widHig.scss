@@ -22,12 +22,15 @@
 .w500{width: 500px}
 
 .mxw600{@include _.wmax(600px)};
+.mw600{@include _.wmin(600px)};
 
 .mh30{@include _.hmin(30px)};
 .mh80{@include _.hmin(80px)};
 .mh200{@include _.hmin(200px)};
 .mh250{@include _.hmin(250px)};
 .mh300{@include _.hmin(300px)};
+.mh500{@include _.hmin(500px)};
+.mh700{@include _.hmin(700px)};
 
 .w100p{width: 100%;}
 .w80p{width: 80%;}
@@ -40,3 +43,5 @@
 .w50p{width: 50%;}
 .w30p{width: 30%;}
 .w10p{width: 10%;}
+
+.h10{height: 10px;}

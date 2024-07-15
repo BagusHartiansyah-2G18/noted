@@ -15,28 +15,35 @@ import MenuUserM1 from "./layout/dashboard/menuUserM1";
 
 
 import RouterM from './layout/router';
+import RouterCKO from './layout/routerCKO';
+
+
 import FooterM from './layout/footer';
 
 import { htmlS, userMenuS } from "./states/sf/html/action"
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 
 function MyApp() {
     const { _html, dnote } = useSelector((state) => state);
     const dispatch = useDispatch(); 
+    const xuser = document.getElementsByName('xuser')[0].content;
     useEffect(() => { 
         dispatch(htmlS({
             userMenu : {
-                v:4, //value
-                sub:1 //sub menu
-            }
+                v:1, //value
+                sub:1, //sub menu, 
+            },
+            user:(xuser!=''? JSON.parse(atob(xuser)):{})
         }))
         
     }, [dispatch]);
-    const path= window.location.pathname;
-    // console.log(path);
+    const path= window.location.pathname;  
     if(Object.keys(_html).length==0){
         return "";
-    }  
+    }   
     return (
         <>
             <div className='bodyM'>
@@ -54,21 +61,30 @@ function MyApp() {
                     <NavigationM></NavigationM> 4.1. navigation
                     <RouterM></RouterM> 4.2. isi
                 </div> */}
-                 {
+                {
                     (
-                        (path == '/home' || (path.split('home/').length>1)) && 
+                        path != '/' && path!='/logout' &&
                         <>
                             <HeaderM1></HeaderM1>
                             <MenuUserM1
-                                userMenu={_html.userMenu}
+                                userMenu={{..._html.userMenu,..._html.user}}
                             ></MenuUserM1>
                         </>
                     )
                 }
-                <RouterM 
-                    userMenu={_html.userMenu}
+                {
+                    path.split("/cko").length>1?
+                    <RouterCKO
+                        userMenu={_html.userMenu}
+                    ></RouterCKO>
+                    :
+                    <RouterM 
+                        userMenu={_html.userMenu}
                     ></RouterM>
+                }
+                
                 {/* 5. toast*/}
+                <ToastContainer></ToastContainer>
                 <FooterM></FooterM>{/* 6. footer*/}
             </div>
 

@@ -15,6 +15,15 @@ function notedReducer(dt = [], action = {}) {
           }
           return v;
         })
+      case actType.delNoteInduk:   
+        
+        return  dt.filter((v1,i1)=> i1!=action.payload.index);
+      case actType.delNote:  
+         return {
+          ...dt,
+          sub:dt.sub.filter((v1,i1)=> i1!=action.payload.index)
+        };
+        
       case actType.updNoteSub:
         return {
           ...dt,
@@ -28,6 +37,11 @@ function notedReducer(dt = [], action = {}) {
             }
             return v;
           })
+        }
+      case actType.actUFSubNote:
+        return {
+          ...dt,
+          file:action.payload.fileD
         }
       default:
         return dt;
