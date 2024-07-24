@@ -44,9 +44,14 @@ function MyApp() {
     if(Object.keys(_html).length==0){
         return "";
     }   
+    const halamanDepan = (Object.keys(_html.user).length == 0 ? 1:0);
     return (
-        <>
-            <div className='bodyM'>
+        <div className="bodyMBG" style={{ 
+            ...(halamanDepan? {background:"white"}:{})
+        }}>
+            <div className='bodyM' style={{ 
+                ...(halamanDepan? {backgroundColor:"unset"}:{})
+            }}>
                 {/* 2. loading*/}
                 {/* <div className='minHeader'>
                     <HeaderM></HeaderM> 3. header
@@ -71,7 +76,7 @@ function MyApp() {
                             ></MenuUserM1>
                         </>
                     )
-                }
+                } 
                 {
                     path.split("/cko").length>1?
                     <RouterCKO
@@ -81,14 +86,14 @@ function MyApp() {
                     <RouterM 
                         userMenu={_html.userMenu}
                     ></RouterM>
-                }
+                } 
                 
                 {/* 5. toast*/}
                 <ToastContainer></ToastContainer>
                 <FooterM></FooterM>{/* 6. footer*/}
             </div>
 
-        </>
+        </div>
     );
 }
 export default MyApp;

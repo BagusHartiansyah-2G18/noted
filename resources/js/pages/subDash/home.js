@@ -5,7 +5,7 @@ import { useState } from 'react';
 
 function Homes ({ sub }){
     return (
-        <>
+        <div className="body">
             {
                 (sub === 1 &&
                     <>
@@ -52,7 +52,7 @@ function Homes ({ sub }){
                     </>
                 )
             }
-        </>
+        </div>
     );
 }
 Homes.PropTypes = {

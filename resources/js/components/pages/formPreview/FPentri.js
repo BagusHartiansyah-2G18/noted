@@ -19,15 +19,18 @@ function FPentri({ dtf, saveNewData, updData, dvalue=[], batalkan }) {
     }   
     const dformInput = __listItemForView({ act,dt:dtf.data,dvalue}); 
     return (
-        <div className="boxShadow flexC w90p radius-10 pwrap__2p mwrap__2p mauto_">
-            <div class="flexR">
-                <button className="btn bdark">
-                    <span className="mdi mdi-star-crescent cwarning fzXl"></span>
-                </button>
-                <h2 className=" pwrap_5p pl0 cdark aiE fBebasNeue">{dtf.tujuan}</h2>
-            </div> 
-            <div className="flexC  pwrap_5p bwhite"> 
-                <hr/> 
+        <div class="FM1 borderForm pwrap-10 w80p mauto">
+            <div class="header bwhite">
+                <div class="cdark flexR">
+                    <button className="btn bdark">
+                        <span className="mdi mdi-star-crescent cwarning fzXl"></span>
+                    </button>
+                    <h2 className="  pl0 aiE fBebasNeue">
+                        <b>{dtf.tujuan}</b> 
+                    </h2>
+                </div> 
+            </div>
+            <div class="body bdark pwrap-10" style={{width:"unset", padding:"10px "}}> 
                 {
                     dformInput.map((v,i)=>{
                         return v;
@@ -47,6 +50,7 @@ function FPentri({ dtf, saveNewData, updData, dvalue=[], batalkan }) {
                 </div>
             </div>
         </div>
+         
     )
 }
 export default FPentri;

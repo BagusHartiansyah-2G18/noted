@@ -21,13 +21,35 @@ export default function Pfile({ option, tampilkan }) {
         }  
     } catch (error) { 
     }  
-
+    // console.log(ektensi);
     const actOnOff=({target})=>{  
         _onOff(target.checked); 
     } 
     const selAct=({label, value})=>{    
         _files({label, value}); 
     }  
+
+    const _view=()=>{
+        switch (String(ektensi).toLocaleLowerCase()) {
+            case "pdf":
+                return <PVpdf onOff={onOff} start={{start:true}} initialDoc={files.value}></PVpdf> 
+            case "png":
+                return vimage(); 
+            case "jpg":
+                return vimage();
+            case "gif":
+                return vimage();
+            default:
+                return '';
+        }
+    }
+    const vimage=()=>{
+        return (
+            <div className="w100p jcC">
+                <img src={files.value}></img>
+            </div>
+        )
+    }
     return (
     <>
        <div className='flexR jcSB boxS pwrap_20'>
@@ -64,10 +86,7 @@ export default function Pfile({ option, tampilkan }) {
             </Link> 
         </div>
         <hr/>
-        {(
-            ektensi=="pdf" && 
-            <PVpdf onOff={onOff} start={{start:true}} initialDoc={files.value}></PVpdf>
-        )}
+        {_view()}
       </div>  
     </>
     )

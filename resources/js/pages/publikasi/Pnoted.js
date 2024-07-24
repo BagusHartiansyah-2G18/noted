@@ -51,41 +51,44 @@ function Pnoted({  }) {
     }
      
     return (
-        <div className="flexR  pwrap_5p bwhite">
-            <CNmcd
-                dt={[
-                    ...induk.map((v,i)=>{
-                        return {
-                            name:v.judul,
-                            ket:v.ringkasan,
-                            url:'',
-                            click:()=>pindahNote(i),
-                            aktif:(i==induk.length-1)
-                        }
-                    }),
-                    ...sub.map((v,i)=>{
-                        return {
-                            name:v.judul,
-                            ket:v.ringkasan,
-                            url:'',
-                            click:()=>pindahNoteSub(i),
-                            aktif:0
-                        }
-                    })
-                ]}
-            ></CNmcd>
-            {/* + mh700 */}
-            <Plist
-                dt={[
-                    {
-                        ...induk[induk.length-1],
-                        file, form
-                    },
-                    ...sub,
-                ]}
-                url={baseUrl}
-                start={{start:1}}
-            ></Plist> 
+        <div className="Mcontainer bgForm aiS jcC"> 
+        {/* flexR pwrap_5p bwhite */}
+            <div className="bodyFlexRow800  flexR pwrap_5p" style={{width:"100%"}}>
+                <CNmcd
+                    dt={[
+                        ...induk.map((v,i)=>{
+                            return {
+                                name:v.judul,
+                                ket:v.ringkasan,
+                                url:'',
+                                click:()=>pindahNote(i),
+                                aktif:(i==induk.length-1)
+                            }
+                        }),
+                        ...sub.map((v,i)=>{
+                            return {
+                                name:v.judul,
+                                ket:v.ringkasan,
+                                url:'',
+                                click:()=>pindahNoteSub(i),
+                                aktif:0
+                            }
+                        })
+                    ]}
+                ></CNmcd>
+                {/* + mh700 */}
+                <Plist
+                    dt={[
+                        {
+                            ...induk[induk.length-1],
+                            file, form
+                        },
+                        ...sub,
+                    ]}
+                    url={baseUrl}
+                    start={{start:1}}
+                ></Plist> 
+            </div>  
         </div> 
     )
 }

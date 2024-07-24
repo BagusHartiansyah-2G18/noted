@@ -20,7 +20,7 @@ function FEselect({ option, resVal, plac, getVal = {}, dt, clsDiv="doubleInput p
         <div className={clsDiv}>
             <label className="tbold pLink">{plac}</label>
             <Select
-                className="mnw400 "
+                className="mnw400 cdark blight"
                 options={option}
                 placeholder={plac}
                 value={val}

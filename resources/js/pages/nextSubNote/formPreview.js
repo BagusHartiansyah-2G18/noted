@@ -38,7 +38,7 @@ function FormPreview() {
         //     kdJudul,
         //     kdMember
         // })); 
-        dispatch(userMenuS({v:45,sub:1, isi:''}));
+        dispatch(userMenuS({v:46,sub:2, isi:''}));
         dispatch(__formWithKey({
             tingkat,
             kdNote,
@@ -81,7 +81,7 @@ function FormPreview() {
         }
         _dview([]);
     }
-    const updData=({dnew})=>{     
+    const updData=({dnew})=>{ 
         try {
             dispatch(
                 updValueForm({
@@ -101,7 +101,7 @@ function FormPreview() {
         }
         _dview([]);
     }
-    const _dataUpdata=(find)=>{
+    const _dataUpdata=(find)=>{ 
         _indV(find); 
         _dview(valuex[find].data);
     }
@@ -152,28 +152,36 @@ function FormPreview() {
     }
     return (
         <>
-            <FPentri
-                dtf={form}
-                saveNewData={saveNewData}
-                dvalue={dview}
-                updData={updData}
-                batalkan={batalkan}
-            ></FPentri>
-            {
-                (user?
-                    <>
-                    <FPtabelData
-                        dt={valuex.map(v=>{ return [...v.data,v.name]})}
-                        pertanyaan={pertanyaan}  
-                        user={user}
-                        updData={_dataUpdata}
-                        delData={delData}
-                        tujuan={form.tujuan}
-                        kdDF={kdDF}
-                    ></FPtabelData>
-                    </>:''
-                )
-            }
+            <div className="Mcontainer bgForm aiS jcC"> 
+                <div className="bodyFlexRow800  flexR pwrap-5p" style={{width:"100%"}}>
+                    <FPentri
+                        dtf={form}
+                        saveNewData={saveNewData}
+                        dvalue={dview}
+                        updData={updData}
+                        batalkan={batalkan}
+                    ></FPentri> 
+                </div> 
+            </div>
+            <div className="Mcontainer bgForm aiS jcC"> 
+                <div className="bodyFlexRow800  flexR pwrap_5p" style={{width:"100%"}}>
+                    { (user?
+                        <>
+                        <FPtabelData
+                            dt={valuex.map(v=>{ return [...v.data,v.name]})}
+                            pertanyaan={pertanyaan}  
+                            user={user}
+                            updData={_dataUpdata}
+                            delData={delData}
+                            tujuan={form.tujuan}
+                            kdDF={kdDF}
+                        ></FPtabelData>
+                        </>:''
+                    )
+                }
+                </div> 
+            </div>
+            
             {
                 (modalC!='' ?
                     <ModalM

@@ -2,14 +2,8 @@
 
 
 .flex{display: flex;}
-.flexC{
-    @extend .flex;
-    flex-direction: column;
-}
-.flexR{
-    @extend .flex;
-    flex-direction: row;
-}
+.flexC{ @extend .flex; flex-direction: column; }
+.flexR{ @extend .flex; flex-direction: row; }
 
 // justifyContent
 .jcE{ @include _.jc(end)}
@@ -18,7 +12,7 @@
 .jcSA{ @include _.jc(space-around) }
 .jcC{ @include _.jc() }
 
-
+.aiS{ @include _.ai(start)}
 .aiE{ @include _.ai(end)}
 .aiC{ @include _.ai()}
 
@@ -55,6 +49,14 @@
 .borderB1{
     border-bottom: 1px;
     border-bottom-style: dashed;
+}
+.bdashed1{
+    border: 1px;
+    border-style: dashed;
+}
+.bsolid1{
+    border: 1px;
+    border-style: solid;
 }
 .hidden{visibility: hidden;}
 

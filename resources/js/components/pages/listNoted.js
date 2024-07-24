@@ -10,67 +10,34 @@ function ListNoted({ dt, openFormPerbarui, delKonfir }){
     const updMenu =({ v, sub, inode })=>{
         dispatch(userMenuS({v,sub, inode}))
     }
-    return (
-        // <div className="listNode w90p mauto  pwrap-5 radius-10  pwrap__3p">
-        //     {
-        //         dt.map((v,i)=>{
-        //             // onClick={()=> selectMenuSub({menuSub:'dashboard'})}
-        //             return(
-        //                 <div className="flexC" key={i}>
-        //                         <Bicon3coll
-        //                             cls=" pointer"
-        //                             val={{
-        //                                 judul:v.judul,
-        //                                 ket: v.ringkasan
-        //                             }}
-        //                             btn={
-        //                                 <div className="flexR jcC">
-        //                                     <button class="btn bwarning" onClick={()=>openFormPerbarui({i})} title="Perbarui"><span className="mdi mdi-lead-pencil"></span></button>
-        //                                     <button class="btn bdanger" onClick={()=>delKonfir({i})} title="Hapus"><span className="mdi mdi-trash-can"></span></button>
-        //                                     <Link class="btn bsuccess" to={'/notedSub/'+btoa(JSON.stringify({
-        //                                             kdJudul:v.kdJudul,
-        //                                             kdMember:v.kdMember,
-        //                                             tingkat:v.tingkat,
-        //                                         }))} onClick={()=>updMenu({v:5,sub:1})} title="view more"> 
-        //                                         <span className="mdi mdi-arrow-right-bold-circle"></span> 
-        //                                     </Link>
-        //                                 </div>
-        //                             }
-        //                         ></Bicon3coll>
-                           
-                            
-        //                 </div>
-        //             )
-        //         })
-        //     }
-        // </div>
-        <ul className="pm0">
+    return ( 
+        <ul className="pm0 scroll-800">
             {
                 dt.map((v,i)=>{
-                    // ${(i%2 == 0 ? 'bmuted clight':'')}
+                    // ${(i%2 == 0 ? 'bmuted clight':'')} 
                     return(
                         <li className={`flexR jcSB pwrap__5 borderB1`} style={{borderBottomColor:"#7a4606"}}>
-                            <div className="flexR jcC">
-                                <label className="aiC pwrap_10  tbold fzL3">{`[ `}<span className="fzXl">{i+1}</span>{` ]`}</label>
-                                <div className="flexC jcC ">
-                                    <Link class="cdark tbold" to={'/notedSub/'+btoa(JSON.stringify({
+                            <div className="flexR jcC cwhite">
+                                <label className="aiC pwrap_10 cwarning tbold fzL3">{`[ `}<span className="fzXl">{i+1}</span>{` ]`}</label>
+                                <div className="flexC  jcC ">
+                                    <Link class="cwhite tbold" to={'/notedSub/'+btoa(JSON.stringify({
                                             kdJudul:v.kdJudul,
                                             kdMember:v.kdMember,
                                             tingkat:v.tingkat,
                                         }))} onClick={()=>updMenu({v:5,sub:1})} title="view more"> 
                                         <span>{v.judul}</span> 
                                     </Link> 
-                                    <span className="cmuted pm0">{v.ringkasan}</span>
+                                    <span className="clight pm0">{v.ringkasan}</span>
                                 </div>
                             </div> 
                             <div id="dropdonwUl_">
-                                <button class="dropdown-btn">
+                                <button class="dropdown-btn bmuted">
                                     <span>opsi</span>
-                                    <span class="arrowTop"></span>
+                                    <span class={ (i<4 ? "arrow":" arrowTop")}></span>
                                 </button>
-                                <ul class="dropdown-content dcTop pwrap-5p">
+                                <ul class={`dropdown-content ${ (i<4 ? "":"dcTop")} pwrap-5p`}>
                                     <li style={{"--delay": 1}} >
-                                        <Link class="btn csuccess aiC tstart" target="_blank" to={'/Pnoted/'+btoa(JSON.stringify({
+                                        <Link class="btn csuccess aiC tstart " target="_blank" to={'/Pnoted/'+btoa(JSON.stringify({
                                                 kdJudul:v.kdJudul,
                                                 kdMember:v.kdMember,
                                                 tingkat:v.tingkat,

@@ -59,47 +59,53 @@ function FPtabelData({ dt, pertanyaan, user, updData,delData, tujuan, kdDF }) {
                 {
                     (user?
                         <button class="btn bdanger" onClick={()=>delData(i)} title="Hapus">
-                            <span className="mdi mdi-file-settings"></span> Hapus
+                            <span className="mdi mdi-delete"></span>  
                         </button>
                         :''
                     )
                 } 
                 <button class="btn bwarning" onClick={()=>updData(i)} title="Perbarui">
-                    <span className="mdi mdi-file-settings"></span> Perbarui
+                    <span className="mdi mdi-lead-pencil"></span>  
                 </button> 
             </div>
         )
     }  
     return ( 
-        <div className="boxShadow flexC w90p radius-10 pwrap__2p mwrap__2p mauto_">
-            <div className="flexR jcSB">
-                <div class="w50p flexR">
+        <div class="FM1 borderForm  w80p mauto">
+            <div class="header bwhite">
+                <div class="cdark flexR">
                     <button className="btn bdark">
                         <span className="mdi mdi-star-crescent cwarning fzXl"></span>
                     </button>
-                    <h2 className=" pwrap_5p pl0 cdark aiE fBebasNeue">List Data {` { `+kdDF+` }`}</h2>
-                </div>  
+                    <h2 className="  pl0 aiE fBebasNeue">
+                        <b>List Data {` { `+kdDF+` }`}</b> 
+                    </h2>
+                </div> 
                 <button class="ptb10px btn bsuccess " onClick={()=>prosesSaveJson()}>go JSON</button> 
-            </div> 
-            <div className="flexC  pwrap_5p bwhite"> 
-                <hr/> 
-                <Tabel1
-                    search={search}
-                    oncSearch={_search}
-                    columns={coll}
-                    data={dt.filter((item) => {
-                            if (search === "") {
-                                return item;
-                            } else if (
-                                item.toLowerCase().includes(search.toLowerCase())
-                            ) {
-                                return item;
-                            }
-                        })}
-                ></Tabel1>
-                <hr/> 
             </div>
-        </div>
+            <div class="body bdark pm0" style={{width:"unset"}}> 
+                <div>
+                    <Tabel1
+                        search={search}
+                        oncSearch={_search}
+                        columns={coll}
+                        data={dt.filter((item) => {
+                                if (search === "") {
+                                    return item;
+                                } else if (
+                                    item.toLowerCase().includes(search.toLowerCase())
+                                ) {
+                                    return item;
+                                }
+                            })}
+                        dbtn={[
+                            {label:"Hapus Data",value:"bdanger"},
+                            {label:"Perbarui Data",value:"bwarning"},
+                        ]}
+                    ></Tabel1>
+                </div>
+            </div>
+        </div> 
     )
 }
 export default FPtabelData;

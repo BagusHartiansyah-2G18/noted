@@ -3,17 +3,22 @@
 namespace App\Http\Controllers;
 use App\Helper\Mfc;
 use Illuminate\Support\Facades\Storage;
-
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class SfMfc extends Controller {
-    
+    private $Mfc; 
+    public function __construct()
+    { 
+        $this->Mfc = new Mfc(); 
+        $this->middleware('auth');
+    }
     function uploadFile(Request $request){
-        $v = Mfc::portal();
+        $v = $this->Mfc->portal();
         if($v['exc']){ 
             $request = $request->all();
             $namaFile = $this->_uploadImage($request['files']['data'],"fileEntri/".$request['files']['nama']);
-            return Mfc::resp($namaFile);
+            return $this->Mfc->resp($namaFile);
         }
         return $v;
     }
@@ -56,4 +61,6 @@ class SfMfc extends Controller {
         Storage::put($lokasiFile,base64_decode($file));
         return $namaFile;
     }
+
+    
 }

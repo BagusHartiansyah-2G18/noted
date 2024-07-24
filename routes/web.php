@@ -5,6 +5,8 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\JudulController;
 use App\Http\Controllers\FormEntri;
 use App\Http\Controllers\SfMfc;
+use App\Http\Controllers\Canggota;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -99,5 +101,13 @@ Route::controller(FormEntri::class)->name('formEntri.')->prefix('api/formEntri')
 
 });
 Route::controller(SfMfc::class)->name('sfmfc.')->prefix('api/sfmfc')->group(function(){ 
-    Route::post('uploadFile','uploadFile')->name('uploadFile'); 
+    Route::post('uploadFile','uploadFile')->name('uploadFile');  
+}); 
+Route::controller(Canggota::class)->name('anggota.')->prefix('api/anggota')->group(function(){ 
+    Route::post('userSetter','userSetter')->name('userSetter');  
+    Route::post('userGetter','userGetter')->name('userGetter');  
+    Route::post('userUndang','userUndang')->name('userUndang');  
+    Route::post('batalkanAnggota','batalkanAnggota')->name('batalkanAnggota');  
+    Route::post('terimaAnggota','terimaAnggota')->name('terimaAnggota');   
+    
 }); 

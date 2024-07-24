@@ -153,6 +153,11 @@ function __infoListTerpilih(data){
             nameJudul:dfEntri[v.indF].name,
             ...dfEntri[v.indF].ops[v.indO]
         }
+        // return {
+        //     ...v,
+        //     nameJudul:dfEntri[(v.indF==3? 2:v.indF)].name,
+        //     ...dfEntri[(v.indF==3? 2:v.indF)].ops[v.indO]
+        // }
     })
 }
 function __listItemForAttrOps({ indF,indO, actAttr, actOption, dt}){
@@ -190,7 +195,7 @@ function __formView({  ind, v, act}){
                 plac={(ind+1)+". "+v.pertanyaan}
                 resVal={(dt)=>act(dt)}
                 valuex={(v.value == undefined ?'':v.value.label)}
-                clsSpan='mdi mdi-lead-pencil'
+                clsSpan='mdi mdi-lead-pencil cdark'
                 key={ind}
                 placd=''
                 types={v.name}
@@ -203,7 +208,7 @@ function __formView({  ind, v, act}){
                     row:{label:0,value:1}
                 })} 
                 plac={(ind+1)+". "+v.pertanyaan}
-                clsDiv='iconInput ptb10px jcSB' 
+                clsDiv='iconInput ptb10px jcSB ' 
                 getVal={(v.value!= undefined? v.value:{label:v.valueOption[0][0].label, value:v.valueOption[0][1]})}
                 resVal={act} 
                 dt={{...v,star:true, indQ:ind}}

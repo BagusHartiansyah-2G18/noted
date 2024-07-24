@@ -13,15 +13,20 @@ use Dotenv\Validator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Models\data_form;
+use App\Models\value_forms;
+
 
 class JudulController extends Controller
 {
+    private $Mfc; 
     public function __construct()
-    {
+    { 
+        $this->Mfc = new Mfc();
         $this->middleware('auth');
     }
     public function index(Request $request){
-        $portal = Mfc::portal(Auth::user());
+        
+        $portal = $this->Mfc->portal();
         if($portal['exc']){
             $validator = $request;
             try {
@@ -36,7 +41,10 @@ class JudulController extends Controller
             }
             return response()->json([
                 'exc' => true,
-                'data' => $this->getData($portal['kdMember'],$validator['tingkat'])
+                'data' =>[
+                    "induk"=> $this->getData($portal['kdMember'],$validator['tingkat']),
+                    "dkategori"=>value_forms::where("kdDF","354e3a3751ceb3131125a09be6e4436a")->get()
+                ]
             ], 200);
         }
     }
@@ -53,15 +61,8 @@ class JudulController extends Controller
         //     order by judul asc
         // ");
     }
-    public function addx(Request $request){
-        // $request->session()->put('duser',$users);
-        // if($request->session()->has('duser')){
-        //     $user =$request->session()->get('duser');
-        // }
-        // $user =Auth::user();
-        // return new judulR(true, 'List Data Posts', $request->session());
-
-        $portal = Mfc::portal(Auth::user());
+    public function addx(Request $request){ 
+        $portal = $this->Mfc->portal();
         if($portal['exc']){
             $validator = $request;
             try {
@@ -124,7 +125,7 @@ class JudulController extends Controller
         ], 200);
     }
     public function upd(Request $request){
-        $portal = Mfc::portal(Auth::user());
+        $portal = $this->Mfc->portal();
         if($portal['exc']){
             $validator = $request;
             try {
@@ -166,7 +167,7 @@ class JudulController extends Controller
         ], 200);
     }
     public function del(Request $request){
-        $portal = Mfc::portal(Auth::user());
+        $portal = $this->Mfc->portal();
         if($portal['exc']){
             $validator = $request;
             try {
@@ -206,7 +207,7 @@ class JudulController extends Controller
     }
 
     public function add(Request $request){
-        $portal = Mfc::portal(Auth::user());
+        $portal = $this->Mfc->portal();
         if($portal['exc']){
             $validator = $request;
             try {
@@ -307,7 +308,7 @@ class JudulController extends Controller
 
 
     public function sub(Request $request){
-        $portal = Mfc::portal(Auth::user());
+        $portal = $this->Mfc->portal();
         if($portal['exc']){
             $validator = $request;
             try {
@@ -351,7 +352,7 @@ class JudulController extends Controller
                    join users b on 
                        a.kdMember = TO_BASE64(b.id)
                    where a.kdDF='".
-                   Mfc::getKeyValue(array_merge($validator,["kd"=>$vx['kd'], "kdNote"=>$validator['kdJudul']]))
+                   $this->Mfc->getKeyValue(array_merge($validator,["kd"=>$vx['kd'], "kdNote"=>$validator['kdJudul']]))
                    ."' and  
                    a.aktif =1
                ");
@@ -373,26 +374,26 @@ class JudulController extends Controller
                        join users b on 
                            a.kdMember = TO_BASE64(b.id)
                        where a.kdDF='".
-                       Mfc::getKeyValue(array_merge($validator,["kd"=>$vx['kd'], "kdNote"=>$vx['kdNote'],"tingkat"=>$vx['tingkat']]))
+                       $this->Mfc->getKeyValue(array_merge($validator,["kd"=>$vx['kd'], "kdNote"=>$vx['kdNote'],"tingkat"=>$vx['tingkat']]))
                        ."' and  
                        a.aktif =1
                    ");
                };
-            }; 
-            
+            };  
             return response()->json([
                 'exc' => true,
                 'data' => [
                     'induk'=>$data,
                     'sub'=>$sub,
                     'file'=>$file,
-                    'form'=>$form
+                    'form'=>$form,
+                    "dkategori"=>value_forms::where("kdDF","354e3a3751ceb3131125a09be6e4436a")->get()
                 ]
             ], 200);
         }
     }
     public function subFileUpload(Request $request){
-        $portal = Mfc::portal(Auth::user());
+        $portal = $this->Mfc->portal();
         if($portal['exc']){
             $validator = $request;
             try {
@@ -419,7 +420,7 @@ class JudulController extends Controller
                 'exc' => true,
                 'data' => [
                     'induk'=>$data,
-                    'file'=>$file
+                    'file'=>$file, 
                 ]
             ], 200);
         }
@@ -477,7 +478,7 @@ class JudulController extends Controller
         return $fdata;
     }
     public function actUFSubNote(Request $request){
-        $portal = Mfc::portal(Auth::user());
+        $portal = $this->Mfc->portal();
         if($portal['exc']){
             $request = $request->all();  
             $namaFile =''; 

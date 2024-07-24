@@ -40,9 +40,10 @@
         border-top-right-radius: 0;
         border-bottom-right-radius: 0;
     }
-    // & >.btn{
-    //     padding: 2px;
-    // }
+    & >.btn{
+        // padding: 2px;
+        margin: 0px;
+    }
     & .current{
         border-radius: 0px;
     }
@@ -608,7 +609,8 @@ $borderW: 2px;
 	align-items: center;
 	min-height: 100vh;
 	font-family: 'Jost', sans-serif;
-  background: linear-gradient(to top, #28a745, #347a96);
+  background:linear-gradient(to top, #d2fbfc, #a9adc7);
+  // background: linear-gradient(to top, #28a745, #347a96);
 	// background: linear-gradient(to bottom, #0f0c29, #302b63, #24243e);
   & .SM-sw-form{
     width: 350px;
@@ -692,3 +694,24 @@ $borderW: 2px;
     }
   }
 }
+
+
+// .thankyou_button_active {
+//   background-color: #ff9d72;
+//   color: white;
+//   border: 1px solid #ff9d72;
+//   width: 120px;
+//   outline: none;
+//   height: 31px;
+//   font-weight: 700;
+//   border-radius: 30px;
+//   transition: transform  1s all;
+//   font-size: 15px;
+//   padding: 6px 10px;
+//   margin-bottom: 1rem;
+// }
+
+// .thankyou_button_active:active {
+//   transition: transform  1s all;
+//   box-shadow:0 0 10px #ff9d72;
+// }

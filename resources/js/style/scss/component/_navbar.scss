@@ -354,7 +354,7 @@
 
 
 @media only screen and (min-width: 960px) and (max-width: 1199px) {
-    .mcd-menu {
+  .mcd-menu {
 		margin-left:10px;
 	}
 }
@@ -365,6 +365,7 @@
 	}
 	.mcd-menu li a {
 		height:30px;
+    padding: 5px 20px; 
 	}
 	.mcd-menu li a i {
 		font-size: 22px;
@@ -374,6 +375,7 @@
 	}
 	.mcd-menu li a small {
 		font-size: 10px;
+    visibility: hidden;
 	}	
 	.mcd-menu li a.search input {
 		width: 120px;
@@ -411,152 +413,152 @@
 @media only screen and (min-width: 480px) and (max-width: 767px) {
 	
 	.mcd-menu { 
-		width: 50px;
+		width: 80%; 
 	}
-	.mcd-menu li a { 
-		position: relative;
-		padding: 12px 16px;
-		height:20px;
-	}
-	.mcd-menu li a small { 
-		display: none;
-	}
-	.mcd-menu li a strong { 
-		display: none;
-	}
-	.mcd-menu li a:hover strong,.mcd-menu li a.active strong {
-		display:block;
-		font-size:10px;
-		padding:3px 0;
-		position:absolute;
-		bottom:0px;
-		left:0;
-		background:#e67e22;
-		color:#FFF;
-		min-width:100%;
-		text-transform:lowercase;
-		font-weight:normal;
-		text-align:center;
-	}
-	.mcd-menu li .search { 
-		display: none;
-	}
+	// .mcd-menu li a { 
+	// 	position: relative;
+	// 	padding: 12px 16px;
+	// 	height:20px;
+	// }
+	// .mcd-menu li a small { 
+	// 	display: none;
+	// }
+	// .mcd-menu li a strong { 
+	// 	display: none;
+	// }
+	// .mcd-menu li a:hover strong,.mcd-menu li a.active strong {
+	// 	display:block;
+	// 	font-size:10px;
+	// 	padding:3px 0;
+	// 	position:absolute;
+	// 	bottom:0px;
+	// 	left:0;
+	// 	background:#e67e22;
+	// 	color:#FFF;
+	// 	min-width:100%;
+	// 	text-transform:lowercase;
+	// 	font-weight:normal;
+	// 	text-align:center;
+	// }
+	// .mcd-menu li .search { 
+	// 	display: none;
+	// }
 	
-	.mcd-menu li > ul {
-		min-width:180px;
-		left:70px;
-	}
-	.mcd-menu li:hover > ul {
-		min-width:180px;
-		left:50px;
-	}
-	.mcd-menu li ul li > ul, .mcd-menu li ul li ul li > ul {
-		min-width:150px;
-	}
-	.mcd-menu li ul li:hover > ul {
-		left:180px;
-		min-width:150px;
-	}
-	.mcd-menu li ul li ul li > ul {
-		left:35px;
-		top: 45px;
-		border:0;
-		border-top:4px solid #e67e22;
-	}
-	.mcd-menu li ul li ul li > ul:before {
-		left:30px;
-		top: -9px;
-		border:0;
-		border-bottom:5px solid #e67e22;
-		border-left:5px solid transparent;
-		border-right:5px solid transparent;
-	}
-	.mcd-menu li ul li ul li:hover > ul {
-		left:30px;
-		min-width:150px;
-		top: 35px;
-	}
-	.mcd-menu li ul a {
-		font-size:12px;
-	}
-	.mcd-menu li ul a i {
-		font-size:14px;
-	}
+	// .mcd-menu li > ul {
+	// 	min-width:180px;
+	// 	left:70px;
+	// }
+	// .mcd-menu li:hover > ul {
+	// 	min-width:180px;
+	// 	left:50px;
+	// }
+	// .mcd-menu li ul li > ul, .mcd-menu li ul li ul li > ul {
+	// 	min-width:150px;
+	// }
+	// .mcd-menu li ul li:hover > ul {
+	// 	left:180px;
+	// 	min-width:150px;
+	// }
+	// .mcd-menu li ul li ul li > ul {
+	// 	left:35px;
+	// 	top: 45px;
+	// 	border:0;
+	// 	border-top:4px solid #e67e22;
+	// }
+	// .mcd-menu li ul li ul li > ul:before {
+	// 	left:30px;
+	// 	top: -9px;
+	// 	border:0;
+	// 	border-bottom:5px solid #e67e22;
+	// 	border-left:5px solid transparent;
+	// 	border-right:5px solid transparent;
+	// }
+	// .mcd-menu li ul li ul li:hover > ul {
+	// 	left:30px;
+	// 	min-width:150px;
+	// 	top: 35px;
+	// }
+	// .mcd-menu li ul a {
+	// 	font-size:12px;
+	// }
+	// .mcd-menu li ul a i {
+	// 	font-size:14px;
+	// }
 	
 }
 
 @media only screen and (max-width: 479px) {
-    .mcd-menu { 
-		width: 50px;
-	}
-	.mcd-menu li a { 
-		position: relative;
-		padding: 12px 16px;
-		height:20px;
-	}
-	.mcd-menu li a small { 
-		display: none;
-	}
-	.mcd-menu li a strong { 
-		display: none;
-	}
-	.mcd-menu li a:hover strong,.mcd-menu li a.active strong {
-		display:block;
-		font-size:10px;
-		padding:3px 0;
-		position:absolute;
-		bottom:0px;
-		left:0;
-		background:#e67e22;
-		color:#FFF;
-		min-width:100%;
-		text-transform:lowercase;
-		font-weight:normal;
-		text-align:center;
-	}
-	.mcd-menu li .search { 
-		display: none;
-	}
+  //   .mcd-menu { 
+	// 	width: 50px;
+	// }
+	// .mcd-menu li a { 
+	// 	position: relative;
+	// 	padding: 12px 16px;
+	// 	height:20px;
+	// }
+	// .mcd-menu li a small { 
+	// 	display: none;
+	// }
+	// .mcd-menu li a strong { 
+	// 	display: none;
+	// }
+	// .mcd-menu li a:hover strong,.mcd-menu li a.active strong {
+	// 	display:block;
+	// 	font-size:10px;
+	// 	padding:3px 0;
+	// 	position:absolute;
+	// 	bottom:0px;
+	// 	left:0;
+	// 	background:#e67e22;
+	// 	color:#FFF;
+	// 	min-width:100%;
+	// 	text-transform:lowercase;
+	// 	font-weight:normal;
+	// 	text-align:center;
+	// }
+	// .mcd-menu li .search { 
+	// 	display: none;
+	// }
 	
-	.mcd-menu li > ul {
-		min-width:180px;
-		left:70px;
-	}
-	.mcd-menu li:hover > ul {
-		min-width:180px;
-		left:50px;
-	}
-	.mcd-menu li ul li > ul, .mcd-menu li ul li ul li > ul {
-		min-width:150px;
-	}
-	.mcd-menu li ul li:hover > ul {
-		left:180px;
-		min-width:150px;
-	}
-	.mcd-menu li ul li ul li > ul {
-		left:35px;
-		top: 45px;
-		border:0;
-		border-top:4px solid #e67e22;
-	}
-	.mcd-menu li ul li ul li > ul:before {
-		left:30px;
-		top: -9px;
-		border:0;
-		border-bottom:5px solid #e67e22;
-		border-left:5px solid transparent;
-		border-right:5px solid transparent;
-	}
-	.mcd-menu li ul li ul li:hover > ul {
-		left:30px;
-		min-width:150px;
-		top: 35px;
-	}
-	.mcd-menu li ul a {
-		font-size:12px;
-	}
-	.mcd-menu li ul a i {
-		font-size:14px;
-	}
+	// .mcd-menu li > ul {
+	// 	min-width:180px;
+	// 	left:70px;
+	// }
+	// .mcd-menu li:hover > ul {
+	// 	min-width:180px;
+	// 	left:50px;
+	// }
+	// .mcd-menu li ul li > ul, .mcd-menu li ul li ul li > ul {
+	// 	min-width:150px;
+	// }
+	// .mcd-menu li ul li:hover > ul {
+	// 	left:180px;
+	// 	min-width:150px;
+	// }
+	// .mcd-menu li ul li ul li > ul {
+	// 	left:35px;
+	// 	top: 45px;
+	// 	border:0;
+	// 	border-top:4px solid #e67e22;
+	// }
+	// .mcd-menu li ul li ul li > ul:before {
+	// 	left:30px;
+	// 	top: -9px;
+	// 	border:0;
+	// 	border-bottom:5px solid #e67e22;
+	// 	border-left:5px solid transparent;
+	// 	border-right:5px solid transparent;
+	// }
+	// .mcd-menu li ul li ul li:hover > ul {
+	// 	left:30px;
+	// 	min-width:150px;
+	// 	top: 35px;
+	// }
+	// .mcd-menu li ul a {
+	// 	font-size:12px;
+	// }
+	// .mcd-menu li ul a i {
+	// 	font-size:14px;
+	// }
     
 }

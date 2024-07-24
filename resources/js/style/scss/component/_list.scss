@@ -2,9 +2,8 @@
 @forward '../base/index';
 
 
-.ul1{
-    // display: inline;
-    @extend .pm0;
+.ul-menu1{
+    @extend .flexR,.pm0;
     & li{
         // @extend .pm0;
         margin: 0%;
@@ -23,5 +22,16 @@
     gap: 10px;
     & label{
         @extend .tcenter;
+    }
+}
+
+
+.Flex-b250{
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 20px;
+    & .list{
+        flex-grow: 2; 
+        min-width: 250px;
     }
 }

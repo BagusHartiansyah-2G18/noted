@@ -199,8 +199,10 @@ function FormEntri() {
             kdNote:kdJudul,
             kdMember
          })); 
+         
     }, [dispatch]);
- 
+    
+    
     if(dnote.induk==undefined){
         return '';
     } 
@@ -268,78 +270,96 @@ function FormEntri() {
         mclose();
     }  
  
-    if(Object.keys(settingV).length==0){ 
-        // _settingV({
-        //     "v": {
-        //         "indF": 3,
-        //         "indO": 0,
-        //         "pertanyaan": "Pilih Jenis PJ",
-        //         "valueAttr": [
-        //             "-",
-        //             "-"
-        //         ],
-        //         "valueOption": [
-        //             [
-        //                 "",
-        //                 ""
-        //             ]
-        //         ],
-        //         "nameJudul": "select",
-        //         "name": "select",
-        //         "attr": [
-        //             0,
-        //             1
-        //         ],
-        //         "option": [
-        //             1,
-        //             2
-        //         ]
-        //     },
-        //     "i": 0
-        // });
-    }  
+     
+    // if(dfEntri0.length>0  && indS<0){
+    //     _indS(0);
+    //     _settingV({
+    //         "v": {
+    //             "indF": 0,
+    //             "indO": 0,
+    //             "pertanyaan": "Nama Pekerja ?",
+    //             "valueAttr": [
+    //                 "nmP",
+    //                 "nmP"
+    //             ],
+    //             "valueOption": [],
+    //             "nameJudul": "Input",
+    //             "name": "text",
+    //             "alt": "bidang input teks satu baris",
+    //             "attr": [
+    //                 0,
+    //                 1
+    //             ]
+    //         },
+    //         "i": 0
+    //     });
+    // } 
     return (
         <>
-            
-            {
-                (
-                    dnote.induk.length>0 &&
-                    <ListInformasiNote dinduk={dnote.induk} changeSub={changeSub} key={1}></ListInformasiNote>
-                )
-            }  
-            {
-                <FEDnewData 
-                    buatFormBaru={buatFormBaru} 
-                    dbForm={dfEntri0}
-                    pilihTypeForm={pilihTypeForm}
-                    keyDB={keyDB}
-                    formPerbaruiTujuan={formPerbaruiTujuan}
-                    
-                ></FEDnewData>
-            }
+            <div className="Mcontainer2Form bgForm body aiS"> 
+                <div className="right">
+                    <div class="FM1">
+                        <div class="header bwhite">
+                            <div class="cdark flexR">
+                                <button className="btn bdark">
+                                    <span className="mdi mdi-star-crescent cwarning fzXl"></span>
+                                </button>
+                                <h2 className="  pl0 aiE fBebasNeue">
+                                    <b>List Noted Selected</b> 
+                                </h2>
+                            </div> 
+                        </div>
+                        <div class="body bdark" style={{width:"unset" }}> 
+                            {
+                                (
+                                    dnote.induk.length>0 &&
+                                    <ListInformasiNote dinduk={dnote.induk} changeSub={changeSub} key={1}></ListInformasiNote>
+                                )
+                            }  
+                        </div>
+                    </div>
+                </div>
+                <div className="left" > 
+                    {
+                        <FEDnewData 
+                            buatFormBaru={buatFormBaru} 
+                            dbForm={dfEntri0}
+                            pilihTypeForm={pilihTypeForm}
+                            keyDB={keyDB}
+                            formPerbaruiTujuan={formPerbaruiTujuan}
+                            
+                        ></FEDnewData>
+                    } 
+                </div>
+            </div>
             
             {
                 (indS>=0 && 
-                    <div className="boxShadow flexC w90p radius-10 pwrap__2p mwrap__2p mauto_">
-                        <div className="flexR ">
+                    <div className="boxShadow blight cwhite flexC w90p radius-10" style={{margin:"10px auto 10px auto"}}>
+                        <div className="flexR binfo pwrap__10 radius__10 ">
                             <button className="btn bdark">
                                 <span className="mdi mdi-star-crescent cwarning fzXl"></span>
                             </button>
                             <div className="flexC">
-                                <h2 className="  pm0 cdark aiE fBebasNeue">Pengaturan Atribut Form</h2>
+                                <h2 className="  pm0  aiE fBebasNeue">Pengaturan Form
+                                </h2>
                                 <p className="pm0">{dfEntri0[indS].tujuan}</p>
                             </div> 
+                        </div> 
+                        <div className="Mcontainer2Form bgForm body aiS">
+                            <FEDjenisForm
+                                indS={indS}
+                                PilihJenisForm={PilihJenisForm}
+                                deData={dfEntri0[indS].data}
+                                delTypeFormSelected={delTypeFormSelectedx}
+                                aturSettingV={aturSettingV} 
+                            ></FEDjenisForm>    
                         </div>
-                        <hr/>
-                        <FEDjenisForm
-                            indS={indS}
-                            PilihJenisForm={PilihJenisForm}
-                            deData={dfEntri0[indS].data}
-                            delTypeFormSelected={delTypeFormSelectedx}
-                            aturSettingV={aturSettingV} 
-                        ></FEDjenisForm>  
+                        
                 </div>
             ) }
+            
+            
             {
                 (
                     Object.keys(settingV).length != 0 &&

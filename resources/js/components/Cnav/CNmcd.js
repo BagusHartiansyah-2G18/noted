@@ -1,7 +1,7 @@
 import React from "react";
 function CNmcd({ dt }){ 
     return (
-        <nav className="">
+        <nav className="jcC">
             <ul class="mcd-menu bdark">
                 {
                     dt.map((v,i)=>{

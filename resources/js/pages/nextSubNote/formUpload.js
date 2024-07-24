@@ -119,77 +119,102 @@ function FormUpload() {
         _files('-');
         _url({target:{value:''}});
     }  
-    return (
+    return ( 
         <>
-            {
-                (
-                    dnote.induk.length>0 &&
-                    <ListInformasiNote dinduk={dnote.induk} key={1}></ListInformasiNote>
-                )
-            } 
-            <div className="boxShadow flexC w90p radius-10 pwrap__2p mwrap__2p mauto_">
-                <div className="flexR jcSB">
-                    <div class="w50p flexR">
-                        <button className="btn bdark">
-                            <span className="mdi mdi-star-crescent cwarning fzXl"></span>
-                        </button>
-                        <h2 className=" pwrap_5p pl0 cdark aiE fBebasNeue">Form Upload</h2>
-                    </div>  
+           <div className="Mcontainer2Form bgForm body aiS"> 
+                <div className="right" > 
+                    <div class="FM1">
+                        <div class="header bwhite">
+                            <div class="cdark flexR">
+                                <button className="btn bdark">
+                                    <span className="mdi mdi-star-crescent cwarning fzXl"></span>
+                                </button>
+                                <h2 className="  pl0 aiE fBebasNeue">
+                                    <b>Form Upload</b> 
+                                </h2>
+                            </div> 
+                        </div>
+                        <div class="body bdark pwrap_5" style={{width:"unset" }}><br/>
+                            <div className="doubleInput ptb10px pwrap_2p">
+                                <label>Judul File</label>
+                                <div className="iconInput2 ">
+                                    <input className="borderR10px" ref={judulFokus}  type="text" value={judul} onChange={_judul} placeholder="Judul Note" />
+                                    <span className={`mdi mdi-cloud-search ${(form.add == 1 ? 'cprimary': 'cwarning')} `}></span>
+                                </div>
+                            </div> 
+                            <div className="doubleInput ptb10px pwrap_2p">
+                                <label className="mw100px"><span className={`mdi mdi-file-upload cprimary fziconS`}></span>Dokumen (PDF) / URL</label>
+                                <input className="borderR10px" type="file" value=''
+                                    onChange={(e)=>sfLib.readFile(e.target,_files)} />
+                                {(files!='-' && <span><b>Nama File : </b> {files.nama}</span>)} 
+                            </div>  
+                            <div className="doubleInput ptb10px pwrap_2p">
+                                <div className="iconInput2 mwrap__2p">
+                                    <input className="borderR10px" ref={judulFokus}  type="text" value={url} onChange={_url} placeholder="https:://bappedaksb.com" />
+                                    <span className={`mdi mdi-cloud-search ${(form.add == 1 ? 'cprimary': 'cwarning')} `}></span>
+                                </div>
+                            </div>  
+                            
+                            <div className="list jcE">
+                                <button class="btn bprimary" onClick={()=>upload()}>Tambahkan</button> 
+                             </div> 
+                        </div>
+                    </div>
                 </div>
-                <div className="flexR jcSB pwrap_5p bwhite">
-                    <div className="doubleInput ptb10px pwrap_2p">
-                        <label>Judul File</label>
-                        <div className="iconInput2 ">
-                            <input className="borderR10px" ref={judulFokus}  type="text" value={judul} onChange={_judul} placeholder="Judul Note" />
-                            <span className={`mdi mdi-cloud-search ${(form.add == 1 ? 'cprimary': 'cwarning')} `}></span>
+                <div className="left">
+                    <div class="FM1">
+                        <div class="header bwhite">
+                            <div class="cdark flexR">
+                                <button className="btn bdark">
+                                    <span className="mdi mdi-star-crescent cwarning fzXl"></span>
+                                </button>
+                                <h2 className="  pl0 aiE fBebasNeue">
+                                    <b>List Noted Selected</b> 
+                                </h2>
+                            </div> 
+                        </div>
+                        <div class="body bdark" style={{width:"unset" }}> 
+                            {
+                                (
+                                    dnote.induk.length>0 &&
+                                    <ListInformasiNote dinduk={dnote.induk} key={1}></ListInformasiNote>
+                                )
+                            }
+                        </div>
+                    </div>
+                    <div class="FM1">
+                        <div class="header bwhite">
+                            <div class="cdark flexR">
+                                <button className="btn bdark">
+                                    <span className="mdi mdi-star-crescent cwarning fzXl"></span>
+                                </button>
+                                <h2 className="  pl0 aiE fBebasNeue">
+                                    <b>List Upload</b> 
+                                </h2>
+                            </div> 
+                        </div>
+                        <div class="body bdark" style={{width:"unset" }}><br/>
+                            <Tabel1
+                                    search={search}
+                                    oncSearch={_search}
+                                    columns={colFile}
+                                    data={dnote.file.filter((item) => {
+                                            if (search === "") {
+                                                return item;
+                                            } else if (
+                                                item.keterangan.toLowerCase().includes(search.toLowerCase())
+                                            ) {
+                                                return item;
+                                            }
+                                        })}
+                                ></Tabel1>
                         </div>
                     </div> 
-                    <div className="doubleInput ptb10px">
-                        <label className="mw100px"><span className={`mdi mdi-file-upload cprimary fziconS`}></span>Dokumen (PDF) / URL</label>
-                        <input className="borderR10px" type="file" value=''
-                            onChange={(e)=>sfLib.readFile(e.target,_files)} />
-                        {(files!='-' && <span><b>Nama File : </b> {files.nama}</span>)} 
-                        <div className="iconInput2 mwrap__2p">
-                            <input className="borderR10px" ref={judulFokus}  type="text" value={url} onChange={_url} placeholder="Url" />
-                            <span className={`mdi mdi-cloud-search ${(form.add == 1 ? 'cprimary': 'cwarning')} `}></span>
-                        </div>
-                    </div>  
-                    <div className="doubleInput ptb10px">
-                        <label className="w200"></label>
-                        <button class=" pwrap-5p btn bprimary " onClick={()=>upload()}>Tambahkan</button>
-                    </div> 
-                </div>   
-            </div>
-            <div className="boxShadow flexC w90p radius-10 pwrap__2p mwrap__2p mauto_">
-                <div className="flexR jcSB">
-                    <div class="w50p flexR">
-                        <button className="btn bdark">
-                            <span className="mdi mdi-star-crescent cwarning fzXl"></span>
-                        </button>
-                        <h2 className=" pwrap_5p pl0 cdark aiE fBebasNeue">List Upload</h2>
-                    </div>  
                 </div>
-                <div className="flexC jcSB pwrap_5p bwhite">
-                    <Tabel1
-                        search={search}
-                        oncSearch={_search}
-                        columns={colFile}
-                        data={dnote.file.filter((item) => {
-                                if (search === "") {
-                                    return item;
-                                } else if (
-                                    item.keterangan.toLowerCase().includes(search.toLowerCase())
-                                ) {
-                                    return item;
-                                }
-                            })}
-                    ></Tabel1>
-                </div>   
-            </div>
+            </div>   
             <ModalM
                 children ={modalC} 
             ></ModalM>
-            
         </>
     )
 }

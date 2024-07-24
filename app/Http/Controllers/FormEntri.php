@@ -6,18 +6,20 @@ use Illuminate\Http\Request;
 use App\Helper\Mfc;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-
+ 
 use App\Models\data_form;
 use App\Models\value_forms;
 
 class formEntri extends Controller
 {
+    private $Mfc; 
     public function __construct()
     {
+        $this->Mfc = new Mfc();
         $this->middleware('auth');
     }
     public function getForm(Request $request){
-        $portal = Mfc::portal(Auth::user());
+        $portal = $this->Mfc->portal();
         if($portal['exc']){
             $validator = $request;
             try {
@@ -34,12 +36,16 @@ class formEntri extends Controller
             }
             return response()->json([
                 'exc' => true,
-                'data' => data_form::where($validator)->get()
+                'data' =>data_form::where($validator)->get()
+                // [
+                //     "dform"=>,
+                //     "Kategori"=>value_forms::where("kdDF","354e3a3751ceb3131125a09be6e4436a")->get(),
+                // ]
             ], 200);
         }
     }
     public function setForm(Request $request){
-        $portal = Mfc::portal(Auth::user());
+        $portal = $this->Mfc->portal();
         if($portal['exc']){
             $validator = $request;
             try {
@@ -73,7 +79,7 @@ class formEntri extends Controller
         }
     }
     public function updForm(Request $request){
-        $portal = Mfc::portal(Auth::user());
+        $portal = $this->Mfc->portal();
         if($portal['exc']){
             $validator = $request;
             try {
@@ -113,7 +119,7 @@ class formEntri extends Controller
     }
  
     public function setTypeForm(Request $request){
-        $portal = Mfc::portal(Auth::user());
+        $portal = $this->Mfc->portal();
         if($portal['exc']){
             $validator = $request;
             try {
@@ -162,7 +168,7 @@ class formEntri extends Controller
     //     ]));
     // }
     public function getFormWithKey(Request $request){
-        $portal = Mfc::portal(Auth::user());
+        $portal = $this->Mfc->portal();
         if($portal['exc']){
             $validator = $request;
             
@@ -190,7 +196,7 @@ class formEntri extends Controller
                     from value_forms a
                     join users b on 
                         a.kdMember = TO_BASE64(b.id)
-                    where a.kdDF='".Mfc::getKeyValue($validator)."' and  
+                    where a.kdDF='".$this->Mfc->getKeyValue($validator)."' and  
                     a.aktif =1
                 ");
                 // a.kd='".$validator['kd']."' and
@@ -200,7 +206,7 @@ class formEntri extends Controller
                     from value_forms a
                     join users b on 
                         a.kdMember = TO_BASE64(b.id) 
-                    where a.kdDF='".Mfc::getKeyValue($validator)."' and
+                    where a.kdDF='".$this->Mfc->getKeyValue($validator)."' and
                     a.kdMember='".$portal['kdMember']."' and
                     a.aktif =1
                 ");
@@ -217,7 +223,7 @@ class formEntri extends Controller
         }
     }
     public function setValueForm(Request $request){
-        $portal = Mfc::portal(Auth::user());
+        $portal = $this->Mfc->portal();
         if($portal['exc']){
             $validator = $request;
             try {
@@ -255,7 +261,7 @@ class formEntri extends Controller
         }
     }
     public function updValueForm(Request $request){
-        $portal = Mfc::portal(Auth::user());
+        $portal = $this->Mfc->portal();
         if($portal['exc']){
             $validator = $request;
             try {
@@ -292,7 +298,7 @@ class formEntri extends Controller
         }
     }
     public function delValueForm(Request $request){
-        $portal = Mfc::portal(Auth::user());
+        $portal = $this->Mfc->portal();
         if($portal['exc']){
             $validator = $request;
             try {

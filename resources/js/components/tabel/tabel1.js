@@ -11,7 +11,10 @@ function Tabel1({
         btnAction = undefined,
         ExpandedComponent = null,
         rowSelectCritera = false,
+        dbtn=[],
         selectData =()=>{}}){ 
+
+    const cekBtn = (dbtn.length>0 && data.length>0);
     return (
         <>
             {
@@ -23,7 +26,15 @@ function Tabel1({
                 (
                     (search!=undefined || data.length!=0)   &&
                     <> 
-                        <div className="jcE pwrap__2p">
+                        <div className={(cekBtn ?"jcSB":"jcE")+" pwrap-2p"}> 
+                            {(
+                                cekBtn && 
+                                <div className="flexR btnGroup aiC">
+                                    {
+                                        dbtn.map(v=><small className={`pwrap-5 ${v.value}`}>{v.label}</small>)
+                                    }
+                                </div>
+                            )}
                             <div className={`iconInput2 ${cinput}`}>
                                 <input className="borderR10px" type="text" value={search} onChange={oncSearch}  placeholder="search..." />
                                 <span className="mdi mdi-cloud-search "></span>
@@ -32,7 +43,7 @@ function Tabel1({
                     </>
                 )
             }
-            <DataTable
+            <DataTable 
                 pagination={pagination}
                 columns={columns}
                 data={data}

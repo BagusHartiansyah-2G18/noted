@@ -11,9 +11,9 @@ function HeaderM1(){
         dispatch(userMenuS({v,sub}))
     }
     return (
-        <div className="headerM1">
-            <div className="wrap">
-                <ul>
+        <div className="Mcontainer bhijauBlueG">
+            <div className="left">
+                <ul className="ul-menu1 aiC">
                     <li>
                         <div className="textIcon">
                             <Link to={`/home`} className="btn" onClick={()=>updMenu({v:1,sub:1})}>
@@ -49,9 +49,9 @@ function HeaderM1(){
                     </li>
                 </ul>
             </div>
-            <div className="wrap aiC" style={{display:"grid"}}>
-                <ul className="jcE">
-                    {/* <li>
+            <div className="right aiC jcE" style={{width:"300px"}}>
+                <ul className="ul-menu1 " >
+                    <li>
                         <button className="btn flexR cinfo " onClick={()=>logout()}>
                             <span className="mdi mdi-information-outline "></span>
                             <label>*</label>
@@ -62,7 +62,7 @@ function HeaderM1(){
                             <span className="mdi mdi-message-fast-outline"></span>
                             <label>*</label>
                         </button> 
-                    </li> */}
+                    </li>
                     <li> 
                         <button className="btn bdark" onClick={()=>logout()}>
                             <span className="mdi mdi-login-variant cdanger" style={{fontSize:"25px"}}></span>  

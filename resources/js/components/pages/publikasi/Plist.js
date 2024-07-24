@@ -1,8 +1,9 @@
 import React, { useState } from "react"; 
 import Pform from "./Pform"; 
 import Pfile from "./Pfile";
-import PrenderHtml from "./PrenderHtml";
-import Parser from 'html-react-parser';
+// import PrenderHtml from "./PrenderHtml";
+import PKlist from "./PKlist";
+import { Link } from "react-router-dom";
 
 function Plist({ dt, url, start}) {
     const tingkat = (dt[0].tingkat == 0? 1: dt[0].tingkat);
@@ -17,64 +18,71 @@ function Plist({ dt, url, start}) {
     if(openFile == undefined || openForm == undefined){
         return '';
     }  
-    
-    
+     
     return (
-        <div className={"flexC  borderForm pwrap-10 w80p "}>
+        <div className={"flexC  borderForm pwrap-10 w80p mauto"}>
             {
-                dt.map((v,i)=>{
-                    // console.log(openFile[i]);
+                dt.map((v,i)=>{  
                     const rows =v.ringkasan.toString().split("\n").length;  
                     return(
                         <>
-                            <div key={i}>
-                                <div className="flexR jcSB boxS pwrap-5 radius__10">
+                            <div key={i} >
+                                <div className="flexR bwhite jcSB boxS pwrap-5 radius__10">
                                     <div className="flexC " style={{ alignSelf:"center"}}>
                                         <div className="flexR  " >
                                             <label className="aiC pwrap_10 cwarning tbold fzL3">{`[ `}<span className="fzXl cdark">{(i==0?tingkat:tingkat+"."+(i))}</span>{` ]`} </label>
                                             {(
                                                 rows ==1 &&  v.ringkasan.length>3 ?
                                                 <div style={{display:"flex", flexDirection:"column", alignSelf:"center"}}>
-                                                    <span className="aiC fzL tbold">{v.judul}</span>
-                                                    <small>{v.ringkasan}</small> 
+                                                    <span className="aiC fzL cdark tbold">{v.judul}</span>
+                                                    <small className="cmuted">{v.ringkasan}</small> 
                                                 </div>:
-                                                <span className="aiC fzL tbold">{v.judul}</span>
+                                                <span className="aiC fzL cdark tbold">{v.judul}</span>
                                             )} 
                                         </div>
                                         <small className="pwrap_10 cmuted" style={{alignSelf:"baseline"}}>{v.created_at.substring(0,19)}</small> 
                                     </div>
-                                    <div className="flexC">
+                                    <div className="flexC " >
                                         <div id="dropdonwUl_">
                                             <button class="dropdown-btn bdark">
                                                 <span>Pengaturan</span>
                                                 <span class="arrowTop"></span>
                                             </button>
                                             <ul class="dropdown-content dcTop bmuted pwrap-5p ">
+                                                
                                                 <li style={{"--delay": 2}}>
-                                                    <button class="btn csuccess jcSA w100p" onClick={()=>{
-                                                        window.open("localhost:9000")}
-                                                        } >
-                                                        <span className="mdi mdi-file-excel "></span>
+                                                    <Link class="btn csuccess  w100p jcSA" style={{display:"flex"}}  target="_blank" 
+                                                        to={'/pe-export/'+btoa(JSON.stringify({
+                                                            kdJudul:v.kdJudul,
+                                                            kdMember:v.kdMember,
+                                                            tingkat:v.tingkat 
+                                                        }))}  title="Preview">
+                                                        <span className="mdi mdi-file-excel"></span>
                                                         <label>Export</label>
-                                                    </button> 
+                                                    </Link> 
                                                 </li> 
-                                                <li style={{"--delay": 2}}>
-                                                    <button class="btn cwarning jcSA w100p"  >
-                                                        <span className="mdi mdi-microsoft-sharepoint "></span>
-                                                        <label>Bagikan</label>
-                                                    </button>
-                                                </li> 
-                                                <li style={{"--delay": 2}}>
-                                                    <button class="btn cprimary jcSA w100p"  >
+                                                <li style={{"--delay": 2}}> 
+                                                    <Link class="btn cprimary  w100p jcSA" style={{display:"flex"}}  target="_blank" 
+                                                        to={'/pe-formentri/'+btoa(JSON.stringify({
+                                                            kdJudul:v.kdJudul,
+                                                            kdMember:v.kdMember,
+                                                            tingkat:v.tingkat 
+                                                        }))}  title="Preview">
                                                         <span className="mdi mdi-view-list-outline "></span>
                                                         <label>Form Entri</label>
-                                                    </button>
+                                                    </Link>
                                                 </li> 
                                                 <li style={{"--delay": 1}} >
-                                                    <button class="btn cinfo jcSA w100p"  >
+                                                
+                                                    <Link class="btn cinfo  w100p jcSA" style={{display:"flex"}}  target="_blank" 
+                                                        to={'/pe-noted/'+btoa(JSON.stringify({
+                                                            kdJudul:v.kdJudul,
+                                                            kdMember:v.kdMember,
+                                                            tingkat:v.tingkat 
+                                                        }))}  title="Preview">
                                                         <span className="mdi mdi-notebook-edit-outline "></span>
                                                         <label>Noted</label>
-                                                    </button>
+                                                    </Link>
                                                 </li>
                                                  
                                             </ul>
@@ -95,23 +103,25 @@ function Plist({ dt, url, start}) {
                             <div style={{   
                                     border:"1px solid #17a2b8", 
                                     marginBottom:"5px"
-                                }} className="radius_10">
-                                <br/>
+                                }} 
+                                className="radius_10 blight">
+                                <br/> 
                                 {(
-                                    rows > 1 &&
-                                    <>
-                                        <textarea rows={(rows>10 ? 10:rows )} onChange={()=>{}} className="bdark radius_10 pwrap-10 w100p" 
-                                            value={v.ringkasan}  
-                                        ></textarea> 
-                                    </> 
-                                )} 
-                                {(
-                                    v.judul.toLocaleLowerCase().split("(html)").length>=2 && 
-                                    <div className="radius_10 pwrap-10 w100p"> 
-                                        <label><b>* Preview HTML</b></label> 
-                                        {Parser(v.ringkasan)}
-                                        <hr/> 
-                                    </div> 
+                                    v.indOps>0 ? 
+                                    <div className="radius_10 pwrap-10 w100p flexC"> 
+                                        <PKlist 
+                                            indOps={v.indOps}
+                                            ringkasan={v.ringkasan}
+                                        ></PKlist>
+                                    </div>:
+                                    (
+                                        rows > 1 &&
+                                        <>
+                                            <textarea rows={(rows>10 ? 10:rows )} onChange={()=>{}} className="bdark radius_10 pwrap-10 w100p" 
+                                                value={v.ringkasan}  
+                                            ></textarea> 
+                                        </> 
+                                    )
                                 )}  
                                 {(
                                     v.file.length>0 &&

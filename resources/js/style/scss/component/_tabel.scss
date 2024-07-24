@@ -1,10 +1,35 @@
 @use '../abstracts/variabel' as _;
 @forward '../base/index';
 
+.noBorder{
+    border: 0px;
+    & tr{border: 0px;}
+    & td{border: 0px;}
+}
+
 .grid-4c{
-    @include _.gridC(repeat(4,23%));
+    @include _.gridC(repeat(2,50%));
     width: 100%;
     grid-gap: 2%;
+
+    @media screen and (min-width:800px) {
+        grid-template-columns: repeat(3,32%) !important;
+    }
+    @media screen and (min-width:1200px) {
+        grid-template-columns: repeat(4,23%) !important;
+    }
+}
+.grid-2c{
+    @include _.gridC(repeat(1,98%));
+    width: 100%;
+    grid-gap: 2%;
+    & .cimg {
+        width: 100%;
+        & img{width: 100%;}
+    }
+    @media screen and (min-width:800px) {
+        grid-template-columns: repeat(2,50%) !important;
+    } 
 }
 
 
@@ -55,3 +80,25 @@
     border: 1px solid black;
     border-collapse: collapse;
 }
+.gr_13{
+    @include _.gridC(repeat(1,80%));
+    grid-gap : 30px;
+    grid-row: 20px;
+    @media screen and (min-width: 850px) {  
+        .gr_13{
+            @include _.gridC(repeat(2,50%));
+        } 
+    }
+    @media screen and (min-width: 1000px) {  
+        .gr_13{
+            @include _.gridC(repeat(3,33%));
+        } 
+    }
+    @media screen and (min-width: 1300px) {  
+        .gr_13{
+            @include _.gridC(repeat(4,25%));
+        }
+    }
+}
+
+

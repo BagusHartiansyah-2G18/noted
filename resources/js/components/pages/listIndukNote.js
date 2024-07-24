@@ -7,10 +7,10 @@ function ListIndukNote({ dt, back }){
                 dt.map((v,i)=>{
                     return(
                         <li className="flexR">
-                            <label className="aiC pwrap_10 cwarning tbold fzL3">{`[ `}<span className="fzXl cdark">{i+1}</span>{` ]`}</label>
+                            <label className="aiC pwrap_10 cwarning tbold fzL3">{`[ `}<span className="fzXl clight">{i+1}</span>{` ]`}</label>
                             <div className="flexC">
-                                <span className="fzXl pm0 btn tstart cprimary" onClick={()=>back(i)}>{v.judul}</span>
-                                <span className="cmuted pm0">{v.ringkasan}</span>
+                                <span className=" fzXl pm0 btn tstart  cprimary " onClick={()=>back(i)}>{v.judul}</span>
+                                <span className="clight pm0">{v.ringkasan}</span>
                             </div>
                         </li>
                     )

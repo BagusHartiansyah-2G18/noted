@@ -27,21 +27,11 @@ function ListInformasiNote({ dinduk ,changeSub }) {
     }
     
     return (
-        <div className="boxShadow flexC w90p mauto radius-10 pwrap__2p">
-            <div className="flexR jcSB ">
-                <div class="w50p flexR">
-                    <button className="btn bdark">
-                        <span className="mdi mdi-star-crescent cwarning fzXl"></span>
-                    </button>
-                    <h2 className=" pwrap_5p pl0 cdark aiE fBebasNeue">Noted Selected</h2>
-                </div>  
-            </div>
-            <div className=" pwrap_5p bwhite">
-                <Tabel1 
-                    columns={colNoted}
-                    data={dinduk}
-                ></Tabel1>
-            </div>
+        <div className="  ">
+            <Tabel1 
+                columns={colNoted}
+                data={dinduk}
+            ></Tabel1>
         </div>
     )
 }

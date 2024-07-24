@@ -34,7 +34,9 @@ export default function PVpdf({ onOff, start, initialDoc }) {
     });
   }  
   useEffect(() => {
+    if(onOff){
       loadDoc();
+    }
   }, []); 
   if(start.start){ 
     start.start=false;

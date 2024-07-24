@@ -22,7 +22,7 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm bhijauBlueG">
+        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm bdark">
             <div class="container ">
                 <a class="navbar-brand fpacifico cwhite" href="{{ url('/') }}">
                     <u>Catatan Turunan</u>
@@ -76,7 +76,7 @@
             </div>
         </nav>
 
-        <main >
+        <main>
             @yield('content')
         </main>
     </div>

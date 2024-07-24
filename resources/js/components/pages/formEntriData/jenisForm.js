@@ -30,11 +30,12 @@ function FEDjenisForm({ indS, PilihJenisForm, deData, delTypeFormSelected,aturSe
         {
           name: 'No',
           selector: (row,i) => i+1,
-          width : '200px'
+          width : '50px'
         }
         ,{
             name: 'Jenis Form',
             selector: row =>row.nameJudul+", "+row.name,
+            width : '150px'
         },{
             name: 'Pertanyaan',
             selector: row => row.pertanyaan,
@@ -48,63 +49,67 @@ function FEDjenisForm({ indS, PilihJenisForm, deData, delTypeFormSelected,aturSe
     ]; 
     const vjudulbtn=(row, i)=>{   
         return(
-            <div className="btnGroup blight">
-                <button class="btn cdanger" onClick={()=>delTypeFormSelected(i)} title="Hapus">
-                    <span className="mdi mdi-file-settings"></span> Hapus
+            <div className="btnGroup clight">
+                <button class="btn bdanger" onClick={()=>delTypeFormSelected(i)} title="Hapus">
+                    <span className="mdi mdi-delete"></span> 
                 </button>
-                <button class="btn cinfo" onClick={()=>aturSettingV({v:row, i})} title="setting">
-                    <span className="mdi mdi-file-settings"></span> Pengaturan
+                <button class="btn binfo" onClick={()=>aturSettingV({v:row, i})} title="setting">
+                    <span className="mdi mdi-file-check"></span>
                 </button> 
             </div>
         )
     }  
     return (
-       <> 
-            <div className="flexC  pwrap_5p bwhite">
-                <div className="flexC jcSB borderForm pwrap-10">
-                    <div className="flexR">
-                        <label className="aiC pwrap_10 cwarning tbold fzL3">{`[ `}<span className="fzXl cdark">1.</span>{` ]`} </label>
-                        <label className="aiC fzL">Pemilihan JeniS Form </label>
+        <> 
+        <div className="right">
+            <div class="FM1">
+                <div class="header bwhite">
+                    <div class="cdark flexR">
+                        <button className="btn bdark">
+                            <span className="mdi mdi-star-crescent cwarning fzXl"></span>
+                        </button>
+                        <h2 className="  pl0 aiE fBebasNeue">
+                            <b>Pemilihan JeniS Form</b> 
+                        </h2>
                     </div> 
-                    <hr/>
-                    <div className="flexR">
-                        <div className="doubleInput ptb10px pwrap_2p">
-                            <label>Daftar Jenis Form </label>
-                            <div className="iconInput2 ">
-                                <FEselect
-                                    option={__cbForm()}
-                                    // indx={indx}
-                                    getVal={{label:"Pilih Type Form yang akan digunakan", value:0}}
-                                    resVal={prosesJenisForm} 
-                                ></FEselect>
-                            </div>
+                </div>
+                <div class="body bdark pwrap-5" style={{width:"unset" }}> 
+                    <div className="doubleInput pwrap-2p bsolid1 cinfo">
+                        <label>Daftar Jenis Form </label>
+                        <div className="iconInput2 ">
+                            <FEselect
+                                option={__cbForm()}
+                                // indx={indx}
+                                getVal={{label:"Pilih Type Form yang akan digunakan", value:0}}
+                                resVal={prosesJenisForm} 
+                            ></FEselect>
                         </div>
+                    </div>
 
-                        <div className="doubleInput ptb10px">
-                                <label className="mw100px"><span className={`mdi mdi-file-upload cprimary fziconS`}></span>Keterangan Form</label>
-                                <label>{(Object.keys(dtForm).length==0 ?'Belum ada informasi !':dtForm.alt)}</label>
-                        </div> 
-                        {
-                            (Object.keys(dtForm).length>0 && dtForm.ops.length>1
-                                && 
-                                <>
-                                    <div className="doubleInput ptb10px">
-                                        <label className="w200">Jenis {dtForm.name}</label>
-                                        <FEselect
-                                            option={sfLib.coptionSelect({
-                                                dt:dtForm.ops,
-                                                row:{label:'name',value:'name'},
-                                                // xind:true
-                                            })}
-                                            // indx={indx}
-                                            getVal={{label:dtForm.ops[0].name, value:dtForm.ops[0].name}}
-                                            resVal={prosesFormOption} 
-                                        ></FEselect>
-                                    </div> 
-                                </>
-                            )
-                        }
+                    <div className="doubleInput pwrap-2p bsolid1 cinfo">
+                            <label className="mw100px"><span className={`mdi mdi-file-upload cprimary fziconS`}></span>Keterangan Form</label>
+                            <label>{(Object.keys(dtForm).length==0 ?'Belum ada informasi !':dtForm.alt)}</label>
                     </div> 
+                    {
+                        (Object.keys(dtForm).length>0 && dtForm.ops.length>1
+                            && 
+                            <>
+                                <div className="doubleInput pwrap-2p bsolid1 cinfo">
+                                    <label className="w200">Jenis {dtForm.name}</label>
+                                    <FEselect
+                                        option={sfLib.coptionSelect({
+                                            dt:dtForm.ops,
+                                            row:{label:'name',value:'name'},
+                                            // xind:true
+                                        })}
+                                        // indx={indx}
+                                        getVal={{label:dtForm.ops[0].name, value:dtForm.ops[0].name}}
+                                        resVal={prosesFormOption} 
+                                    ></FEselect>
+                                </div> 
+                            </>
+                        )
+                    }
                     <div style={{justifyContent:'end', display:'grid'}}  >
                         {
                             (indF>=0 &&
@@ -112,36 +117,51 @@ function FEDjenisForm({ indS, PilihJenisForm, deData, delTypeFormSelected,aturSe
                             )
                         }
                         
-                    </div>                    
+                    </div>  
                 </div>
-                <br/>
-                <div className="flexC jcSB borderForm pwrap-10">
-                    <div className="flexR">
-                        <label className="aiC pwrap_10 cwarning tbold fzL3">{`[ `}<span className="fzXl cdark">2.</span>{` ]`} </label>
-                        <label className="aiC fzL">Daftar Form Terpilih </label>
-                    </div>
-                    <hr/>
+            </div>
+        </div>
+        <div className="left" > 
+            <div class="FM1">
+                <div class="header bwhite">
+                    <div class="cdark flexR">
+                        <button className="btn bdark">
+                            <span className="mdi mdi-star-crescent cwarning fzXl"></span>
+                        </button>
+                        <h2 className="  pl0 aiE fBebasNeue">
+                            <b>Daftar JeniS Form Terpilih</b> 
+                        </h2>
+                    </div> 
+                </div>
+                <div class="body bdark" style={{width:"unset" }}> 
                     {
                         (deData.length>0 &&
-                            <Tabel1
-                                search={search}
-                                oncSearch={_search}
-                                columns={colFormSelected}
-                                data={__infoListTerpilih(deData).filter((item) => {
-                                        if (search === "") {
-                                            return item;
-                                        } else if (
-                                            item.name.toLowerCase().includes(search.toLowerCase())
-                                        ) {
-                                            return item;
-                                        }
-                                    })}
-                            ></Tabel1>
+                            <div>
+                                <Tabel1
+                                    search={search}
+                                    oncSearch={_search}
+                                    columns={colFormSelected}
+                                    data={__infoListTerpilih(deData).filter((item) => {
+                                            if (search === "") {
+                                                return item;
+                                            } else if (
+                                                item.name.toLowerCase().includes(search.toLowerCase())
+                                            ) {
+                                                return item;
+                                            }
+                                        })}
+                                    dbtn={[
+                                        {label:"Hapus",value:"bdanger"},
+                                        {label:"Pengaturan Jenis Form",value:"binfo"}
+                                    ]}
+                                ></Tabel1>
+                            </div>
                         )
                     }
-                </div> 
+                </div>
             </div> 
-       </> 
+        </div> 
+       </>  
     )
 }
 export default FEDjenisForm; 

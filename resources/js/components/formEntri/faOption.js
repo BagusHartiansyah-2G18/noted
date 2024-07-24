@@ -17,7 +17,7 @@ function FaOption({ dt ,form, delAttrOption}){
                         )
                     }})} sisipan={{i}}></FEinputLoop>
                     {(dt.valueOption.length !=1 ? 
-                        <div className="aiE"><button class="w200 btn bdanger " onClick={()=>delAttrOption({indO:i})}>Hapus</button> </div>:
+                        <div className="aiE"><button class="w100 btn bdanger " onClick={()=>delAttrOption({indO:i})}><span className="mdi mdi-delete "></span></button> </div>:
                         ""
                     )}
                 </div>

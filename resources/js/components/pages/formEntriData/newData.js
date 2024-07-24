@@ -34,7 +34,8 @@ function FEDnewData({ buatFormBaru, dbForm, pilihTypeForm, keyDB,formPerbaruiTuj
         // },
         {
             name: 'Aksi Tombol',
-            selector: (row,i) =>colBtn(row,i)
+            selector: (row,i) =>colBtn(row,i),
+            width: "250px"
         } 
     ];
     const perbarui=({i,ftujuan})=>{
@@ -54,14 +55,13 @@ function FEDnewData({ buatFormBaru, dbForm, pilihTypeForm, keyDB,formPerbaruiTuj
         return(
             <div className="btnGroup blight">
                 <button class="btn bwarning" onClick={()=>perbarui({i,ftujuan:row.tujuan})} title="Perbarui">
-                    <span className="mdi mdi-pencil"></span> Perbarui
+                    <span className="mdi mdi-pencil"></span> 
                 </button>
                 <button class="btn binfo" onClick={()=>pilihTypeForm(i)} title="Pilih Jenis Form">
-                    <span className="mdi mdi-file-check"></span> Pengaturan Form
+                    <span className="mdi mdi-file-check"></span> 
                 </button>
                 <Link class="btn bsuccess" target="_blank"  to={'/formPreview/'+btoa(JSON.stringify({...keyDB(),kdForm:row.kd}))} title="preview Form"> 
-                    <span className="mdi mdi-search-web"></span>
-                    preview Form
+                    <span className="mdi mdi-search-web"></span> 
                 </Link> 
             </div>
         )
@@ -75,65 +75,69 @@ function FEDnewData({ buatFormBaru, dbForm, pilihTypeForm, keyDB,formPerbaruiTuj
         _form({...form, on:0})
     }
     return (
-        <div className="boxShadow flexC w90p radius-10 pwrap__2p mwrap__2p mauto_">
-            <div className="flexR jcSB">
-                <div class="w50p flexR">
+        <div class="FM1">
+            <div class="header bwhite">
+                <div class="cdark flexR">
                     <button className="btn bdark">
                         <span className="mdi mdi-star-crescent cwarning fzXl"></span>
                     </button>
-                    <h2 className=" pwrap_5p pl0 cdark aiE fBebasNeue">Pembuatan Form</h2>
-                </div>  
+                    <h2 className="  pl0 aiE fBebasNeue">
+                        <b>Pembuatan Form</b> 
+                    </h2>
+                </div> 
                 {
                     form.on ? 
                     <button class="ptb10px btn bdanger " onClick={()=>closeFormBaru()}>Close Form</button> :
                     <button class="ptb10px btn bprimary " onClick={()=>openFormBaru()}>Buat Form Baru</button> 
                 }
             </div>
-            <hr/>
-            <div className={`pwrap_5p bwhite`}>
-                <div className={`flexC ` }>
-                    {
-                        (form.on ? 
-                            <div className="borderForm pwrap-10">
-                                <u className="cinfo"><label className="aiC pwrap_10  tbold fzL3">{`[  `}<span className="fzXl pwrap_5 cdark">Entri Form</span>{`]`} </label></u>
-                                <hr/>
-                                <div className="doubleInput ptb10px">
-                                    <label>Tujuan</label>
-                                    <div className="iconInput2 ">
-                                        <input className="borderR10px" ref={tujuanFokus}  type="text" value={tujuan} onChange={_tujuan} placeholder="pendataan warga ..." />
-                                        <span className={`mdi mdi-lightbulb-on ${(form.add == 1 ? 'cprimary': 'cwarning')} `}></span>
-                                    </div>
-                                </div> 
-                                <div>
-                                    {
-                                        (
-                                            form.add == 1 ?
-                                                <button class="btn bprimary" onClick={()=>buatFormBarux({ tujuan })}>Buatkan Form Baru</button>
-                                            :
-                                                <button class="btn bwarning" onClick={()=>formPerbaruiTujuanx({ tujuan, indU: form.indU })}>Perbarui</button>
-                                        )
-                                    }
+            <div class="body bdark" style={{width:"unset" }}> 
+                {
+                    (form.on ? 
+                        <div className="borderForm pwrap-10">
+                            <u className="cinfo"><label className="aiC pwrap_10  tbold fzL3">{`[  `}<span className="fzXl pwrap_5 cwhite">Penambahan Data Baru</span>{`]`} </label></u>
+                            {/* <hr/> */}
+                            <div className="doubleInput ptb10px">
+                                <label>Tujuan</label>
+                                <div className="iconInput2 ">
+                                    <input className="borderR10px" ref={tujuanFokus}  type="text" value={tujuan} onChange={_tujuan} placeholder="pendataan warga ..." />
+                                    <span className={`mdi mdi-lightbulb-on ${(form.add == 1 ? 'cprimary': 'cwarning')} `}></span>
                                 </div>
-                            </div>:''
-                        )
-                    }
-                    <br/>
-                    {
-                        (dbForm.length>0 ?
-                            <div className="borderForm pwrap-10">
-                                <u className="cinfo"><label className="aiC pwrap_10  tbold fzL3">{`[  `}<span className="fzXl pwrap_5 cdark">DAFTAR FORM</span>{`]`} </label></u>
-                                <hr/>
-                                <Tabel1 
-                                    columns={col}
-                                    data={dbForm}
-                                ></Tabel1>
-                            </div>:
-                            <label className="tcenter w100p">pengguna belum melakukan aktivitas pembuatan form !!!</label>
-                        )
-                    }    
-                </div> 
-            </div>  
+                            </div> 
+                            <div>
+                                {
+                                    (
+                                        form.add == 1 ?
+                                            <button class="btn bprimary" onClick={()=>buatFormBarux({ tujuan })}>Buatkan Form Baru</button>
+                                        :
+                                            <button class="btn bwarning" onClick={()=>formPerbaruiTujuanx({ tujuan, indU: form.indU })}>Perbarui</button>
+                                    )
+                                }
+                            </div>
+                        </div>:''
+                    )
+                }
+                <br/>
+                {
+                    (dbForm.length>0 ?
+                        <div className="borderForm ">
+                            <u className="cinfo"><label className="aiC pwrap_10  tbold fzL3">{`[  `}<span className="fzXl pwrap_5 cwhite">Daftar Data Pembuatan Form</span>{`]`} </label></u>
+                            <Tabel1 
+                                columns={col}
+                                data={dbForm}
+                                dbtn={[
+                                    {label:"Perbarui", value:"bwarning"},
+                                    {label:"Pengaturan Form", value:"binfo"},
+                                    {label:"Preview", value:"bsuccess"}
+                                ]}
+                            ></Tabel1>
+                        </div>:
+                        <label className="tcenter w100p">pengguna belum melakukan aktivitas pembuatan form !!!</label>
+                    )
+                } 
+            </div>
         </div>
+        
     )
 }
 export default FEDnewData;

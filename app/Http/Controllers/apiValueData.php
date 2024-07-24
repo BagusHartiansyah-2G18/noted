@@ -9,11 +9,17 @@ use App\Helper\Mfc;
 
 class apiValueData extends Controller
 {
+    private $Mfc; 
+    public function __construct()
+    { 
+        $this->Mfc = new Mfc();
+        // $this->middleware('auth');
+    }
     function index(){ 
         return print_r("selemat datang !!!"); 
     }
     function show($v){
-        $v = Mfc::apiPortal($v);
+        $v = $this->Mfc->apiPortal($v);
         if($v['exc']){
             $dparam = $v['dparam'];
             $dv = value_forms::
@@ -22,7 +28,7 @@ class apiValueData extends Controller
                     "kdDF"=>$dparam->kdDF,
                     'aktif'=>1
                 ])->get();
-            return Mfc::resp($dv);
+            return $this->Mfc->resp($dv);
         } 
         return print_r($v);
     }

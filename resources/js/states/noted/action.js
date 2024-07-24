@@ -4,6 +4,9 @@ const baseUrl = api.BASE_URL;
 const actType = {
     _note: "_note", //_ set __get
     note:"note",
+    newDtAwal:"newDtAwal",
+    newDtAwalSub:"newDtAwalSub",
+    newDt:"newDt",
     updNote:"updNote",
     delNoteInduk:"delNoteInduk",
     delNote:"delNote",
@@ -12,18 +15,30 @@ const actType = {
     actUFSubNote:"actUFSubNote",
 };
 
-function newDt(dt) {
+function newDtAwal(dt) { //tambahan Kategori
     return {
-      type: actType.note,
+      type: actType.newDtAwal,
       payload: dt,
     };
+}
+function newDtAwalSub(dt) { //tambahan Kategori
+  return {
+    type: actType.newDtAwalSub,
+    payload: dt,
+  };
+}
+function newDt(dt) {
+  return {
+    type: actType.note,
+    payload: dt,
+  };
 }
 function note(v) {
   return async (dispatch) => {
       // dispatch(showLoading());
       try {
         const dt = await api.POST({url:"judul", body:v}); 
-        dispatch(newDt(dt));
+        dispatch(newDtAwal(dt));
       } catch (error) {
         toast(error.message);
       }
@@ -35,7 +50,7 @@ function noteSub(v) {
       // dispatch(showLoading());
       try {
         const dt = await api.POST({url:"judul/sub", body:v}); 
-        dispatch(newDt(dt));
+        dispatch(newDtAwalSub(dt));
       } catch (error) {
         toast(error.message);
       }
@@ -47,7 +62,10 @@ function noteSubFileUpload(v) {
       // dispatch(showLoading());
       try {
         const dt = await api.POST({url:"judul/subFileUpload", body:v}); 
-        dispatch(newDt(dt));
+        dispatch({
+          type: actType.newDt,
+          payload: dt,
+        });
       } catch (error) {
         toast(error.message);
       }
@@ -59,7 +77,19 @@ function _note(body) {
         // dispatch(showLoading());
         try {
           const dt = await api.POST({url:"judul/add", body});
-          dispatch(newDt(dt));
+          if(body.tingkat==0){
+            dispatch({
+              type: actType.newDtAwal,
+              payload: {
+                induk:dt
+              },
+            });
+          }else{
+            dispatch({
+              type: actType.newDtAwalSub,
+              payload: dt,
+            });
+          } 
           return 1;
         } catch (error) {
           toast(error.message);

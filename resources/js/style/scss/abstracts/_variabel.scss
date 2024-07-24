@@ -15,7 +15,13 @@ $c: (
     'muted': #6c757d,
     'muted1': #3a3f44,
     'light': #e2e2e2,
+    
     'white': #fff,
+    'white02': rgba(255, 255, 255, 0.2),
+    'white04': rgba(255, 255, 255, 0.4),
+    'white06': rgba(255, 255, 255, 0.6),
+    'white08': rgba(255, 255, 255, 0.8),
+
     'black': #000,
     'warning': #f1b100,
     'warning1': #7a4606,
@@ -120,6 +126,11 @@ $px:(
     overflow: auto;
     @if($max){
         @include hmax($max);
+    }
+    -ms-overflow-style: none;   /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+    ::-webkit-scrollbar {
+        display: none;
     }
 }
 

@@ -9,7 +9,7 @@
     width: 100%;
     @include _pos.gridC();
     // background-color: rgb(83, 83, 83);
-    background-image: url('../../public/header.jpeg');
+    background-image: url('/public/header.jpeg');
     background-position-y: center;
     // margin: auto;
     align-content: center; 

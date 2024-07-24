@@ -2,9 +2,9 @@ import React from "react";
 import PropTypes from "prop-types";
 import { useDispatch, useSelector } from 'react-redux';
 
-import { userMenuS } from "../../states/sf/html/action"
+import { userMenuS,logout } from "../../states/sf/html/action"
 import { Link } from "react-router-dom";
-
+ 
 function MenuUserM1({ userMenu }) {
     const dispatch = useDispatch();
     const updMenu =({ v, sub })=>{
@@ -46,7 +46,8 @@ function MenuUserM1({ userMenu }) {
             {
                 userMenu.v != 46 ?
                 <>
-                    <div id="ui_bg">
+                    {/* style={{backgroundImage:"url('./bgBook1.jpg')", backgroundSize:"cover"}} style={{opacity:"0.4"}}*/} 
+                    <div id="ui_bg" className="bdark" >
                         <label>Background Profil</label>
                     </div> 
                     <div>
@@ -59,8 +60,22 @@ function MenuUserM1({ userMenu }) {
                                             <label className="tbold fPoppins">{userMenu.name}</label>
                                             <label className="">{userMenu.email}</label>
                                         </div>
+                                    </div> 
+                                    <div id="logout"> 
+                                        <button className="btn flexR cinfo " onClick={()=>logout()}>
+                                            <span className="mdi mdi-information-outline "></span>
+                                            <label>*</label>
+                                        </button>   
+                                        <button className="btn flexR  cwarning  " onClick={()=>logout()}>
+                                            <span className="mdi mdi-message-fast-outline"></span>
+                                            <label>*</label>
+                                        </button>  
+                                        <button className="btn bdark" onClick={()=>logout()}>
+                                            <span className="mdi mdi-login-variant cdanger" style={{fontSize:"25px"}}></span>  
+                                        </button>
                                     </div>
-                                    <div id="menu">
+                                </div>
+                                <div id="menu">
                                         {
                                             (userMenu.v === 1 ) && menuHome()
                                         }
@@ -74,7 +89,6 @@ function MenuUserM1({ userMenu }) {
                                             (userMenu.v === 4) && menuNoted()
                                         }
                                     </div>
-                                </div>
                             </div>
                             
                         } 

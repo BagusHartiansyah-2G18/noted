@@ -12,6 +12,10 @@ import Publikasi from '../pages/subDash/publikasi';
 import ErrorP from '../pages/error';
 import Pnoted from "../pages/publikasi/Pnoted";
 
+import PEnoted from "../pages/pengaturan/PEnoted";
+import PEformEntri from "../pages/pengaturan/PEformEntri";
+
+
 
 import FormUpload from "../pages/nextSubNote/formUpload";
 import FormEntri from "../pages/nextSubNote/formEntriData";
@@ -34,6 +38,11 @@ function RouterM({ userMenu }){
 
             <Route path="/formPreview/:value" element={<FormPreview /> } />  
             <Route path="/Pnoted/:value" element={<Pnoted /> } /> 
+
+            <Route path="/pe-noted/:value" element={<PEnoted /> } /> 
+            <Route path="/pe-export/:value" element={<Pnoted /> } /> 
+            <Route path="/Pe-formentri/:value" element={<PEformEntri /> } />  
+
             
 
             <Route path="/" element={<Home /> } />

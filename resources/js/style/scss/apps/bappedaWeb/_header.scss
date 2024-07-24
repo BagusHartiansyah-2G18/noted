@@ -44,15 +44,7 @@
         }
         #sosial{display: none}
     }
-}
-.wtext{
-    @extend .pm0, .mnw250;
-}
-.bweb_apps{
-    @include _.gridC(repeat(1,80%));
-    grid-gap : 30px;
-    grid-row: 20px;
-}
+}  
 .bwebFooter{
     @extend .pwrap-10, .bdark, .w100p;
     & label{
@@ -60,21 +52,15 @@
         @extend .w100p;
     }
 }
-
 .boxApp{
     @extend .flexR, .bwhite ,.radius-10 ,.boxS, .mnw400;
-}
+} 
 
-
-@media only screen and (min-width: 650px){
-    
+@media only screen and (min-width: 650px){ 
     .bweb_informasi .informasi{
         position: absolute;
         grid-template-columns: repeat(3, 33%);
-    }
-    
-    
-    
+    } 
 }
 @media screen and (min-width: 800px) { 
     .bweb_informasi .menuLogo{
@@ -92,7 +78,7 @@
         width: 300px;
         @include _.wmin(300px);
     }
-    .bweb_apps{
+    .gr_13{
         @include _.gridC(repeat(2,50%));
     } 
 }
@@ -104,7 +90,7 @@
         width: 400px;
         @include _.wmin(400px);
     }
-    .bweb_apps{
+    .gr_13{
         @include _.gridC(repeat(2,50%));
     } 
 }
@@ -117,7 +103,7 @@
         width: 300px;
         @include _.wmin(300px);
     }
-    .bweb_apps{
+    .gr_13{
         @include _.gridC(repeat(3,33%));
     } 
 }

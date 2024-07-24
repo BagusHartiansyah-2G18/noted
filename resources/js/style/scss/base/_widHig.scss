@@ -2,6 +2,7 @@
 
 .mxw200{@include _.wmax(200px)};
 .mnw200{@include _.wmin(200px)};
+.w100{width: 100px}
 .w200{width: 200px}
 .w220{width: 220px}
 .w230{width: 230px}
@@ -21,8 +22,14 @@
 .mxw500{@include _.wmax(500px)};
 .w500{width: 500px}
 
+.mxw550{@include _.wmax(550px)};
+.mw550{@include _.wmin(550px)};
+
 .mxw600{@include _.wmax(600px)};
 .mw600{@include _.wmin(600px)};
+
+.mxw800{@include _.wmax(800px)};
+.mw800{@include _.wmin(800px)};
 
 .mh30{@include _.hmin(30px)};
 .mh80{@include _.hmin(80px)};
@@ -45,3 +52,5 @@
 .w10p{width: 10%;}
 
 .h10{height: 10px;}
+.h40{height: 40px;}
+

@@ -106,6 +106,58 @@ async function uploadFile(body,callback){
     callback("File gagal diupload.");
   } 
 } 
+const dtShare = [
+  ["Private",0],
+  ["Khusus",1],
+  ["Public",2],
+];
+
+const checkForm=(dt)=>{
+  // type, minLength, value
+  try {
+    dt.map((v,i)=>{
+        switch (v.type) {
+          case "text": 
+            cfMinLength({...v,ind:i});
+          break;
+          case "email": 
+            cfEmail({...v,ind:i});
+          break;
+        }
+    })
+
+    return {
+      cf:1,
+      msg:'',
+      ind:-1
+    }
+  } catch (error) {
+    return {
+      cf:0,
+      ...error
+    }
+  }
+}
+const cfMinLength=({value,minLength, ind})=>{
+  if(String(value).length>=minLength){
+    return true;
+  }
+  throw {msg: "value harus terisi minimal "+minLength, ind}
+}
+const cfEmail=({value,minLength, ind})=>{
+  cfMinLength({value,minLength, ind});
+  if(String(value).split("@").length>1){
+    return true;
+  }
+  throw {msg: 'email harus menggunakan tandan @ ', ind}
+}
+
+const _statusAnggota=(status)=>{
+  if(status){
+    return "Terhubung";
+  }
+  return "Progress";
+}
 export {
     actType,
     htmlS,
@@ -116,4 +168,7 @@ export {
     saveJSON,
     uploadFile,
     fileUrl, 
+    dtShare,
+    checkForm,
+    _statusAnggota,
 }
