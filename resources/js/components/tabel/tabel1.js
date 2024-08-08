@@ -11,7 +11,11 @@ function Tabel1({
         btnAction = undefined,
         ExpandedComponent = null,
         rowSelectCritera = false,
-        selectData =()=>{}}){
+        dbtn=[], 
+        // selectData =()=>{},
+        // attibut:{}
+    }){  
+    const cekBtn = (dbtn.length>0 && data.length>0);
     return (
         <>
             {
@@ -21,16 +25,26 @@ function Tabel1({
             }
             {
                 (
-                    search!=undefined &&
-                    <div className="jcE">
-                        <div className={`iconInput2 ${cinput}`}>
-                            <input className="borderR10px" type="text" value={search} onChange={oncSearch}  placeholder="search..." />
-                            <span className="mdi mdi-cloud-search "></span>
+                    (search!=undefined || data.length!=0)   &&
+                    <> 
+                        <div className={(cekBtn ?"jcSB":"jcE")+" pwrap-2p"}> 
+                            {(
+                                cekBtn && 
+                                <div className="flexR btnGroup aiC">
+                                    {
+                                        dbtn.map(v=><small className={`pwrap-5 ${v.value}`}>{v.label}</small>)
+                                    }
+                                </div>
+                            )}
+                            <div className={`iconInput2 ${cinput}`}>
+                                <input className="borderR10px" type="text" style={{padding:"10px 30px"}} value={search} onChange={oncSearch}  placeholder="search..." />
+                                <span className="mdi mdi-cloud-search "></span>
+                            </div>
                         </div>
-                    </div>
+                    </>
                 )
             }
-            <DataTable
+            <DataTable 
                 pagination={pagination}
                 columns={columns}
                 data={data}
@@ -39,9 +53,9 @@ function Tabel1({
                 fixedHeaderScrollHeight={fixedHeaderScrollHeight}
                 expandableRows={(ExpandedComponent!= null && true)}
                 expandableRowsComponent={ExpandedComponent == null ? (()=>{}): ExpandedComponent}
-                onSelectedRowsChange={checkboxSelection == null ? (()=>{}): checkboxSelection }
-                selectableRowSelected={rowSelectCritera}
-                onRowClicked={selectData}
+                onSelectedRowsChange={checkboxSelection == null ? (()=>{}): checkboxSelection } 
+                // onRowClicked={selectData} 
+                selectableRowSelected={rowSelectCritera} 
             />
         </>
     );

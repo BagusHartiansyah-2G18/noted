@@ -1,0 +1,26 @@
+/* eslint-disable react/prop-types */
+import React from "react";
+import Modal from 'react-modal';
+import { useSelector } from 'react-redux';
+import PropTypes from 'prop-types';
+
+// belum dipakai
+function ModalUpd ({ cls='mw600 mtop100' }){
+    const { _html } = useSelector((state) => state); 
+    return (
+        <Modal id='dialog1'
+            className={`modal1 ${cls} mauto`}
+            isOpen={_html.modal}
+            contentLabel="Modal"
+            ariaHideApp={false}
+        >
+            {_html.children}
+        </Modal>
+    );
+}
+
+ModalM.propTypes ={
+    children : PropTypes.any.isRequired,
+    // cls : PropTypes.string.isRequired
+}
+export default ModalUpd;

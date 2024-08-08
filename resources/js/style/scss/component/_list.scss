@@ -2,9 +2,8 @@
 @forward '../base/index';
 
 
-.ul1{
-    // display: inline;
-    @extend .pm0;
+.ul-menu1{
+    @extend .flexR,.pm0;
     & li{
         // @extend .pm0;
         margin: 0%;
@@ -13,15 +12,11 @@
         @extend .pwrap-3p;
         & label{
             @extend .jcC, .fzXl;
+            cursor: pointer;
+        }
+        & a{ 
+            @extend .flexR, .aiC;
+            span{padding-right: 5px;}
         }
     }
-}
-
-.grid-col3{
-    display: grid;
-    grid-template-columns: repeat(3,1fr);
-    gap: 10px;
-    & label{
-        @extend .tcenter;
-    }
-}
+} 

@@ -2,9 +2,9 @@ import React from "react";
 import PropTypes from "prop-types";
 import { useDispatch, useSelector } from 'react-redux';
 
-import { userMenuS } from "../../states/sf/html/action"
+import { userMenuS,logout } from "../../states/sf/html/action"
 import { Link } from "react-router-dom";
-
+ 
 function MenuUserM1({ userMenu }) {
     const dispatch = useDispatch();
     const updMenu =({ v, sub })=>{
@@ -36,43 +36,70 @@ function MenuUserM1({ userMenu }) {
     const menuNoted =()=>{
         return(
             <div className="acC">
-                <Link className="btn blight borderTInfo-5" to={`/home/noted`}><b>Form Noted</b></Link>
+                <Link className="btn blight borderTInfo-5" to={`/noted`}><b>Form Noted</b></Link>
                 <button className="btn blight borderTInfo-5" ><b>List Noted</b></button>
             </div>
         )
-    }
-    return (
+    }  
+    return ( 
         <div className="userInfo">
-            <div id="ui_bg">
-                <label>Background Profil</label>
-            </div>
-            <div className="boxProfil ">
-                <div id="ui_profil">
-                    <div id="profil">
-                        <img src="/svg/dev-mini.png"/>
-                        <div className="flexC jcC mwrap_3p">
-                            <label className="tbold fPoppins">Bagus Hartiansyah</label>
-                            <label className="">Manajer MFC</label>
+            {
+                userMenu.v == 1 ?
+                <>
+                    {/* style={{backgroundImage:"url('./bgBook1.jpg')", backgroundSize:"cover"}} style={{opacity:"0.4"}}*/} 
+                    <div id="ui_bg" className="bdark" >
+                        <label>Background Profil</label>
+                    </div> 
+                    <div>
+                    <div className="boxProfil ">
+                        <div id="ui_profil">
+                            <div id="profil">
+                                <img src="/svg/dev-mini.png"/>
+                                <div className="flexC jcC mwrap_3p">
+                                    <label className="tbold fPoppins">{userMenu.name}</label>
+                                    <label className="">{userMenu.email}</label>
+                                </div>
+                            </div> 
+                            <div id="logout"> 
+                                <button className="btn flexR cinfo " onClick={()=>logout()}>
+                                    <span className="mdi mdi-information-outline "></span>
+                                    <label>*</label>
+                                </button>   
+                                <button className="btn flexR  cwarning  " onClick={()=>logout()}>
+                                    <span className="mdi mdi-message-fast-outline"></span>
+                                    <label>*</label>
+                                </button>  
+                                <button className="btn bdark" onClick={()=>logout()}>
+                                    <span className="mdi mdi-login-variant cdanger" style={{fontSize:"25px"}}></span>  
+                                </button>
+                            </div>
                         </div>
+                        <div id="menu">
+                                {
+                                    (userMenu.v === 1 ) && menuHome()
+                                }
+                                {
+                                    (userMenu.v === 2) && menuAnggota()
+                                }
+                                {
+                                    (userMenu.v === 3) && menuPublikasi()
+                                }
+                                {
+                                    (userMenu.v === 4) && menuNoted()
+                                }
+                            </div>
                     </div>
-                    <div id="menu">
-                        {
-                            (userMenu.v === 1 ) && menuHome()
-                        }
-                        {
-                            (userMenu.v === 2) && menuAnggota()
-                        }
-                        {
-                            (userMenu.v === 3) && menuPublikasi()
-                        }
-                        {
-                            (userMenu.v === 4) && menuNoted()
-                        }
                     </div>
-                </div>
-            </div>
+                </>:
+                (
+                    userMenu.sub == 555 ?
+                    <div id="ui_bg">
+                        <label>URL Error,</label>
+                    </div> :''
+                )
+            }
         </div>
-    )
+    ) 
 }
 MenuUserM1.prototype = {
     userMenu: PropTypes.object.isRequired,

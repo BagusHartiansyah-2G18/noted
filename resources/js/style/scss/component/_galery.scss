@@ -6,7 +6,7 @@
     display: flex;
     flex-direction: row;
     @extend .mauto;
-
+    padding: 0px 20px;
     & .cimg{ //container image
         @extend .flex;
         @extend .mwrap-10;
@@ -32,9 +32,42 @@
         @extend .boval;
     }
     & #kiri{
-        left: -30px;
+        left: -10px;
     }
     & #kanan{
-        right: -30px;
+        right: -10px;
+    }
+
+    .form:before {
+        position: absolute;
+        content: "";
+        height: 26px;
+        width: 26px;
+        left: 4px;
+        bottom: 4px;
+        background-color: white;
+        -webkit-transition: .4s;
+        transition: .4s;
+    }
+    @media screen and (min-width:800px) {
+
+        & #kiri{
+            left: -20px;
+        }
+        & #kanan{
+            right: -20px;
+        }
+    }
+    @media screen and (min-width:1000px) {
+
+        & #kiri{
+            left: -30px;
+        }
+        & #kanan{
+            right: -30px;
+        }
     }
 }
+
+
+

@@ -5,20 +5,30 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Helper\Mfc;
 use App\Models\judul;
+use App\Models\judul_file;
+use App\Models\anggota; 
+use App\Models\publikasi;
+
+use Illuminate\Support\Facades\Storage;
 use App\Http\Resources\judulR;
 use Dotenv\Validator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use App\Models\data_form;
+use App\Models\value_forms;
+
 
 class JudulController extends Controller
 {
+    private $Mfc; 
     public function __construct()
-    {
+    { 
+        $this->Mfc = new Mfc();
         $this->middleware('auth');
     }
-    public function index(Request $request)
-    {
-        $portal = Mfc::portal(Auth::user());
+    public function index(Request $request){
+        
+        $portal = $this->Mfc->portal();
         if($portal['exc']){
             $validator = $request;
             try {
@@ -26,34 +36,29 @@ class JudulController extends Controller
                     'tingkat' => 'required', 
                 ]);
             } catch (\Throwable $th) {
-                return response()->json([
-                    'exc' => false,
-                    'data' => 'body not valid'
-                ], 422);
+                return response()->json($this->Mfc->respError('body not valid'), 422);
             }
-            return response()->json([
-                'exc' => true,
-                'data' => $this->getData($portal['kdMember'],$validator['tingkat'])
-            ], 200);
+            return response()->json(
+                $this->Mfc->resp([
+                "induk"=> $this->getData($portal['kdMember'],$validator['tingkat']),
+                "dkategori"=>value_forms::where("kdDF","354e3a3751ceb3131125a09be6e4436a")->get()
+                ])
+            , 200);
         }
+        // return response()->json($this->Mfc->respError('error execute !!!'), 200);
+        // return response()->json($this->Mfc->resp([]), 200);
+
+        return response()->json($portal, 200);
     }
     function getData($kdMember,$tingkat){
-        return DB::select(" 
-            select * from judul
-            where tingkat = '".$tingkat."' and
-            kdMember='".$kdMember."'
-            order by judul asc
-        ");
+        return judul::where('tingkat',$tingkat)
+            ->where('kdMember',$kdMember)
+             ->where('aktif',1)
+             ->orderby('judul')
+            ->get();  
     }
-    public function addx(Request $request){
-        // $request->session()->put('duser',$users);
-        // if($request->session()->has('duser')){
-        //     $user =$request->session()->get('duser');
-        // }
-        // $user =Auth::user();
-        // return new judulR(true, 'List Data Posts', $request->session());
-
-        $portal = Mfc::portal(Auth::user());
+    public function addx(Request $request){ 
+        $portal = $this->Mfc->portal();
         if($portal['exc']){
             $validator = $request;
             try {
@@ -62,32 +67,18 @@ class JudulController extends Controller
                     'ringkasan'   => 'required',
                 ]);
             } catch (\Throwable $th) {
-                return response()->json([
-                    'exc' => false,
-                    'data' => 'body not valid'
-                ], 422);
-            }
-            // if ($validator->fails()) {
-            //     return response()->json($validator->errors(), 422);
-            // }
-            // return print_r($validator);
-            //upload image
-            // $image = $request->file('image');
-            // $image->storeAs('public/posts', $image->hashName());
-            $kdJudul = 1;
-            // $dt = DB::statement(" select * from judul");
-            // where length(kdJudul) = '".$validator['ckdJudul']."' and
+                return response()->json($this->Mfc->respError('body not valid'), 422);
+            } 
+            $kdJudul = 1; 
             $dt = DB::select(" 
                 select kdJudul from judul
                 where tingkat=0 and
-                kdMember='".$portal['kdMember']."' and
-                
+                kdMember='".$portal['kdMember']."' and 
                 order by kdJudul desc
                 limit 1
             ");
             
             if(count($dt)>0){ 
-                // return print_r($dt[0]->kdJudul);
                 $kdJudul = $dt[0]->kdJudul+1;
             }
             if(
@@ -100,23 +91,16 @@ class JudulController extends Controller
                     'kdMemberSub' =>''
                 ])
             ){
-                return response()->json([
-                    'exc' => true,
-                    'data' => $this->getData($portal['kdMember'],0)
-                ], 200);
+                return response()->json(
+                    $this->Mfc->resp($this->getData($portal['kdMember'],0))
+                , 200);
             }
-            return response()->json([
-                'exc' => false,
-                'msg' => 'error execute !!!'
-            ], 200);
+            return response()->json($this->Mfc->respError('error execute !!!'), 200);
         }
-        return response()->json([
-            'exc' => false,
-            'msg' => $portal['msg']
-        ], 200);
+        return response()->json($portal, 200);
     }
     public function upd(Request $request){
-        $portal = Mfc::portal(Auth::user());
+        $portal = $this->Mfc->portal();
         if($portal['exc']){
             $validator = $request;
             try {
@@ -128,10 +112,7 @@ class JudulController extends Controller
                     'tingkat'=> 'required',
                 ]);
             } catch (\Throwable $th) {
-                return response()->json([
-                    'exc' => false,
-                    'data' => 'body not valid'
-                ], 422);
+                return response()->json($this->Mfc->respError('body not valid'), 422);
             }
             if(
                 judul::where('kdJudul',$validator['kdJudul'])
@@ -142,59 +123,42 @@ class JudulController extends Controller
                     "ringkasan"=>$validator['ringkasan']
                 ])
             ){
-                return response()->json([
-                    'exc' => true,
-                    'data' => []
-                ], 200);
+                return response()->json($this->Mfc->resp([]), 200);
             }
-            return response()->json([
-                'exc' => false,
-                'msg' => 'error execute !!!'
-            ], 200);
+            return response()->json($this->Mfc->respError('error execute !!!'), 200);
         }
-        return response()->json([
-            'exc' => false,
-            'msg' => $portal['msg']
-        ], 200);
+        return response()->json($portal, 200);
     }
     public function del(Request $request){
-        $portal = Mfc::portal(Auth::user());
+        $portal = $this->Mfc->portal();
         if($portal['exc']){
             $validator = $request;
             try {
                 $validator = $validator->validate([
                     'kdJudul' => 'required',
                     'kdMember' => 'required',
+                    'tingkat'=> 'required',
                 ]);
             } catch (\Throwable $th) {
-                return response()->json([
-                    'exc' => false,
-                    'data' => 'body not valid'
-                ], 422);
+                return response()->json($this->Mfc->respError('body not valid'), 422);
             }
             if(
                 judul::where('kdJudul',$validator['kdJudul'])
                 ->where('kdMember',$validator['kdMember'])
-                ->delete()
+                ->where('tingkat',$validator['tingkat'])
+                ->update([
+                    "aktif"=>0 
+                ])
             ){
-                return response()->json([
-                    'exc' => true,
-                    'data' => []
-                ], 200);
+                return response()->json($this->Mfc->resp([]), 200);
             }
-            return response()->json([
-                'exc' => false,
-                'msg' => 'error execute !!!'
-            ], 200);
+            return response()->json($this->Mfc->respError('error execute !!!'), 200);
         }
-        return response()->json([
-            'exc' => false,
-            'msg' => $portal['msg']
-        ], 200);
+        return response()->json($portal, 200);
     }
 
     public function add(Request $request){
-        $portal = Mfc::portal(Auth::user());
+        $portal = $this->Mfc->portal();
         if($portal['exc']){
             $validator = $request;
             try {
@@ -206,10 +170,7 @@ class JudulController extends Controller
                     'tingkat' => 'required',
                 ]);
             } catch (\Throwable $th) {
-                return response()->json([
-                    'exc' => false,
-                    'data' => 'body not valid'
-                ], 422);
+                return response()->json($this->Mfc->respError('body not valid'), 422);
             }
             
             $readKD = $this->readKdJudul($validator['kdJudul']);
@@ -221,21 +182,22 @@ class JudulController extends Controller
                 $lengthKdJudul= strlen($validator['kdJudul'])+2;
             }
             $query =" substr(kdJudul,".$lengthKdJudul.") ";
+            $queryNotTingkat0 = "and kdJudul like '".($validator['tingkat']==1?$validator['kdJudul']."MFC":$validator['kdJudul'])."%'";
             if($validator['tingkat']==0){
                 $lengthKdJudul= 0;
                 $query =" (kdJudul) ";
-            }
+                $queryNotTingkat0 ='';
+            } 
 
             $kdJudul = 1;
             $dt = DB::select(" 
                 select ".$query."  as kdJudul from judul
                 where tingkat = '".$validator['tingkat']."' and
-                kdMember='".$portal['kdMember']."' and
-                kdJudul like '%".($validator['tingkat']==1?$validator['kdJudul']."MFC":$validator['kdJudul'])."%'
+                kdMember='".$portal['kdMember']."' 
+                ".$queryNotTingkat0."
                 order by cast(".$query." as int) desc
                 limit 1
-            ");
-            
+            "); 
             if(count($dt)>0){  
                 $kdJudul = $dt[0]->kdJudul+1;
             }
@@ -268,32 +230,69 @@ class JudulController extends Controller
                     // return print_r($data);
                     $sub=judul::where('tingkat',($validator['tingkat']))
                         ->where('kdMember',$validator['kdMember'])
-                        ->where('kdJudul','like','%'.($validator['tingkat']==1?$validator['kdJudul']."MFC":$validator['kdJudul'])."%")
+                        ->where('kdJudul','like',''.($validator['tingkat']==1?$validator['kdJudul']."MFC":$validator['kdJudul'])."%")
+                        ->where('aktif',1)
                         ->get(); 
                     $dt=[
                         'induk'=>$data,
                         'sub'=>$sub
                     ];
                 }
-                return response()->json([
-                    'exc' => true,
-                    'data' => $dt
-                ], 200);
+                return response()->json($this->Mfc->resp($dt) , 200);
             }
-            return response()->json([
-                'exc' => false,
-                'msg' => 'error execute !!!'
-            ], 200);
+            return response()->json($this->Mfc->respError('error execute !!!'), 200);
         }
-        return response()->json([
-            'exc' => false,
-            'msg' => $portal['msg']
-        ], 200);
+        return response()->json($portal, 200);
     }
 
 
     public function sub(Request $request){
-        $portal = Mfc::portal(Auth::user());
+        $portal = $this->Mfc->portal();
+        if($portal['exc']){
+            $validator = $request;
+            try {
+                $validator = $validator->validate([ 
+                    'tingkat' => 'required', 
+                    'kdMember' => 'required', 
+                    'kdJudul' => 'required', 
+                ]);
+            } catch (\Throwable $th) {
+                return response()->json($this->Mfc->respError('body not valid'), 422);
+            } 
+            $data = $this->getDataTurunanInduk(
+                $validator['kdJudul'],
+                $validator['kdMember'],
+                $validator['tingkat']
+            );
+            $note = $data[count($data)-1]; 
+            if(!empty($request['sumber']) && $request['sumber']=="publikasi"){  
+                return response()->json(
+                    $this->Mfc->resp([
+                        'induk'=>$note,
+                        'publikasi'=>publikasi::select("kdAnggota")->where($validator)->get()
+                    ])
+                , 200); 
+            }
+            $sub=$this->_subWithAtribut($validator); 
+            
+            $file=judul_file::where('kdMember',$note['kdMember'])
+                ->where('kdJudul',$note['kdJudul'])
+                ->get();
+            $form = $this->_formWithValue($note,$validator);
+            
+            return response()->json(
+                $this->Mfc->resp([
+                    'induk'=>$data,
+                    'sub'=>$sub,
+                    'file'=>$file,
+                    'form'=>$form,
+                    "dkategori"=>value_forms::where("kdDF","354e3a3751ceb3131125a09be6e4436a")->get()
+                ])
+            , 200); 
+        }
+    }
+    public function subFileUpload(Request $request){
+        $portal = $this->Mfc->portal();
         if($portal['exc']){
             $validator = $request;
             try {
@@ -312,21 +311,74 @@ class JudulController extends Controller
                 $validator['kdJudul'],
                 $validator['kdMember'],
                 $validator['tingkat']
-            );
-            // return print_r($data);
-            $sub=judul::where('tingkat',($validator['tingkat']+1))
-                ->where('kdMember',$validator['kdMember'])
-                ->where('kdJudul','like','%'.($validator['tingkat']==0?$validator['kdJudul']."MFC":$validator['kdJudul'])."%")
-                ->get(); 
+            ); 
+            $file=judul_file::where('kdMember',$validator['kdMember'])
+                ->where('kdJudul',$validator['kdJudul'])
+                ->get();  
             return response()->json([
                 'exc' => true,
                 'data' => [
                     'induk'=>$data,
-                    'sub'=>$sub
+                    'file'=>$file, 
                 ]
             ], 200);
         }
     }
+    // batas 
+ 
+    function _subWithAtribut($validator){
+        $sub=judul::where('tingkat',($validator['tingkat']+1))
+                ->where('kdMember',$validator['kdMember'])
+                ->where('kdJudul','like',''.($validator['tingkat']==0?$validator['kdJudul']."MFC":$validator['kdJudul'])."%")
+                ->where('aktif',1)
+                ->get();
+        foreach ($sub as $key => $v) {
+            $v['file']=judul_file::where('kdMember',$v['kdMember'])
+            ->where('kdJudul',$v['kdJudul'])
+            ->get();
+            $v['form']=data_form::where([
+                "kdNote"=>$v['kdJudul'],
+                "kdMember"=>$v['kdMember'],
+                "tingkat"=>$v['tingkat']
+            ])->get();
+                    
+            foreach ($v['form'] as $keyx => $vx) {  
+                $vx['dvalue']= DB::select(" 
+                    select a.*, b.name
+                    from value_forms a
+                    join users b on 
+                        a.kdMember = TO_BASE64(b.id)
+                    where a.kdDF='".
+                    $this->Mfc->getKeyValue(array_merge($validator,["kd"=>$vx['kd'], "kdNote"=>$vx['kdNote'],"tingkat"=>$vx['tingkat']]))
+                    ."' and  
+                    a.aktif =1
+                ");
+            };
+        };  
+
+        return $sub;
+    }
+    function _formWithValue($note, $validator){
+        $form= data_form::where([
+            "kdNote"=>$note['kdJudul'],
+            "kdMember"=>$note['kdMember'],
+            "tingkat"=>$note['tingkat']
+        ])->get();
+        foreach ($form as $keyx => $vx) { 
+            $vx['dvalue']= DB::select(" 
+               select a.*, b.name
+               from value_forms a
+               join users b on 
+                   a.kdMember = TO_BASE64(b.id)
+               where a.kdDF='".
+               $this->Mfc->getKeyValue(array_merge($validator,["kd"=>$vx['kd'], "kdNote"=>$validator['kdJudul']]))
+               ."' and  
+               a.aktif =1
+           ");
+       }; 
+       return $form;
+    }
+
     function readKdJudul($kdJudul) {
         $cekJudul = explode("MFC",$kdJudul);
         $sub=[]; 
@@ -340,14 +392,7 @@ class JudulController extends Controller
         return[$cekJudul,$sub];
     }
     function getDataTurunanInduk($kdJudul,$kdMember,$tingkat){
-        // $cekJudul = explode($kdJudul,"MFC");
-        // $sub=[];
-        // if(count($cekJudul)>1){
-        //     $cekJudul = $cekJudul[0]; //jadi kdJudul
-        //     $sub = explode($cekJudul[1],"#");
-        // }else{
-        //     $cekJudul = $kdJudul;
-        // }
+         
         $readKD = $this->readKdJudul($kdJudul);
         $cekJudul=$readKD[0];
         $sub=$readKD[1];
@@ -377,5 +422,67 @@ class JudulController extends Controller
             $itingkat++;
         }
         return $fdata;
+    }
+    public function actUFSubNote(Request $request){
+        $portal = $this->Mfc->portal();
+        if($portal['exc']){
+            $request = $request->all();  
+            $namaFile =''; 
+            if($request['files']!="-" && count($request['files'])>1){
+                $namaFile = $this->_uploadImage($request['files']['data'],"fileUploadSubNote/".$request['files']['nama']); 
+            } 
+
+            $dfile=judul_file::where('kdMember',$portal['kdMember'])
+                ->where('kdJudul',$request['kdJudul'])
+                ->orderByDesc('ind')
+                ->limit(1)
+                ->get();  
+            $ind = 1; 
+            if(count($dfile)>0){ 
+                $ind = $dfile[0]->ind+1; 
+            }
+            $newJudul = new judul_file;
+            $newJudul->keterangan =$request['judul']; 
+            $newJudul->kdMember =$portal['kdMember'];
+            $newJudul->kdJudul =$request['kdJudul'];
+            $newJudul->ind =$ind;
+            $newJudul->file=$namaFile;
+            $newJudul->kdMemberSub='';
+            $newJudul->url =($request['url']==''?'-':$request['url']);
+            if($newJudul->save()){
+                $data = judul_file::where('kdMember',$portal['kdMember'])
+                ->where('kdJudul',$request['kdJudul'])
+                ->get();
+                return response()->json($this->Mfc->resp($data), 200);
+            } 
+            return response()->json($this->Mfc->respError('error execute !!!'), 200);
+        }
+        return response()->json($portal, 200);
+    }
+    public function _uploadImage($file,$nama){
+        $split=explode("/",$nama);
+        $flokasi="sppd/";// default foldar jika ber ubah maka tambahakan dinamanya
+        if(count($split)>1){
+            $flokasi='';
+            foreach ($split as $key => $v) {
+                if($key==count($split)-1){
+                    $nama=$v;
+                }else{
+                    $flokasi.=$v."/";
+                }
+            } 
+        }
+         
+        date_default_timezone_set("America/New_York");
+        $namaFile=date("Y-m-d-h-i-sa")."-".$nama;
+ 
+        $delspace=explode(" ",$namaFile);
+        $namaFile="";
+        foreach ($delspace as $key => $value) {
+            $namaFile.=$value;
+        }
+        $lokasiFile='public/pdf/'.$flokasi.$namaFile;
+        Storage::put($lokasiFile,base64_decode($file));
+        return $namaFile;
     }
 }

@@ -15,14 +15,20 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
-// Route::apiResource('/judul', App\Http\Controllers\JudulController::class);
+// Route::middleware('auth:sanctum')->get('user', function (Request $request) {
+//     return $request->user();
+// });
+// Route::apiResource('resp/',App\Http\Controllers\restApi::class)->name("/","index");
+Route::apiResource('vd',App\Http\Controllers\apiValueData::class);
 
-// Route::get('/users', function () {
-//     return print_r(Auth::user());
+// Route::apiResource('respMain',App\Http\Controllers\restApi::class,['main']);
+
+// Route::controller(App\Http\Controllers\restApi::class)->name("resp.")->group(function () {
+//     Route::post('/','index')->name('index');
+// });
+// Route::get('rest/users', function () {
+//     return print_r("Bagus H");
+//     // return print_r(Auth::user());
 //     // return new UserCollection(User::all());
-//     // return UserResource::collection(User::all());
-
+//     // return UserResource::collection(User::all()); 
 // });

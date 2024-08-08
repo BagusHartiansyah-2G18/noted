@@ -21,16 +21,19 @@ class HomeController extends Controller
      * Show the application dashboard.
      *
      * @return \Illuminate\Contracts\Support\Renderable
-     */
-    public function index()
-    {
-        // $user =Auth::user();
-        // $$request = new Request;
-        // $request->session()->put('duser',$users);
-        // $user =Auth::user()->id;
-        // return print_r($user);
-        return view('react')->with([
-            "kdDinas" => Auth::user()->kdDinas
+     */ 
+    public function web()
+    { 
+        // Auth::user()
+        return view('react',[
+            "user"=>  base64_encode(json_encode([
+                "name"=> Auth::user()->name,
+                "email"=> Auth::user()->email,
+            ]))
         ]);
+        // return view('react')->with([
+        //     "user" => base64_encode(json_encode(Auth::user()))
+        // ]);
     }
+    
 }

@@ -10,6 +10,9 @@
 .fzL4{ @include _.fz('l4')}
 .fzL5{ @include _.fz('l5')}
 .fzL6{ @include _.fz('l6')}
+.fz100{ @include _.fz('100')}
+.fzJapp{@include _.fz('l2')}
+.fzSapp{ @include _.fz('m')}
 
 .fnunito{
     font-family: 'Nunito', sans-serif;
@@ -78,3 +81,8 @@
 .tbold{font-weight: bold;}
 .tjustify{text-align: justify;}
 .tcenter{text-align: center;}
+.tstart{text-align: start;}
+.tend{text-align: end;}
+
+
+

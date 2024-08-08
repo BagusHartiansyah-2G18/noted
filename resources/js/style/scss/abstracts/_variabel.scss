@@ -4,6 +4,10 @@ $c: (
     'secondary': #6c757d,
     'success': #28a745,
     'success1': #076b20,
+    'success2':#E3FEF7,
+    'success3':#135D66,
+    'success4':#77B0AA,
+    'success5':#003C43,
 
     'danger': #dc3545,
     'info': #17a2b8,
@@ -15,7 +19,13 @@ $c: (
     'muted': #6c757d,
     'muted1': #3a3f44,
     'light': #e2e2e2,
+    
     'white': #fff,
+    'white02': rgba(255, 255, 255, 0.2),
+    'white04': rgba(255, 255, 255, 0.4),
+    'white06': rgba(255, 255, 255, 0.6),
+    'white08': rgba(255, 255, 255, 0.8),
+
     'black': #000,
     'warning': #f1b100,
     'warning1': #7a4606,
@@ -37,6 +47,7 @@ $px:(
     'l4':40px,
     'l5':50px,
     'l6':60px,
+    '100':100px
 );
 
 @mixin cB($v:'dark'){ background-color:map-get($c,$v) !important;}
@@ -114,12 +125,21 @@ $px:(
 @mixin ac($v:center){
     display: flex;
     align-content: $v;
-}
+} 
+@mixin as($v:center){
+    display: flex;
+    align-self:$v;
+} 
 
 @mixin scroll($max:false){
     overflow: auto;
     @if($max){
         @include hmax($max);
+    }
+    -ms-overflow-style: none;   /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+    ::-webkit-scrollbar {
+        display: none;
     }
 }
 

@@ -5,7 +5,7 @@ import { useState } from 'react';
 
 function Homes ({ sub }){
     return (
-        <>
+        <div className="body">
             {
                 (sub === 1 &&
                     <>
@@ -16,7 +16,8 @@ function Homes ({ sub }){
                             <h2 className=" pwrap_5p pl0 cdark aiE fBebasNeue">Informasi</h2>
                         </div>
                         <div className="bwhite pwrap-5 radius-10 mwrap__2p">
-                            *Profil User
+                             
+                            
                         </div>
                     </>
                 )
@@ -51,7 +52,7 @@ function Homes ({ sub }){
                     </>
                 )
             }
-        </>
+        </div>
     );
 }
 Homes.PropTypes = {

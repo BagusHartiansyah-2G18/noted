@@ -111,9 +111,11 @@ function Home(){
         <>
             <div className='minHeader'>
                 <HeaderM></HeaderM> {/* 3. header*/}
-                <div>
-                    <h1>Make a list of your notes.</h1>
-                    <h2><u><b className='fpacifico'>Derivative Notes</b> <i className='fBebasNeue'>"DN / CT"</i></u></h2>
+                <div className="infoLogin">
+                    <div className="info">
+                        <h1>Make a list of your notes.</h1>
+                        <h2><u><b className='fpacifico'>Derivative Notes</b> <i className='fBebasNeue'>"DN / CT"</i></u></h2>
+                    </div>
                     <button className='btnRadius50 bprimary' onClick={sigin}>Sig In</button>
                     <button className='btnRadius50 bwarning' onClick={sigup}>Sig Up</button>
                 </div>
@@ -150,14 +152,14 @@ function Home(){
                 </p>
             </h2>
             <div className="wrapContact">
-                <div className="mxw400">
-                    <div className="flexR">
+                <div className="">
+                    <div className="flexR jcC">
                         <img src="/svg/dev-mini.png" height="80px"/>
                         <h2 className="aiC fpacifico">M Software Center</h2>
                     </div>
                     <p>berdiri sejak tahun 2021, dengan menggeluti bidang pengembangan sistem untuk berbagai kebutuhan.</p>
                 </div>
-                <table>
+                <table className="noBorder">
                     <tr>
                         <td><span className="mdi mdi-google-maps fzL1 cinfo"></span></td>
                         <td><p className="pm0 tbold">Sumbawa Barat</p><label>Desa Meraran, kec. Seteluk</label></td>

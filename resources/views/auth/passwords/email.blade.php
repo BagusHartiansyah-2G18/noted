@@ -1,7 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container containerHome">
+
+<div class="SM-sw-form-body" style="min-height: 95vh; align-items:unset">
+<div class="container pwrap-10">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
@@ -43,5 +45,6 @@
             </div>
         </div>
     </div>
+</div>
 </div>
 @endsection

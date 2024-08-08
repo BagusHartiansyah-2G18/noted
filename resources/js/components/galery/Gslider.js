@@ -32,18 +32,20 @@ function Gslider({ data }){
     return (
         <div className="sliderM">
             <button id="kiri" onClick={prev}><span className="mdi mdi-chevron-left-circle fzL1"></span></button>
-            <div className="cimg jcE"><img src={data[ind].img} /></div>
-            <div className="form blight08 pwrap-3p cdark">
-                <h3 className="fBebasNeue tcenter ">{data[ind].judul}</h3>
-                <p className="tjustify fzL">{data[ind].text}</p>
-                {
-                    (
-                        data[ind].list!=undefined && data[ind].list.length>0 ?
-                        <Lbesic data={data[ind].list}/>
-                        :""
-                    )
-                }
-            </div>
+            <div className="grid-2c">
+                <div className="cimg jcE"><img src={data[ind].img} /></div>
+                <div className="form blight08 pwrap-3p cdark">
+                    <h3 className="fBebasNeue tcenter ">{data[ind].judul}</h3>
+                    <p className="tjustify fzL">{data[ind].text}</p>
+                    {
+                        (
+                            data[ind].list!=undefined && data[ind].list.length>0 ?
+                            <Lbesic data={data[ind].list}/>
+                            :""
+                        )
+                    }
+                </div>
+            </div> 
             <button id="kanan" onClick={next}><span className="mdi mdi-chevron-right-circle fzL1"></span></button>
         </div>
     )
