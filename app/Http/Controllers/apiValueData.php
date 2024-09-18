@@ -23,7 +23,7 @@ class apiValueData extends Controller
         if($v['exc']){
             $dparam = $v['dparam'];
             $dv = value_forms::
-                select(["data"])
+                select(["kd","data"])
                 ->where([
                     "kdDF"=>$dparam->kdDF,
                     'aktif'=>1

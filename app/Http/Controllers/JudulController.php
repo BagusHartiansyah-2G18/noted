@@ -181,23 +181,27 @@ class JudulController extends Controller
             if(count($sub)!=0){
                 $lengthKdJudul= strlen($validator['kdJudul'])+2;
             }
+            $kdMember = $portal['kdMember'];
             $query =" substr(kdJudul,".$lengthKdJudul.") ";
             $queryNotTingkat0 = "and kdJudul like '".($validator['tingkat']==1?$validator['kdJudul']."MFC":$validator['kdJudul'])."%'";
             if($validator['tingkat']==0){
                 $lengthKdJudul= 0;
                 $query =" (kdJudul) ";
                 $queryNotTingkat0 ='';
+            }else{ 
+                if($validator['kdMember'] != $portal['kdMember']){
+                    $kdMember = $validator['kdMember'];
+                }
             } 
-
             $kdJudul = 1;
             $dt = DB::select(" 
                 select ".$query."  as kdJudul from judul
                 where tingkat = '".$validator['tingkat']."' and
-                kdMember='".$portal['kdMember']."' 
+                kdMember='".$kdMember."' 
                 ".$queryNotTingkat0."
                 order by cast(".$query." as int) desc
                 limit 1
-            "); 
+            ");  
             if(count($dt)>0){  
                 $kdJudul = $dt[0]->kdJudul+1;
             }
@@ -207,7 +211,6 @@ class JudulController extends Controller
             }else if($validator['tingkat']==1){
                 $kdJudul=$validator['kdJudul']."MFC".$kdJudul;
             }
-
             $newJudul = new judul;
             $newJudul->judul =$validator['judul'];
             $newJudul->ringkasan =$validator['ringkasan'];
@@ -279,7 +282,20 @@ class JudulController extends Controller
                 ->where('kdJudul',$note['kdJudul'])
                 ->get();
             $form = $this->_formWithValue($note,$validator);
-            
+
+            if(!empty($request['sumber']) && $request['sumber']=="subNote"){
+                $noted = $data[count($data)-1];
+                $keyAkses = $this->__aksesPublikasi($portal['kdMember'],$validator,$noted,$noted['jsCatatan']);
+                return response()->json(
+                    $this->Mfc->resp([
+                        'induk'=>$data,
+                        'sub'=>$sub, 
+                        "dkategori"=>value_forms::where("kdDF","354e3a3751ceb3131125a09be6e4436a")->get(),
+                        "keyAkses"=>$keyAkses
+                    ])
+                , 200); 
+            }
+
             return response()->json(
                 $this->Mfc->resp([
                     'induk'=>$data,
@@ -291,6 +307,7 @@ class JudulController extends Controller
             , 200); 
         }
     }
+    
     public function subFileUpload(Request $request){
         $portal = $this->Mfc->portal();
         if($portal['exc']){
@@ -315,11 +332,17 @@ class JudulController extends Controller
             $file=judul_file::where('kdMember',$validator['kdMember'])
                 ->where('kdJudul',$validator['kdJudul'])
                 ->get();  
+            
+            $noted = $data[count($data)-1];
+           
+            $keyAkses = $this->__aksesPublikasi($portal['kdMember'],$validator,$noted,$noted['jsFEntri']);
+             
             return response()->json([
                 'exc' => true,
                 'data' => [
                     'induk'=>$data,
                     'file'=>$file, 
+                    'keyAkses'=>$keyAkses
                 ]
             ], 200);
         }
@@ -391,8 +414,7 @@ class JudulController extends Controller
         }
         return[$cekJudul,$sub];
     }
-    function getDataTurunanInduk($kdJudul,$kdMember,$tingkat){
-         
+    function getDataTurunanInduk($kdJudul,$kdMember,$tingkat){ 
         $readKD = $this->readKdJudul($kdJudul);
         $cekJudul=$readKD[0];
         $sub=$readKD[1];
@@ -432,7 +454,7 @@ class JudulController extends Controller
                 $namaFile = $this->_uploadImage($request['files']['data'],"fileUploadSubNote/".$request['files']['nama']); 
             } 
 
-            $dfile=judul_file::where('kdMember',$portal['kdMember'])
+            $dfile=judul_file::where('kdMember',$request['kdMember'])
                 ->where('kdJudul',$request['kdJudul'])
                 ->orderByDesc('ind')
                 ->limit(1)
@@ -443,14 +465,14 @@ class JudulController extends Controller
             }
             $newJudul = new judul_file;
             $newJudul->keterangan =$request['judul']; 
-            $newJudul->kdMember =$portal['kdMember'];
+            $newJudul->kdMember =$request['kdMember'];
             $newJudul->kdJudul =$request['kdJudul'];
             $newJudul->ind =$ind;
             $newJudul->file=$namaFile;
-            $newJudul->kdMemberSub='';
+            $newJudul->kdMemberSub=$portal['kdMember'];
             $newJudul->url =($request['url']==''?'-':$request['url']);
             if($newJudul->save()){
-                $data = judul_file::where('kdMember',$portal['kdMember'])
+                $data = judul_file::where('kdMember',$request['kdMember'])
                 ->where('kdJudul',$request['kdJudul'])
                 ->get();
                 return response()->json($this->Mfc->resp($data), 200);
@@ -459,6 +481,35 @@ class JudulController extends Controller
         }
         return response()->json($portal, 200);
     }
+    public function delUFSubNote(Request $request){
+        $portal = $this->Mfc->portal();
+        if($portal['exc']){
+            $validator = $request;
+            try {
+                $validator = $validator->validate([ 
+                    'ind' => 'required', 
+                    'kdMember' => 'required', 
+                    'kdJudul' => 'required', 
+                ]);
+            } catch (\Throwable $th) {
+                return response()->json($this->Mfc->respError('body not valid'), 422);
+            } 
+            if(
+                judul_file::where('kdJudul',$validator['kdJudul'])
+                ->where('kdMember',$validator['kdMember'])
+                ->where('ind',$validator['ind'])
+                ->delete()
+            ){
+                $data = judul_file::where('kdMember',$request['kdMember'])
+                ->where('kdJudul',$request['kdJudul'])
+                ->get();
+                return response()->json($this->Mfc->resp($data), 200);
+            } 
+            return response()->json($this->Mfc->respError('error execute !!!'), 200);
+        }
+        return response()->json($portal, 200);
+    }
+    
     public function _uploadImage($file,$nama){
         $split=explode("/",$nama);
         $flokasi="sppd/";// default foldar jika ber ubah maka tambahakan dinamanya
@@ -484,5 +535,62 @@ class JudulController extends Controller
         $lokasiFile='public/pdf/'.$flokasi.$namaFile;
         Storage::put($lokasiFile,base64_decode($file));
         return $namaFile;
+    }
+    function __aksesPublikasi($pkdMember,$validator, $noted,$jenisSharing){
+        // $noted = $data[count($data)-1]; // get noted terpilih   
+        $publikasi = []; 
+        $pemilik = ($pkdMember!=$validator['kdMember'] ? 0:1);
+        
+        if(!$pemilik){
+            // cek publikasi atas.
+            // $where = [
+            //     "kdMember"=>$validator['kdMember'],
+            //     "kdAnggota"=>$pkdMember,
+            // ];  
+            // $publikasi = publikasi::select("*")->where($where)
+            // ->where("kdJudul"," substring('".$validator['kdJudul']."',1,length(kdJudul))")
+            // ->where("tingkat","<=",$validator['tingkat'])
+            // ->reorder('tingkat', 'desc')
+            // ->get();
+            $publikasi = DB::select("
+                select * from publikasi where
+                kdMember='".$validator['kdMember']."' and
+                kdAnggota='".$pkdMember."' and
+                kdJudul=substring('".$validator['kdJudul']."',1,length(kdJudul)) and
+                tingkat <= ".$validator['tingkat']."
+                order by tingkat desc
+                limit 1
+            "); 
+            if(count($publikasi)==0){  
+                return [
+                    'induk'=>$where,
+                    'sub'=>[], 
+                    "dkategori"=>[]
+                ];
+            }else{
+                $publikasi= $publikasi[count($publikasi)-1];
+                $noted = judul::where([
+                    'tingkat'=>$publikasi->tingkat,
+                    'kdMember'=>$publikasi->kdMember,
+                    'kdJudul'=>$publikasi->kdJudul
+                ])->get()->toArray()[0]; 
+            } 
+        }else{
+            if(!$pemilik){
+                return [
+                    'induk'=>[],
+                    'sub'=>[], 
+                    "dkategori"=>[]
+                ];
+            }
+        }
+          
+        return [
+            "pemilik" => $pemilik,
+            "kdMember"=> $pkdMember,
+            "jsFEntri"=> $noted['jsFEntri'],
+            "jsCatatan"=> $noted['jsCatatan'],
+            "dpCatatan"=> json_decode(base64_decode($noted['dpCatatan'])),
+        ]; 
     }
 }

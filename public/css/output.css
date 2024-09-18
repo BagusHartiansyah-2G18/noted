@@ -953,7 +953,7 @@ body {
   width: 230px;
 }
 
-.mnw240 {
+.mw240 {
   min-width: 240px;
 }
 
@@ -965,7 +965,7 @@ body {
   width: 250px;
 }
 
-.mnw250 {
+.mw250 {
   min-width: 250px;
 }
 
@@ -973,7 +973,7 @@ body {
   max-width: 300px;
 }
 
-.mnw300 {
+.mw300 {
   min-width: 300px;
 }
 
@@ -985,7 +985,7 @@ body {
   max-width: 400px;
 }
 
-.mnw400 {
+.mw400 {
   min-width: 400px;
 }
 
@@ -1017,7 +1017,11 @@ body {
   min-width: 600px;
 }
 
-.mxw800, .Mcontainer, .Mcontainer2Form {
+.mw650, .Mcontainer {
+  min-width: 650px;
+}
+
+.mxw800, .Mcontainer2Form {
   max-width: 800px;
 }
 
@@ -1414,13 +1418,13 @@ body {
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
-    max-width: 800px;
+    width: 100%;
   }
   .Mcontainer .left {
-    max-width: 600px !important;
+    max-width: 65% !important;
   }
   .Mcontainer .right .right-1 {
-    max-width: 200px !important;
+    max-width: 30% !important;
   }
   .Mcontainer .bodyFlexRow800 {
     flex-direction: row;

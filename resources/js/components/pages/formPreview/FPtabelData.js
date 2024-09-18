@@ -4,7 +4,7 @@ import { useInput } from '../../../hooks/useInput';
 import { saveJSON } from "../../../states/sf/html/action";
 
 function FPtabelData({ dt, pertanyaan, user, updData,delData, tujuan, kdDF }) { 
-    const [search, _search] = useInput('');  
+    const [search, _search] = useInput('');   
     const coll = [
         ...pertanyaan.slice(0,2).map((v,i)=>{ 
             return {
@@ -37,7 +37,7 @@ function FPtabelData({ dt, pertanyaan, user, updData,delData, tujuan, kdDF }) {
         }),
         {
             name: "["+(pertanyaan.length+1)+"] Penjawab",
-            selector: (row,i1) => row[row.length-1], 
+            selector: (row,i1) => row[row.length-2], 
         },{
             cell:(row,i) =>collBtn(row,i),
             ignoreRowClick: true,

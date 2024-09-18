@@ -21,6 +21,7 @@ export default function Pform({ option, tampilkan, start }) {
     if(start.start){
         _cekTabel(0);
         _onOff(tampilkan); 
+        
         _selOps({...option[0], dvalue:option[0].dvalue.map(v=>{ return [...JSON.parse(atob(v.data)),v.name]}) });  
         start.start =false;
     }

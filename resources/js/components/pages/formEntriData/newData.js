@@ -7,7 +7,7 @@ import { __tahapan } from '../../../utils/dataFormEntri';
 import { useInput } from '../../../hooks/useInput'; 
 // import { __KdDF } from "../../../states/formEntri/action";
 
-function FEDnewData({ buatFormBaru, dbForm, pilihTypeForm, keyDB,formPerbaruiTujuan}) {
+function FEDnewData({ buatFormBaru, dbForm, pilihTypeForm, keyDB, formPerbaruiTujuan, keyAkses}) {
     const [form, _form] = useState({
         on : 0,
         add : 1
@@ -15,6 +15,8 @@ function FEDnewData({ buatFormBaru, dbForm, pilihTypeForm, keyDB,formPerbaruiTuj
     const [tujuan, _tujuan] = useInput();
     const tujuanFokus = useRef(null);
 
+    const { xformEntri  } = keyAkses.dpCatatan;
+    
     const col = [
         {
           name: 'No',
@@ -51,18 +53,27 @@ function FEDnewData({ buatFormBaru, dbForm, pilihTypeForm, keyDB,formPerbaruiTuj
         _form({on:0, add:1});
     }
     const colBtn=(row,i)=>{
+        if(!keyAkses.pemilik && !xformEntri){
+            return '';
+        }
+        
         //row.status terkunci atau sudah selesai tahapan penyetingan form / berdata
         return(
             <div className="btnGroup blight">
-                <button class="btn bwarning" onClick={()=>perbarui({i,ftujuan:row.tujuan})} title="Perbarui">
-                    <span className="mdi mdi-pencil"></span> 
-                </button>
-                <button class="btn binfo" onClick={()=>pilihTypeForm(i)} title="Pilih Jenis Form">
-                    <span className="mdi mdi-file-check"></span> 
-                </button>
+                {(keyAkses.pemilik || row.kdMemberSub == keyAkses.kdMember ? 
+                    <>
+                        <button class="btn bwarning" onClick={()=>perbarui({i,ftujuan:row.tujuan})} title="Perbarui">
+                            <span className="mdi mdi-pencil"></span> 
+                        </button>
+                        <button class="btn binfo" onClick={()=>pilihTypeForm(i)} title="Pilih Jenis Form">
+                            <span className="mdi mdi-file-check"></span> 
+                        </button> 
+                    </>
+                    :''
+                )}
                 <Link class="btn bsuccess" target="_blank"  to={'/formPreview/'+btoa(JSON.stringify({...keyDB(),kdForm:row.kd}))} title="preview Form"> 
                     <span className="mdi mdi-search-web"></span> 
-                </Link> 
+                </Link>
             </div>
         )
     }
@@ -73,7 +84,8 @@ function FEDnewData({ buatFormBaru, dbForm, pilihTypeForm, keyDB,formPerbaruiTuj
     }
     const closeFormBaru=()=>{
         _form({...form, on:0})
-    }
+    } 
+    
     return (
         <div class="FM1">
             <div class="header bwhite">
@@ -86,10 +98,15 @@ function FEDnewData({ buatFormBaru, dbForm, pilihTypeForm, keyDB,formPerbaruiTuj
                     </h2>
                 </div> 
                 {
-                    form.on ? 
-                    <button class="ptb10px btn bdanger " onClick={()=>closeFormBaru()}>Close Form</button> :
-                    <button class="ptb10px btn bprimary " onClick={()=>openFormBaru()}>Buat Form Baru</button> 
+                    (xformEntri &&
+                        (
+                            form.on ? 
+                            <button class="ptb10px btn bdanger " onClick={()=>closeFormBaru()}>Close Form</button> :
+                            <button class="ptb10px btn bprimary " onClick={()=>openFormBaru()}>Buat Form Baru</button> 
+                        )
+                    )
                 }
+                
             </div>
             <div class="body bdark" style={{width:"unset" }}> 
                 {

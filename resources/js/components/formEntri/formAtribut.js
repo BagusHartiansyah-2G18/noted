@@ -121,6 +121,7 @@ function FEatribut({ dt, indS, addNewAttrOption, sendBackData,delAttrOption, fin
                                     resVal={getPertanyaan}
                                     valuex={dt.pertanyaan}
                                     dt={{...dt, star:true}}
+                                    runSwitch={false}
                                 ></FEinput>
                             </div>
                             <br/>

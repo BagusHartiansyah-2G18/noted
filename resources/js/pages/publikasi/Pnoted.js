@@ -13,7 +13,10 @@ function Pnoted({  }) {
     const dispatch = useDispatch(); 
 
     const { value } = useParams();
-    const {kdMember,kdJudul,tingkat} = JSON.parse(atob(value)); 
+    const paramJ = JSON.parse(atob(value));
+    const {kdMember,kdJudul,tingkat} = paramJ;  
+    const subJS = (paramJ.subJS!=undefined ? paramJ.subJS:true);
+
     const keyDB=()=>{
         return {
             kdMember,
@@ -35,7 +38,20 @@ function Pnoted({  }) {
     if(Object.keys(dnote).length==0 || dnote.length>0){
         return '';
     } 
-    const { induk, sub, file, form } = dnote;  
+    const { induk: xinduk, sub, file, form } = dnote;   
+    let tampJSPublik = false;
+    const induk = (subJS?
+        xinduk:
+        xinduk.filter((v,i)=>{
+            if(v.jsCatatan=="3"){
+                tampJSPublik = true;
+            }
+            if(tampJSPublik){
+                return v;
+            } 
+        })
+    )
+
     const pindahNote=(find)=>{ 
         dispatch(noteSub({
             tingkat:induk[find].tingkat,
@@ -88,6 +104,7 @@ function Pnoted({  }) {
                     ]}
                     url={baseUrl}
                     start={{start:1}}
+                    subJS={subJS}
                 ></Plist> 
             </div>  
         </div> 

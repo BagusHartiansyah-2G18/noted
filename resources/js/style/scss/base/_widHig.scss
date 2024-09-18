@@ -6,17 +6,17 @@
 .w200{width: 200px}
 .w220{width: 220px}
 .w230{width: 230px}
-.mnw240{@include _.wmin(240px)}
+.mw240{@include _.wmin(240px)}
 .w240{width: 240px}
 .w250{width: 250px}
-.mnw250{@include _.wmin(250px)}
+.mw250{@include _.wmin(250px)}
 
 .mxw300{@include _.wmax(300px)};
-.mnw300{@include _.wmin(300px)};
+.mw300{@include _.wmin(300px)};
 .w300{width: 300px}
 
 .mxw400{@include _.wmax(400px)};
-.mnw400{@include _.wmin(400px)};
+.mw400{@include _.wmin(400px)};
 .w400{width: 400px}
 
 .mxw500{@include _.wmax(500px)};
@@ -27,6 +27,7 @@
 
 .mxw600{@include _.wmax(600px)};
 .mw600{@include _.wmin(600px)};
+.mw650{@include _.wmin(650px)};
 
 .mxw800{@include _.wmax(800px)};
 .mw800{@include _.wmin(800px)};

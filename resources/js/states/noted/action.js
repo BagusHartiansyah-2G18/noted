@@ -13,6 +13,7 @@ const actType = {
     updNoteSub:'updNoteSub',
 
     actUFSubNote:"actUFSubNote",
+    delUFSubNote:"delUFSubNote",
 };
 
 function newDtAwal(dt) { //tambahan Kategori
@@ -181,11 +182,25 @@ function actUFSubNote(body){
     // dispatch(hideLoading());
   };
 }
+function delUFSubNote(body) {
+  return async (dispatch) => { 
+      try {
+        const fileD = await api.POST({url:"judul/delUFSubNote", body});
+        dispatch({
+          type: actType.delUFSubNote,
+          payload: body,
+        }); 
+      } catch (error) {
+        toast(error.message);
+      }
+      // dispatch(hideLoading());
+  };
+}
 export {
   actType,
   note,_note,updNote,delNote,
   noteSub,noteSubFileUpload,
-  actUFSubNote, 
+  actUFSubNote,delUFSubNote, 
   delNoteInduk,
   baseUrl,
   

@@ -82,6 +82,8 @@ Route::controller(JudulController::class)->name('judul.')->prefix('api/judul')->
 
     Route::post('subFileUpload','subFileUpload')->name('subFileUpload');
     Route::post('actUFSubNote','actUFSubNote')->name('actUFSubNote');
+    Route::post('delUFSubNote','delUFSubNote')->name('delUFSubNote');
+    
     
 });
 Route::controller(FormEntri::class)->name('formEntri.')->prefix('api/formEntri')->group(function(){
@@ -114,6 +116,8 @@ Route::controller(Cpublikasi::class)->name('publikasi.')->prefix('api/publikasi'
     Route::post('updJenisSharing','updJenisSharing')->name('updJenisSharing');  
     Route::post('updPublikasi','updPublikasi')->name('updPublikasi');  
     Route::post('setAnggota','setAnggota')->name('setAnggota');  
-
+    Route::post('getNoteSharing','getNoteSharing')->name('getNoteSharing');  
+    Route::post('getNoteSharingPublic','getNoteSharingPublic')->name('getNoteSharingPublic');  
     
+
 }); 

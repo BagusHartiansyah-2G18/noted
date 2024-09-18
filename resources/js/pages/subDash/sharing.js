@@ -4,11 +4,11 @@ import { useInput } from '../../hooks/useInput';
 
 import PropTypes from "prop-types";
 import { userMenuS } from "../../states/sf/html/action"  
-import { __notedSharingPublic } from "../../states/publikasi/action";
+import {  _anggotaSharing, __notedSharing } from "../../states/publikasi/action";
 
 import ListSharing from "../../components/pages/Sharing/listSharing";
 
-function Publikasi ({  }){
+function Sharing ({  }){
     const { pubN } = useSelector((state) => state); 
 
     const dispatch = useDispatch(); 
@@ -16,22 +16,21 @@ function Publikasi ({  }){
 
     useEffect(() => { 
         dispatch(userMenuS({v:3,sub:2, isi:''}));  
-        dispatch(__notedSharingPublic());  
+        dispatch(__notedSharing());  
     }, [dispatch]);
 
     if(Object.keys(pubN).length==0){
         return "";
     }
-    const { dpublik } = pubN; 
-    
+    const { dpublik } = pubN;  
     return (
         <>
             <div className="Mcontainer  bdark aiC " style={{justifyContent:"space-between", padding:"5% 10% 5% 10%"}}>
                 <div>
                     <span className="mdi mdi-microsoft-sharepoint fzL6"></span>
                     <label>
-                        <b className="fzXl">Catatan Publik</b> <br/>
-                        Catatan Pengetahuan menuju kepada kebaikan
+                        <b className="fzXl">Berbagi Catatan</b> <br/>
+                        Bersama Saling Melengkapi
                     </label>
                 </div>
                 <div className="iconInput2 w40p">
@@ -50,7 +49,6 @@ function Publikasi ({  }){
                             return {...v, i};
                         }
                     })} 
-                    subJS={false}
                 ></ListSharing> 
             </div> 
         </>
@@ -59,4 +57,4 @@ function Publikasi ({  }){
 // Sharing.PropTypes = {
 //     sub : PropTypes.number.isRequired
 // }
-export default Publikasi;
+export default Sharing;

@@ -20,6 +20,7 @@ function NoteSub(){
     const {kdMember,kdJudul,tingkat} = JSON.parse(atob(value));
     const [selOps, _selOps] = useState({}); 
 
+    
     // const [isPending, startTransition] = useTransition();
 
 
@@ -29,7 +30,8 @@ function NoteSub(){
         dispatch(noteSub({
             tingkat,
             kdJudul,
-            kdMember
+            kdMember,
+            sumber:"subNote"
         })) 
         dispatch(userMenuS({v:46,sub:2, isi:''})); 
     }, [dispatch]);
@@ -141,7 +143,7 @@ function NoteSub(){
             </>
         )
     } 
-    const vjudulbtn=(row)=>{ 
+    const vjudulbtn=(row)=>{   
         return( 
             <div className="btnGroup mwrap-5">
                 <Link class="btn bsuccess aiC tstart" target="_blank" to={'/Pnoted/'+btoa(JSON.stringify({
@@ -151,22 +153,32 @@ function NoteSub(){
                     }))} onClick={()=>updMenu({v:5,sub:1})} title="Preview"> 
                     <span className="mdi mdi-arrow-right-bold-circle"></span> 
                 </Link>
-                <Link class="btn bprimary" target="_blank"  to={'/fu-sub/'+btoa(JSON.stringify({
-                        kdJudul:row.kdJudul,
-                        kdMember:row.kdMember,
-                        tingkat:row.tingkat,
-                    }))} title="Form Upload"> 
-                    <span className="mdi mdi-cloud-upload"></span> 
-                </Link>
-                <Link class="btn binfo" target="_blank"  to={'/fe-sub/'+btoa(JSON.stringify({
-                        kdJudul:row.kdJudul,
-                        kdMember:row.kdMember,
-                        tingkat:row.tingkat,
-                    }))} title="Form Entri"> 
-                    <span className="mdi mdi-format-list-bulleted"></span> 
-                </Link>
-                <button class="btn bwarning" onClick={()=>openFormPerbarui(row)} title="Perbarui"><span className="mdi mdi-lead-pencil"></span></button>
-                <button class="btn bdanger" onClick={()=>delKonfir(row)} title="Hapus"><span className="mdi mdi-trash-can"></span></button>
+                {(keyAkses.pemilik || xformUpload?
+                    <Link class="btn bprimary" target="_blank"  to={'/fu-sub/'+btoa(JSON.stringify({
+                            kdJudul:row.kdJudul,
+                            kdMember:row.kdMember,
+                            tingkat:row.tingkat,
+                        }))} title="Form Upload"> 
+                        <span className="mdi mdi-cloud-upload"></span> 
+                    </Link>:''
+                )}
+                {(keyAkses.pemilik || xformEntri?
+                    <Link class="btn binfo" target="_blank"  to={'/fe-sub/'+btoa(JSON.stringify({
+                            kdJudul:row.kdJudul,
+                            kdMember:row.kdMember,
+                            tingkat:row.tingkat,
+                        }))} title="Form Entri"> 
+                        <span className="mdi mdi-format-list-bulleted"></span> 
+                    </Link>:''
+                )} 
+                {(
+                    keyAkses.pemilik || row.kdMemberSub == keyAkses.kdMember?
+                    <>
+                        <button class="btn bwarning" onClick={()=>openFormPerbarui(row)} title="Perbarui"><span className="mdi mdi-lead-pencil"></span></button>
+                        <button class="btn bdanger" onClick={()=>delKonfir(row)} title="Hapus"><span className="mdi mdi-trash-can"></span></button>
+                    </>:''
+
+                )} 
                 {/* <button class="btn csuccess" onClick={()=>changeSub({...row})} title="Access">
                     <span className="mdi mdi-arrow-right-bold-circle"></span>     
                 </button> */}
@@ -231,8 +243,15 @@ function NoteSub(){
     if(Object.keys(dnote).length<3){
         return '';
     } 
-    const { induk,sub,file,form:dform,dkategori  } = dnote;
-    
+    const { induk,sub,file,form:dform,dkategori, keyAkses  } = dnote; 
+    if(keyAkses==undefined){
+        return "";
+    }
+    const { xcatatan,xformEntri,xformUpload  } = keyAkses.dpCatatan;
+
+    if(induk.length==0){
+        return "";
+    }
     const inode = induk.length-1;
     if(sub == undefined){ // ketika useEffect tidak dijalankan
         dispatch(noteSub({
@@ -244,7 +263,8 @@ function NoteSub(){
     }  
     if(Object.keys(selOps).length == 0){
         _selOps(dkategori[0]);
-    } 
+    }  
+    
     
     return (
         <div className="Mcontainer2Form bgForm body aiS"> 
@@ -299,82 +319,85 @@ function NoteSub(){
                             
                         </div>
                     </div>
-                </div>
+                </div> 
             </div> 
             <div className="right">
-                <div class="FM1 ">
-                    <div class="header bwhite">
-                        <div class="cdark flexR">
-                            <button className="btn bdark">
-                                <span className="mdi mdi-star-crescent cwarning fzXl"></span>
-                            </button>
-                            <h2 className="  pl0 aiE fBebasNeue">
-                                <b>{`[FORM] `+induk[inode].judul}</b> 
-                            </h2>
+                {(xcatatan || keyAkses.pemilik ?
+                    <div class="FM1 ">
+                        <div class="header bwhite">
+                            <div class="cdark flexR">
+                                <button className="btn bdark">
+                                    <span className="mdi mdi-star-crescent cwarning fzXl"></span>
+                                </button>
+                                <h2 className="  pl0 aiE fBebasNeue">
+                                    <b>{`[FORM] `+induk[inode].judul}</b> 
+                                </h2>
+                            </div>
+                            <div className="btnGroup">
+                                {
+                                    (
+                                        inode>0 &&
+                                        <button class="btn bdark " onClick={()=>back(inode-1)}>Back</button>
+                                    )
+                                } 
+                                <button class="btn bprimary" onClick={()=>openFormAdd()}>Entri</button>
+                            </div>
                         </div>
-                        <div className="btnGroup">
+                        <div class="body bdark pwrap-10" style={{width:"unset"}} ><br/> 
                             {
                                 (
-                                    inode>0 &&
-                                    <button class="btn bdark " onClick={()=>back(inode-1)}>Back</button>
-                                )
-                            } 
-                            <button class="btn bprimary" onClick={()=>openFormAdd()}>Entri</button>
-                        </div>
-                    </div>
-                    <div class="body bdark pwrap-10" style={{width:"unset"}} ><br/> 
-                        {
-                            (
-                                form.on == 1 &&
-                                <div className="">
-                                    <h3><small class="fzXl tupper"> <u><b>{(induk[inode].indOps == 0 ? induk[inode].ringkasan+" :" : "")}</b></u></small> <br/>  </h3>  
-                                    
-                                    <div className="Flex-b250" >
-                                        <div className="list doubleInput ptb10px ">
-                                            <label>Judul Note</label>
-                                            <div className="iconInput2 ">
-                                                <input className="borderR10px" type="text" ref={judulFokus} value={judul} onChange={_judul} placeholder="Judul Note" />
-                                                <span className={`mdi mdi-notebook-edit-outline ${(form.add == 1 ? 'cprimary': 'cwarning')} `}></span>
+                                    form.on == 1 &&
+                                    <div className="">
+                                        <h3><small class="fzXl tupper"> <u><b>{(induk[inode].indOps == 0 ? induk[inode].ringkasan+" :" : "")}</b></u></small> <br/>  </h3>  
+                                        
+                                        <div className="Flex-b250" >
+                                            <div className="list doubleInput ptb10px ">
+                                                <label>Judul Note</label>
+                                                <div className="iconInput2 ">
+                                                    <input className="borderR10px" type="text" ref={judulFokus} value={judul} onChange={_judul} placeholder="Judul Note" />
+                                                    <span className={`mdi mdi-notebook-edit-outline ${(form.add == 1 ? 'cprimary': 'cwarning')} `}></span>
+                                                </div>
+                                            </div>
+                                            <div className="list doubleInput ptb10px borderB  cdark">
+                                                <label>Kategori <span className={`mdi mdi-sticker-text-outline ${(form.add == 1 ? 'cprimary': 'cwarning')} `}></span></label>
+                                                <Select
+                                                    className="mnw400 cdark"
+                                                    options={dkategori}
+                                                    placeholder={""}
+                                                    value={selOps}
+                                                    onChange={_selOps}
+                                                    isSearchable={false}
+                                                />
+                                            </div>
+                                            <div className="list doubleInput ptb10px borderB  ">
+                                                <label>Ringkasan <span className={`mdi mdi-sticker-text-outline ${(form.add == 1 ? 'cprimary': 'cwarning')} `}></span></label>
+                                                <div className="iconInput2 ">
+                                                    <textarea rows={3} className="radius-10 pwrap-10 w100p" value={ringkasan} onChange={_ringkasan}></textarea>
+                                                </div>
                                             </div>
                                         </div>
-                                        <div className="list doubleInput ptb10px borderB  cdark">
-                                            <label>Kategori <span className={`mdi mdi-sticker-text-outline ${(form.add == 1 ? 'cprimary': 'cwarning')} `}></span></label>
-                                            <Select
-                                                className="mnw400 cdark"
-                                                options={dkategori}
-                                                placeholder={""}
-                                                value={selOps}
-                                                onChange={_selOps}
-                                                isSearchable={false}
-                                            />
-                                        </div>
-                                        <div className="list doubleInput ptb10px borderB  ">
-                                            <label>Ringkasan <span className={`mdi mdi-sticker-text-outline ${(form.add == 1 ? 'cprimary': 'cwarning')} `}></span></label>
-                                            <div className="iconInput2 ">
-                                                <textarea rows={3} className="radius-10 pwrap-10 w100p" value={ringkasan} onChange={_ringkasan}></textarea>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <hr/>
-                                    <div className="list jcE">
-                                        {
-                                            (
-                                                form.add == 1 ?
-                                                    <button class="btn bprimary" onClick={()=>formAddSub()}>Tambahkan</button>
-                                                :
-                                                    <button class="btn bwarning" onClick={()=>formPerbaruiSub()}>Perbarui</button>
-                                            )
-                                        }
-                                        <button class="btn bmuted" onClick={()=>closeForm()}>Tutup</button>
+                                        <hr/>
+                                        <div className="list jcE">
+                                            {
+                                                (
+                                                    form.add == 1 ?
+                                                        <button class="btn bprimary" onClick={()=>formAddSub()}>Tambahkan</button>
+                                                    :
+                                                        <button class="btn bwarning" onClick={()=>formPerbaruiSub()}>Perbarui</button>
+                                                )
+                                            }
+                                            <button class="btn bmuted" onClick={()=>closeForm()}>Tutup</button>
+                                        </div> 
                                     </div> 
-                                </div> 
-                                
-                            )
-                        }    
-                        {/* w90p mwrap__2p mauto_ pwrap-5 radius-10  boxShadow  pwrap__3p  */}
-                        
-                    </div>
-                </div>
+                                    
+                                )
+                            }    
+                            {/* w90p mwrap__2p mauto_ pwrap-5 radius-10  boxShadow  pwrap__3p  */}
+                            
+                        </div>
+                    </div>:''
+                )}
+                
             </div>
             <ModalM
                 children ={modalC} 

@@ -8,6 +8,7 @@ import Homes from '../pages/subDash/home';
 import Anggota from '../pages/subDash/anggota';
 import Noted from '../pages/subDash/noteForm';
 import NoteSub from '../pages/subDash/noteFormSub';
+import Sharing from '../pages/subDash/sharing';
 import Publikasi from '../pages/subDash/publikasi';
 import ErrorP from '../pages/error';
 import Pnoted from "../pages/publikasi/Pnoted";
@@ -23,13 +24,14 @@ import FormPreview from "../pages/nextSubNote/formPreview";
 
 //dashboard
 function RouterM({ userMenu }){
-    const sub = userMenu.sub;
+    const { sub } = userMenu;
     return (
         <Routes>
             <Route path="/home" element={<Homes sub={sub}/> } />
             
             <Route path="/anggota" element={<Anggota sub={sub} /> } />
-            <Route path="/publikasi" element={<Publikasi sub={sub}/> } />
+            <Route path="/sharing" element={<Sharing /> } />
+            <Route path="/publikasi" element={<Publikasi /> } />
             <Route path="/noted" element={<Noted /> } /> 
             <Route path="/notedSub/:value" element={<NoteSub /> } />  
 
@@ -41,9 +43,7 @@ function RouterM({ userMenu }){
 
             <Route path="/pe-noted/:value" element={<PEnoted /> } /> 
             <Route path="/pe-export/:value" element={<Pnoted /> } /> 
-            <Route path="/Pe-formentri/:value" element={<PEformEntri /> } />  
-
-            
+            <Route path="/Pe-formentri/:value" element={<PEformEntri /> } />   
 
             <Route path="/" element={<Home /> } />
             <Route path="*" element={<ErrorP /> } />

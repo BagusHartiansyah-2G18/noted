@@ -2,10 +2,12 @@ import api from "../../utils/api";
 import { toast } from 'react-toastify';
 const baseUrl = api.BASE_URL;
 const actType = {
-    _note: "_note", //_ set __get 
-    updPublikasi:"updPublikasi",
-    noteSubLangsung:"noteSubLangsung",
+  _note: "_note", //_ set __get 
+  updPublikasi:"updPublikasi",
+  noteSubLangsung:"noteSubLangsung",
+  __notedSharing:"__notedSharing",
 
+  
 };
 
 function newDt(dt) {
@@ -45,6 +47,32 @@ function updPublikasi(v) {
   }
   
 } 
+function __notedSharing(){
+  return async (dispatch) => {
+    try {
+      const dt = await api.POST({url:"publikasi/getNoteSharing"}); 
+      dispatch({
+        type: actType.__notedSharing,
+        payload: dt,
+      });
+    } catch (error) {
+      toast(error.message);
+    }
+  }
+}
+function __notedSharingPublic(){
+  return async (dispatch) => {
+    try {
+      const dt = await api.POST({url:"publikasi/getNoteSharingPublic"}); 
+      dispatch({
+        type: actType.__notedSharing,
+        payload: dt,
+      });
+    } catch (error) {
+      toast(error.message);
+    }
+  }
+}
 
 function noteSubLangsung(v) {
   return async (dispatch) => {
@@ -67,5 +95,8 @@ export {
   updJenisSharing, 
   updPublikasi,
   _anggotaSharing,
-  noteSubLangsung
+  noteSubLangsung,
+
+  __notedSharing,
+  __notedSharingPublic
 }

@@ -16,8 +16,9 @@ class Mfc {
     //     }
     //     return (new static)->respError(" user can't ID !!!");
     // }
-    function portal(){
+    function portal(){ 
         $user= Auth::user();
+        // return print_r($user);
         if(!empty($user->id)){
             return [
                 "exc"=>true,
@@ -30,22 +31,12 @@ class Mfc {
     }
     function apiPortal($v){
         $v = json_decode(base64_decode($v)); 
-        // $where=[];
-        // foreach ($v as $key => $value) {
-        //     if($key == "kdMember"){
-        //         $v->$key = base64_decode($value);
-        //         $where["id"]=$v->$key;
-        //     }
-        //     if($key == "updated_at"){ 
-        //         $where[$key]=$value;
-        //     }
-        // }
-        // return print_r($where);
-        // $duser = User::where($where)->get(); 
+         // select MD5(concat('{"kdMember":"',TO_BASE64(id),'","updated_at":"',updated_at,'","aktif":',aktif,'}')) from users where aktif = 1
         $duser = DB::select(' 
             select  * 
             from users where
-            MD5(concat(\'{"kdMember":"\',TO_BASE64(id),\'","updated_at":"\',updated_at,\'","aktif":\',aktif,\'}\')) =\''.$v->mfc.'\'
+            MD5(concat(\'{"kdMember":"\',TO_BASE64(id),\'","updated_at":"\',updated_at,\'","aktif":\',aktif,\'}\')) =\''.$v->mfc.'\' and
+            aktif = 1
         ');
         if(count($duser)>0){
             return [

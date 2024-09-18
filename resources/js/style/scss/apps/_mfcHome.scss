@@ -2,7 +2,7 @@
 @forward '../base/index';
 
 .Mcontainer{ 
-    @extend .mxw800, .mh80, .pwrap-10, .flexC, .mauto_, .jcSA; 
+    @extend .mw650, .mh80, .pwrap-10, .flexC, .mauto_, .jcSA; 
     & .left{
         @extend .mxw600,.w100p;
         @media screen and  (min-width:1200px)   {   
@@ -35,13 +35,13 @@
         display: flex;
         flex-wrap: wrap;
         flex-direction: row;
-        max-width: 800px;
-        
+        // max-width: 800px;
+        width: 100%;
         & .left{
-            max-width: 600px !important; 
+            max-width: 65% !important; 
         }
         & .right .right-1{
-            max-width:200px !important;  
+            max-width:30% !important;  
         } 
 
         & .bodyFlexRow800{

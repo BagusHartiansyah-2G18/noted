@@ -21,12 +21,12 @@ function HeaderM1(){
             <a class="navbar-brand fpacifico tbold fzXl aiC cdark" href="{{ url('/') }}">
                 <u>Catatan Turunan</u>
             </a>
-            <div className="left flexR">
+            <div className="left flexR ">
                 
                 <ul className="ul-menu1 aiC">
                     <li>
                         <div className="textIcon">
-                            <Link to={`/home`} className="btn" onClick={()=>updMenu({v:1,sub:1})}>
+                            <Link to={`/home`} className="btn  " style={{flexDirection:"column"}} onClick={()=>updMenu({v:1,sub:1})}>
                                 <span className="mdi mdi-view-dashboard"></span>
                                 <label>Dashboard</label>
                             </Link>
@@ -35,7 +35,7 @@ function HeaderM1(){
                     </li>
                     <li>
                         <div className="textIcon">
-                            <Link to={`/anggota`} className="btn" onClick={()=>updMenu({v:2,sub:1})}>
+                            <Link to={`/anggota`} className="btn  " style={{flexDirection:"column"}} onClick={()=>updMenu({v:2,sub:1})}>
                                 <span className="mdi mdi-account-box-multiple"></span>
                                 <label>Anggota</label>
                             </Link>
@@ -43,17 +43,25 @@ function HeaderM1(){
                     </li>
                     <li>
                         <div className="textIcon">
-                            <Link to={`/publikasi`} className="btn" onClick={()=>updMenu({v:3,sub:1})}>
+                            <Link to={`/sharing`} className="btn   " style={{flexDirection:"column"}} onClick={()=>updMenu({v:3,sub:1})}>
                                 <span className="mdi mdi-web"></span>
-                                <label>Publikasi</label>
+                                <label>Sharing</label>
                             </Link>
                         </div>
                     </li>
                     <li>
                         <div className="textIcon">
-                            <Link to={`/noted`} className="btn" onClick={()=>updMenu({v:4,sub:1})}>
+                            <Link to={`/noted`} className="btn   " style={{flexDirection:"column"}} onClick={()=>updMenu({v:4,sub:1})}>
                                 <span className="mdi mdi-terraform"></span>
-                                <label>Noted Form</label>
+                                <label>Noted</label>
+                            </Link>
+                        </div>
+                    </li>
+                    <li>
+                        <div className="textIcon">
+                            <Link to={`/publikasi`} className="btn   " style={{flexDirection:"column"}} onClick={()=>updMenu({v:4,sub:1})}>
+                                <span className="mdi mdi-terraform"></span>
+                                <label>Publikasi</label>
                             </Link>
                         </div>
                     </li>

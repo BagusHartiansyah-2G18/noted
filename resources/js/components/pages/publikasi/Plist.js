@@ -5,14 +5,14 @@ import Pfile from "./Pfile";
 import PKlist from "./PKlist";
 import { Link } from "react-router-dom";
 
-function Plist({ dt, url, start}) {
+function Plist({ dt, url, start, subJS}) {
     const tingkat = (dt[0].tingkat == 0? 1: dt[0].tingkat);
     const[openFile,_openFile] = useState();
     const[openForm,_openForm] = useState();
     
     if(start.start){ 
-        _openFile(dt.map((v,i)=>(i==0 && v.file.length>0)));
-        _openForm(dt.map((v,i)=>(i==0 && v.form.length>0)));
+        _openFile(dt.map((v,i)=>(i==0  && v.file!=undefined && v.file.length>0)));
+        _openForm(dt.map((v,i)=>(i==0 && v.form!=undefined && v.form.length>0)));
         start.start=false;
     }
     if(openFile == undefined || openForm == undefined){
@@ -23,7 +23,11 @@ function Plist({ dt, url, start}) {
         <div className={"flexC  borderForm pwrap-10 w80p mauto"}>
             {
                 dt.map((v,i)=>{  
-                    const rows =v.ringkasan.toString().split("\n").length;  
+                    if(Object.keys(v).length<3){
+                        return '';
+                    }
+                    const rows =(v.ringkasan.toString().length>25 ? 10 :v.ringkasan.toString().split("\n").length) ;   
+                    
                     return(
                         <>
                             <div key={i} >
@@ -43,50 +47,56 @@ function Plist({ dt, url, start}) {
                                         <small className="pwrap_10 cmuted" style={{alignSelf:"baseline"}}>{v.created_at.substring(0,19)}</small> 
                                     </div>
                                     <div className="flexC " >
-                                        <div id="dropdonwUl_">
-                                            <button class="dropdown-btn bdark">
-                                                <span>Pengaturan</span>
-                                                <span class="arrowTop"></span>
-                                            </button>
-                                            <ul class="dropdown-content dcTop bmuted pwrap-5p ">
+                                        {(
+                                            subJS ?
+                                            <div id="dropdonwUl_">
+                                                <button class="dropdown-btn bdark">
+                                                    <span>Pengaturan</span>
+                                                    <span class="arrowTop"></span>
+                                                </button>
+                                                <ul class="dropdown-content dcTop bmuted pwrap-5p ">
+                                                    
+                                                    {/* <li style={{"--delay": 2}}>
+                                                        <Link class="btn csuccess  w100p jcSA" style={{display:"flex"}}  target="_blank" 
+                                                            to={'/pe-export/'+btoa(JSON.stringify({
+                                                                kdJudul:v.kdJudul,
+                                                                kdMember:v.kdMember,
+                                                                tingkat:v.tingkat 
+                                                            }))}  title="Preview">
+                                                            <span className="mdi mdi-file-excel"></span>
+                                                            <label>Export</label>
+                                                        </Link> 
+                                                        
+                                                        <li style={{"--delay": 2}}> 
+                                                            <button class="btn cprimary   w100p jcSA" 
+                                                                to={'/pe-formentri/'+btoa(JSON.stringify({
+                                                                    kdJudul:v.kdJudul,
+                                                                    kdMember:v.kdMember,
+                                                                    tingkat:v.tingkat 
+                                                                }))} 
+                                                                style={{display:"flex"}} title="Preview">
+                                                                <span className="mdi mdi-view-list-outline "></span>
+                                                                <label>....</label>
+                                                            </button>
+                                                        </li> 
+                                                    </li>  */}
                                                 
-                                                <li style={{"--delay": 2}}>
-                                                    <Link class="btn csuccess  w100p jcSA" style={{display:"flex"}}  target="_blank" 
-                                                        to={'/pe-export/'+btoa(JSON.stringify({
-                                                            kdJudul:v.kdJudul,
-                                                            kdMember:v.kdMember,
-                                                            tingkat:v.tingkat 
-                                                        }))}  title="Preview">
-                                                        <span className="mdi mdi-file-excel"></span>
-                                                        <label>Export</label>
-                                                    </Link> 
-                                                </li> 
-                                                <li style={{"--delay": 2}}> 
-                                                    <Link class="btn cprimary  w100p jcSA" style={{display:"flex"}}  target="_blank" 
-                                                        to={'/pe-formentri/'+btoa(JSON.stringify({
-                                                            kdJudul:v.kdJudul,
-                                                            kdMember:v.kdMember,
-                                                            tingkat:v.tingkat 
-                                                        }))}  title="Preview">
-                                                        <span className="mdi mdi-view-list-outline "></span>
-                                                        <label>Form Entri</label>
-                                                    </Link>
-                                                </li> 
-                                                <li style={{"--delay": 1}} >
-                                                
-                                                    <Link class="btn cinfo  w100p jcSA" style={{display:"flex"}}  target="_blank" 
-                                                        to={'/pe-noted/'+btoa(JSON.stringify({
-                                                            kdJudul:v.kdJudul,
-                                                            kdMember:v.kdMember,
-                                                            tingkat:v.tingkat 
-                                                        }))}  title="Preview">
-                                                        <span className="mdi mdi-notebook-edit-outline "></span>
-                                                        <label>Noted</label>
-                                                    </Link>
-                                                </li>
-                                                 
-                                            </ul>
-                                        </div> 
+                                                    <li style={{"--delay": 1}} >
+                                                    
+                                                        <Link class="btn cinfo  w100p jcSA" style={{display:"flex"}}  target="_blank" 
+                                                            to={'/pe-noted/'+btoa(JSON.stringify({
+                                                                kdJudul:v.kdJudul,
+                                                                kdMember:v.kdMember,
+                                                                tingkat:v.tingkat 
+                                                            }))}  title="Preview">
+                                                            <span className="mdi mdi-notebook-edit-outline "></span>
+                                                            <label>Noted</label>
+                                                        </Link>
+                                                    </li>
+                                                    
+                                                </ul>
+                                            </div>:''
+                                        )}
                                         <div className="btnGroup pwrap-5" style={{alignSelf:"baseline"}}>
                                             <button class="btn  cmuted pwrap_5">
                                                 <span className="mdi mdi-folder-file"></span>
@@ -135,13 +145,14 @@ function Plist({ dt, url, start}) {
                                         tampilkan={openForm[i]}
                                     ></Pfile> 
                                 )}
+                                
                                 {(  v.form.length>0 &&
                                     <Pform  
                                         option={v.form.map((v,i)=>{  
                                             return {
                                                 value:i,
                                                 label:v.tujuan,
-                                                data:JSON.parse(atob(v.data)),
+                                                data:(v.data == '' ? [] :JSON.parse(atob(v.data))),
                                                 dvalue:v.dvalue,
                                                 tgl:v.created_at
                                             }

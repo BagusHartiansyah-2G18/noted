@@ -207,7 +207,7 @@ function FormEntri() {
         return '';
     } 
     const inode = dnote.induk.length-1;
-    
+    const {  keyAkses  } = dnote;  
     
     function mclose(){
         // console.log(dnote);
@@ -327,7 +327,7 @@ function FormEntri() {
                             pilihTypeForm={pilihTypeForm}
                             keyDB={keyDB}
                             formPerbaruiTujuan={formPerbaruiTujuan}
-                            
+                            keyAkses={keyAkses}
                         ></FEDnewData>
                     } 
                 </div>

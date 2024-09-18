@@ -98,6 +98,12 @@ function notedReducer(dt = [], action = {}) {
           ...dt,
           file:action.payload.fileD
         }
+      case actType.delUFSubNote:
+        return {
+          ...dt,
+          file:dt.file.filter((v,i)=>i!=action.payload.index)
+        }
+        
       default:
         return dt;
     }

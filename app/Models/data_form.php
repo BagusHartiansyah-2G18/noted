@@ -16,7 +16,8 @@ class data_form extends Model
         'tingkat',
         'tujuan',
         'data',
-        'qdata'
+        'qdata',
+        'kdMemberSub'
     ];
 
 }

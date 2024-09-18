@@ -5,7 +5,7 @@ import Parser from 'html-react-parser';
 export default function PKlist({ indOps, ringkasan}) {
     const [ onOff, _onOff ]=useState(1);
     const rows =ringkasan.toString().split("\n"); 
-    const cRows = rows.length;
+    const cRows = (ringkasan.length>25 ? 10:rows.length);
 
     useEffect(() => {
         _onOff(indOps==2);  

@@ -1,5 +1,5 @@
 import React,  { useEffect,useRef   } from "react";
-import { noteSubFileUpload, actUFSubNote, baseUrl } from "../../states/noted/action";
+import { noteSubFileUpload, actUFSubNote, baseUrl,delUFSubNote } from "../../states/noted/action";
 import { useDispatch,useSelector } from 'react-redux';
 import { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
@@ -25,7 +25,7 @@ function FormUpload() {
     const [modalC, _modalC] = useState('');
     const [files, _files] = useState('-'); 
     const [search, _search] = useInput('');
- 
+     
     const colFile = [
         {
           name: 'No',
@@ -41,15 +41,24 @@ function FormUpload() {
                     </span>
                 )
             },
-        },
-        // {
-        //     cell:row =>vjudulbtn(row),
-        //     ignoreRowClick: true,
-        //     allowOverflow: true,
-        //     button: true,
-        //     width: '250px'
-        // }
-    ]; 
+        },{
+            cell:row =>vjudulbtn(row),
+            ignoreRowClick: true,
+            allowOverflow: true,
+            button: true,
+            width: '250px'
+        }
+    ];
+    const vjudulbtn=(row)=>{    
+        return( 
+            <div className="btnGroup mwrap-5"> 
+                {(keyAkses.pemilik || row.kdMemberSub == keyAkses.kdMember ?
+                    <button class="btn bdanger" onClick={()=>delKonfir(row)} title="Hapus"><span className="mdi mdi-trash-can"></span></button>
+                    :''
+                )}  
+            </div>
+        )
+    }
     useEffect(() => {
         dispatch(noteSubFileUpload({
             tingkat,
@@ -66,7 +75,13 @@ function FormUpload() {
     if(dnote.induk==undefined){
         return '';
     } 
+
+    const {  file  } = dnote;
     const inode = dnote.induk.length-1;
+    const {  keyAkses  } = dnote;
+
+    const { xformUpload  } = keyAkses.dpCatatan;
+
     
     function mclose(){
         // console.log(dnote);
@@ -119,49 +134,92 @@ function FormUpload() {
         _files('-');
         _url({target:{value:''}});
     }  
-    return ( 
-        <>
-           <div className="Mcontainer2Form bgForm body aiS"> 
-                <div className="right" > 
-                    <div class="FM1">
-                        <div class="header bwhite">
-                            <div class="cdark flexR">
-                                <button className="btn bdark">
-                                    <span className="mdi mdi-star-crescent cwarning fzXl"></span>
-                                </button>
-                                <h2 className="  pl0 aiE fBebasNeue">
-                                    <b>Form Upload</b> 
-                                </h2>
+    const delKonfir = (v) =>{   
+        const i =file.findIndex((val)=>val.ind === v.ind ); 
+        _modalC(
+            sfHtml.modalForm({
+                label : "Konfirmasi Penghapusan Data",
+                mclose,
+                clsH: " bdanger",
+                children : (
+                    <p>
+                        Anda ingin menghapus File ini ?
+                    </p>
+                ),
+                footer : (
+                    sfHtml.modalBtn({
+                        mclose,
+                        xdeled:()=>xdeled(i)
+                    })
+                )
+            })
+        );
+        dispatch(
+            htmlS({
+                modal : true,
+            })
+        );
+    }
+    const xdeled = (index) =>{    
+        dispatch(delUFSubNote({  
+            kdJudul:file[index].kdJudul,
+            kdMember:file[index].kdMember, 
+            ind:file[index].ind,
+            index
+        })); 
+        mclose(); 
+    }
+
+    const htmlForm=()=>{
+        return (
+            <div className="right" > 
+                <div class="FM1">
+                    <div class="header bwhite">
+                        <div class="cdark flexR">
+                            <button className="btn bdark">
+                                <span className="mdi mdi-star-crescent cwarning fzXl"></span>
+                            </button>
+                            <h2 className="  pl0 aiE fBebasNeue">
+                                <b>Form Upload</b> 
+                            </h2>
+                        </div> 
+                    </div>
+                    <div class="body bdark pwrap_5" style={{width:"unset" }}><br/>
+                        <div className="doubleInput ptb10px pwrap_2p">
+                            <label>Judul File</label>
+                            <div className="iconInput2 ">
+                                <input className="borderR10px" ref={judulFokus}  type="text" value={judul} onChange={_judul} placeholder="Judul Note" />
+                                <span className={`mdi mdi-cloud-search ${(form.add == 1 ? 'cprimary': 'cwarning')} `}></span>
+                            </div>
+                        </div> 
+                        <div className="doubleInput ptb10px pwrap_2p">
+                            <label className="mw100px"><span className={`mdi mdi-file-upload cprimary fziconS`}></span>Dokumen (PDF) / URL</label>
+                            <input className="borderR10px" type="file" value=''
+                                onChange={(e)=>sfLib.readFile(e.target,_files)} />
+                            {(files!='-' && <span><b>Nama File : </b> {files.nama}</span>)} 
+                        </div>  
+                        <div className="doubleInput ptb10px pwrap_2p">
+                            <div className="iconInput2 mwrap__2p">
+                                <input className="borderR10px" ref={judulFokus}  type="text" value={url} onChange={_url} placeholder="https:://bappedaksb.com" />
+                                <span className={`mdi mdi-cloud-search ${(form.add == 1 ? 'cprimary': 'cwarning')} `}></span>
+                            </div>
+                        </div>  
+                        
+                        <div className="list jcE">
+                            <button class="btn bprimary" onClick={()=>upload()}>Tambahkan</button> 
                             </div> 
-                        </div>
-                        <div class="body bdark pwrap_5" style={{width:"unset" }}><br/>
-                            <div className="doubleInput ptb10px pwrap_2p">
-                                <label>Judul File</label>
-                                <div className="iconInput2 ">
-                                    <input className="borderR10px" ref={judulFokus}  type="text" value={judul} onChange={_judul} placeholder="Judul Note" />
-                                    <span className={`mdi mdi-cloud-search ${(form.add == 1 ? 'cprimary': 'cwarning')} `}></span>
-                                </div>
-                            </div> 
-                            <div className="doubleInput ptb10px pwrap_2p">
-                                <label className="mw100px"><span className={`mdi mdi-file-upload cprimary fziconS`}></span>Dokumen (PDF) / URL</label>
-                                <input className="borderR10px" type="file" value=''
-                                    onChange={(e)=>sfLib.readFile(e.target,_files)} />
-                                {(files!='-' && <span><b>Nama File : </b> {files.nama}</span>)} 
-                            </div>  
-                            <div className="doubleInput ptb10px pwrap_2p">
-                                <div className="iconInput2 mwrap__2p">
-                                    <input className="borderR10px" ref={judulFokus}  type="text" value={url} onChange={_url} placeholder="https:://bappedaksb.com" />
-                                    <span className={`mdi mdi-cloud-search ${(form.add == 1 ? 'cprimary': 'cwarning')} `}></span>
-                                </div>
-                            </div>  
-                            
-                            <div className="list jcE">
-                                <button class="btn bprimary" onClick={()=>upload()}>Tambahkan</button> 
-                             </div> 
-                        </div>
                     </div>
                 </div>
-                <div className="left">
+            </div>
+        )
+    }
+    return ( 
+        <>
+           <div className="Mcontainer2Form bgForm body aiS" style={(xformUpload?{ }:{gridTemplateColumns:"80%"})}> 
+                {(
+                    xformUpload? htmlForm():''
+                )}
+                <div className={(xformUpload?'left':"")}>
                     <div class="FM1">
                         <div class="header bwhite">
                             <div class="cdark flexR">

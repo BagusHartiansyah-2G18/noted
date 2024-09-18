@@ -9,7 +9,8 @@ import FEinputRange from './inputRange';
 function FEinput({
             resVal, plac, dt, types="text",
             clsSpan="mdi mdi-emoticon-angry ", placd="...",
-            valuex 
+            valuex,
+            runSwitch=true
         }){
     const [val, _val] = useState(valuex);
     function selAct({value}) { 
@@ -20,38 +21,40 @@ function FEinput({
         });
     }  
     
-    switch (dt.name) {
-        case "file": return <FEinputFile 
-            resVal={resVal}
-            plac={plac}
-            dt={dt}
-            value={valuex}
-        ></FEinputFile>;
-        case "range": return <FEinputRange 
-            resVal={resVal}
-            plac={plac}
-            dt={dt}
-            value={valuex}
-        ></FEinputRange>;
-        case "color": return <FEinputColor 
-            resVal={resVal}
-            plac={plac}
-            dt={dt}
-            value={valuex}
-            clsSpan={clsSpan}
-        ></FEinputColor>;
-        case "checkbox": return <FEinputCheckbox 
-            resVal={resVal}
-            plac={plac}
-            dt={dt}
-            value={valuex} 
-        ></FEinputCheckbox>;
-        case "radio": return <FEinputRadio 
-            resVal={resVal}
-            plac={plac}
-            dt={dt}
-            value={valuex} 
-        ></FEinputRadio>; 
+    if(runSwitch){
+        switch (dt.name) {
+            case "file": return <FEinputFile 
+                resVal={resVal}
+                plac={plac}
+                dt={dt}
+                value={valuex}
+            ></FEinputFile>;
+            case "range": return <FEinputRange 
+                resVal={resVal}
+                plac={plac}
+                dt={dt}
+                value={valuex}
+            ></FEinputRange>;
+            case "color": return <FEinputColor 
+                resVal={resVal}
+                plac={plac}
+                dt={dt}
+                value={valuex}
+                clsSpan={clsSpan}
+            ></FEinputColor>;
+            case "checkbox": return <FEinputCheckbox 
+                resVal={resVal}
+                plac={plac}
+                dt={dt}
+                value={valuex} 
+            ></FEinputCheckbox>;
+            case "radio": return <FEinputRadio 
+                resVal={resVal}
+                plac={plac}
+                dt={dt}
+                value={valuex} 
+            ></FEinputRadio>; 
+        }
     }
     if(dt.star!=undefined && dt.star){ // digunakan untuk update awal, sesuai dengan value tersimpan 
         _val((valuex==undefined ? '':valuex));

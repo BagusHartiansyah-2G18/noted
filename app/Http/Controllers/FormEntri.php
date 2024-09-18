@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Helper\Mfc;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
- 
+use App\Models\judul;
 use App\Models\data_form;
 use App\Models\value_forms;
 
@@ -61,8 +61,8 @@ class formEntri extends Controller
                     'exc' => false,
                     'data' => 'body not valid'
                 ], 422);
-            }
-            if (data_form::create($validator)) {
+            } 
+             if (data_form::create([...$validator,"kdMemberSub"=>$portal['kdMember']])) {
                 return response()->json([
                     'exc' => true,
                     'data' => data_form::where([
@@ -187,8 +187,8 @@ class formEntri extends Controller
             } 
             // return print_r($this->getKeyValue($validator));
             $user=false;
-            $value = [];
-            // return print_r($validator);
+            $value = []; 
+            $xformEntri = false;
             if($validator['kdMember']==$portal['kdMember']){
                 $user=true;
                 $value = DB::select(" 
@@ -201,6 +201,19 @@ class formEntri extends Controller
                 ");
                 // a.kd='".$validator['kd']."' and
             }else{ 
+                $djudul = judul::where([
+                    'kdMember' => $validator['kdMember'],
+                    'kdJudul' =>  $validator['kdNote'],
+                    'tingkat' =>  $validator['tingkat'],
+                ])->get()[0];
+    
+                $xformEntri = json_decode(base64_decode($djudul->dpCatatan))->xformEntri;
+                if(!$xformEntri){
+                    return response()->json([
+                        'exc' => false,
+                        'data' => 'akses ditolak'
+                    ], 500);
+                }
                 $value = DB::select(" 
                     select a.*, b.name
                     from value_forms a
@@ -210,8 +223,7 @@ class formEntri extends Controller
                     a.kdMember='".$portal['kdMember']."' and
                     a.aktif =1
                 ");
-            }
-            
+            }  
             return response()->json([
                 'exc' => true,
                 'data' => [

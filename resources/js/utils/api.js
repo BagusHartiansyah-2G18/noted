@@ -1,9 +1,9 @@
 const api = (() => {  
-    // const BASE_URL = 'http://localhost:8000/';
-    const BASE_URL = 'https://noted.bappedaksb.com/';
+    const BASE_URL = 'http://localhost:8000/';
+    // const BASE_URL = 'https://noted.bappedaksb.com/';
     const File_URL = BASE_URL+'fileEntri/';
-    async function GET({method, api = 'api/' }) {
-        const response = await fetch(`${BASE_URL+api+method}`, {
+    async function GET({url, api = 'api/' }) {
+        const response = await fetch(`${BASE_URL+api+url}`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
