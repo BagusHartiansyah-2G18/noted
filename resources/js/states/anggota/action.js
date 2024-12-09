@@ -58,7 +58,7 @@ function batalkanAnggota(v) {
       try {
         const dt = await api.POST({url:"anggota/batalkanAnggota", body:v}); 
         dispatch({
-          type: actType.__anggota,
+          type: actType.batalkanAnggota,
           payload: v,
         });
       } catch (error) {

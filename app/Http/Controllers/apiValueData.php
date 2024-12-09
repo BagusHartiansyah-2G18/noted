@@ -21,7 +21,7 @@ class apiValueData extends Controller
     function show($v){
         $v = $this->Mfc->apiPortal($v);
         if($v['exc']){
-            $dparam = $v['dparam'];
+            $dparam = $v['dparam']; 
             $dv = value_forms::
                 select(["kd","data"])
                 ->where([
